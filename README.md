@@ -4,7 +4,7 @@
 
 ## Description
 
-Shared system configurations and deployments for some my JoJo themed garbage (computers).
+Shared system configurations and deployments for some of my JoJo themed garbage (computers).
 
 ## TODO
 
