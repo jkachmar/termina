@@ -51,21 +51,25 @@
     trunk,
     ...
   }: let
-    inherit (flake-parts.lib) mkFlake withSystem;
-    linuxSystems = with flake-utils.lib.system; [
+    inherit (flake-parts.lib) mkFlake;
+    inherit (flake-utils.lib) system;
+    linuxSystems = with system; [
       aarch64-linux
       x86_64-linux
     ];
-    macosSystems = with flake-utils.lib.system; [
+    macosSystems = with system; [
       aarch64-darwin
       x86_64-darwin
     ];
     systems = linuxSystems ++ macosSystems;
   in
-    mkFlake {inherit self;} {
+    mkFlake {inherit self;} ({withSystem, ...}: {
       inherit systems;
-
-      perSystem = {pkgs, inputs', ...}: {
+      perSystem = {
+        pkgs,
+        inputs',
+        ...
+      }: {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             alejandra
@@ -76,8 +80,23 @@
 
       flake = {
         colmena = {};
-        darwinConfigurations = {};
-        nixosConfigurations = {};
+        # 'crazy-diamond'
+        darwinConfigurations.crazy-diamond = withSystem system.x86_64-darwin ({pkgs, system, ...}:
+          inputs.darwin.lib.darwinSystem {
+            inherit system;
+            specialArgs.inputs = inputs;
+            modules = [];
+          });
+        homeConfigurations.crazy-diamond = withSystem system.x86_64-darwin ({pkgs, ...}:
+          inputs.home.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [];
+          });
+        # 'enigma'
+        nixosConfigurations.enigma = inputs.nixpkgs.lib.nixosSystem {
+          system = system.x86_64-linux;
+          modules = [];
+        };
       };
-    };
+    });
 }
