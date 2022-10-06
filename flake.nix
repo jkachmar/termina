@@ -1,102 +1,124 @@
 {
   #############################################################################
-  description = "";
+  description = "jkachmar's personal dotfiles and machine configurations.";
 
   #############################################################################
   inputs = {
-    # Nix package sets and other official sources.
-    flakeRegistry = {
-      flake = false;
-      url = "github:nixos/flake-registry/master";
-    };
-    nixpkgs.url = "github:nixos/nixpkgs/22.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    trunk.url = "github:nixos/nixpkgs/master";
-
-    # Nix flake utilities.
-    flake-parts = {
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-utils.url = "github:numtide/flake-utils/master";
-
-    # Configuration & deployment.
-    colmena = {
-      inputs.nixpkgs.follows = "unstable";
-      inputs.stable.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
-      url = "github:zhaofengli/colmena/main";
-    };
-    # NOTE: Use 'colmena' cachix binary cache & skip the "follows" stuff.
+    #################
+    # PACKAGE SETS. #
+    #################
+    # Stable macOS package set; pinned to the latest 22.05 release.
     #
-    # Their CI builds {aarch64,x86_64}-{darwin,linux} which is all we need.
-    # colmena.url = "github:zhaofengli/colmena/main";
+    # `darwin` is used to indicate the most up-to-date stable packages tested
+    # against macOS.
+    #
+    # XXX: Temporarily pinning this to unstable for new home-manager stuff.
+    # macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    macosPkgs.url = "github:nixos/nixpkgs";
+
+    # Stable NixOS package set; pinned to the latest 22.05 release.
+    #
+    # XXX: Temporarily pinning this to unstable for new home-manager stuff.
+    # nixosPkgs.url = "github:nixos/nixpkgs/nixos-22.05";
+
+    nixosPkgs.url = "github:nixos/nixpkgs";
+
+    # Unstable (rolling-release) NixOS package set.
+    unstable.url = "github:nixos/nixpkgs";
+
+    ##############
+    # UTILITIES. #
+    ##############
+    # Declarative, NixOS-style configuration for macOS.
     darwin = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "macosPkgs";
       url = "github:lnl7/nix-darwin";
     };
-    home = {
-      inputs.nixpkgs.follows = "nixpkgs";
+
+    # Declarative user configuration for macOS systems.
+    macosHome = {
+      inputs.nixpkgs.follows = "macosPkgs";
+      url = "github:nix-community/home-manager";
+    };
+
+    # Declarative user configuration for NixOS systems.
+    nixosHome = {
+      inputs.nixpkgs.follows = "nixosPkgs";
       url = "github:nix-community/home-manager/release-22.05";
     };
   };
 
   #############################################################################
-  outputs = inputs @ {
-    self,
-    darwin,
-    flake-parts,
-    flake-utils,
-    nixpkgs,
-    unstable,
-    trunk,
-    ...
-  }: let
-    inherit (flake-parts.lib) mkFlake;
-    inherit (flake-utils.lib) system;
-    linuxSystems = with system; [
-      aarch64-linux
-      x86_64-linux
-    ];
-    macosSystems = with system; [
-      aarch64-darwin
-      x86_64-darwin
-    ];
-    systems = linuxSystems ++ macosSystems;
-  in
-    mkFlake {inherit self;} ({withSystem, ...}: {
-      inherit systems;
-      perSystem = {
-        pkgs,
-        inputs',
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            alejandra
-            inputs'.colmena.packages.colmena
-          ];
+  outputs = inputs@{ self, darwin, macosHome, macosPkgs, nixosPkgs, unstable, ... }:
+    let
+      # Utility function to construct a package set based on the given system
+      # along with the shared `nixpkgs` configuration defined in this repo.
+      mkPkgsFor = system: pkgset:
+        import pkgset {
+          inherit system;
+          config = import ./config/nixpkgs.nix;
+        };
+
+      # Utility function to construct a macOS system configuration.
+      mkMacOSSystemCfg = hostname: system: darwin.lib.darwinSystem {
+        modules = [(./hosts + "/${hostname}/system.nix")];
+        specialArgs = {
+          inputs = inputs // {
+            nixpkgs = macosPkgs;
+          };
+          pkgs = mkPkgsFor system macosPkgs;
+          unstable = mkPkgsFor system unstable;
         };
       };
 
-      flake = {
-        colmena = {};
-        # 'crazy-diamond'
-        darwinConfigurations.crazy-diamond = withSystem system.x86_64-darwin ({pkgs, system, ...}:
-          inputs.darwin.lib.darwinSystem {
-            inherit system;
-            specialArgs.inputs = inputs;
-            modules = [];
-          });
-        homeConfigurations.crazy-diamond = withSystem system.x86_64-darwin ({pkgs, ...}:
-          inputs.home.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [];
-          });
-        # 'enigma'
-        nixosConfigurations.enigma = inputs.nixpkgs.lib.nixosSystem {
-          system = system.x86_64-linux;
-          modules = [];
+      # Utility function to construct a macOS home configuration.
+      mkMacOSHomeCfg = hostname: system: macosHome.lib.homeManagerConfiguration {
+        pkgs = mkPkgsFor system macosPkgs;
+        modules = [(./hosts + "/${hostname}/home.nix")];
+      };
+
+      # Utility function to construct a NixOS system configuration.
+      mkNixOSSystemCfg = hostname: system: nixosPkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixosPkgs.nixosModules.notDetected
+          (./hosts + "/${hostname}/home.nix")
+        ];
+        specialArgs = {
+          inherit inputs;
+          pkgs = mkPkgsFor system nixosPkgs;
+          unstable = mkPkgsFor system inputs.unstable;
         };
       };
-    });
+
+      # Utility function to construct a NixOS home configuration.
+      mkLinuxHomeCfg = hostname: system: {
+      };
+    in
+    {
+      ##########################
+      # SYSTEM CONFIGURATIONS. #
+      ##########################
+      # macOS system configurations.
+      darwinConfigurations = {
+        crazy-diamond = mkMacOSSystemCfg "crazy-diamond" "x86_64-darwin";
+      };
+
+      # NixOS system configurations.
+      nixosConfigurations = {
+        enigma = mkNixOSSystemCfg "enigma" "x86_64-linux";
+        kraftwerk = mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
+        star-platinum = mkNixOSSystemCfg "star-platinum" "x86_64-linux";
+      };
+
+      ########################
+      # USER CONFIGURATIONS. #
+      ########################
+      homeConfigurations = {
+        # macOS home configurations.
+        crazy-diamond = mkMacOSHomeCfg "crazy-diamond" "x86_64-darwin";
+
+        # Linux home configurations.
+      };
+    };
 }

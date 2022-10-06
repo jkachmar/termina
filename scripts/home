@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+
+set -eu
+
+mode=${1:-"check"}
+machine=${2:-$(hostname -s)}
+
+# CONFIG_PATH="${HOME}/.config/dotfiles"
+CONFIG_PATH="${HOME}/Code/morioh"
+
+nix build \
+  --experimental-features 'flakes nix-command' \
+  --show-trace \
+  --no-link "${CONFIG_PATH}/#homeConfigurations.${machine}.activationPackage"
+
+result=$(
+  nix path-info \
+    --extra-experimental-features 'flakes nix-command' \
+    "${CONFIG_PATH}/#homeConfigurations.${machine}.activationPackage"
+)
+
+if [ "$mode" = "check" ]; then
+  echo "${result}"
+elif [ "$mode" = "switch" ] ; then
+  "${result}/activate"
+else
+  echo "Invalid argument '${mode}'; must be one of 'check' or 'switch'."
+  exit
+fi
