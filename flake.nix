@@ -49,36 +49,48 @@
   };
 
   #############################################################################
-  outputs = inputs@{ self, darwin, macosHome, macosPkgs, nixosPkgs, unstable, ... }:
-    let
-      # Utility function to construct a package set based on the given system
-      # along with the shared `nixpkgs` configuration defined in this repo.
-      mkPkgsFor = system: pkgset:
-        import pkgset {
-          inherit system;
-          config = import ./config/nixpkgs.nix;
-        };
+  outputs = inputs @ {
+    self,
+    darwin,
+    macosHome,
+    macosPkgs,
+    nixosPkgs,
+    unstable,
+    ...
+  }: let
+    # Utility function to construct a package set based on the given system
+    # along with the shared `nixpkgs` configuration defined in this repo.
+    mkPkgsFor = system: pkgset:
+      import pkgset {
+        inherit system;
+        config = import ./config/nixpkgs.nix;
+      };
 
-      # Utility function to construct a macOS system configuration.
-      mkMacOSSystemCfg = hostname: system: darwin.lib.darwinSystem {
+    # Utility function to construct a macOS system configuration.
+    mkMacOSSystemCfg = hostname: system:
+      darwin.lib.darwinSystem {
         modules = [(./hosts + "/${hostname}/system.nix")];
         specialArgs = {
-          inputs = inputs // {
-            nixpkgs = macosPkgs;
-          };
+          inputs =
+            inputs
+            // {
+              nixpkgs = macosPkgs;
+            };
           pkgs = mkPkgsFor system macosPkgs;
           unstable = mkPkgsFor system unstable;
         };
       };
 
-      # Utility function to construct a macOS home configuration.
-      mkMacOSHomeCfg = hostname: system: macosHome.lib.homeManagerConfiguration {
+    # Utility function to construct a macOS home configuration.
+    mkMacOSHomeCfg = hostname: system:
+      macosHome.lib.homeManagerConfiguration {
         pkgs = mkPkgsFor system macosPkgs;
         modules = [(./hosts + "/${hostname}/home.nix")];
       };
 
-      # Utility function to construct a NixOS system configuration.
-      mkNixOSSystemCfg = hostname: system: nixosPkgs.lib.nixosSystem {
+    # Utility function to construct a NixOS system configuration.
+    mkNixOSSystemCfg = hostname: system:
+      nixosPkgs.lib.nixosSystem {
         inherit system;
         modules = [
           nixosPkgs.nixosModules.notDetected
@@ -91,34 +103,45 @@
         };
       };
 
-      # Utility function to construct a NixOS home configuration.
-      mkLinuxHomeCfg = hostname: system: {
-      };
-    in
-    {
-      ##########################
-      # SYSTEM CONFIGURATIONS. #
-      ##########################
-      # macOS system configurations.
-      darwinConfigurations = {
-        crazy-diamond = mkMacOSSystemCfg "crazy-diamond" "x86_64-darwin";
-      };
-
-      # NixOS system configurations.
-      nixosConfigurations = {
-        enigma = mkNixOSSystemCfg "enigma" "x86_64-linux";
-        kraftwerk = mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
-        star-platinum = mkNixOSSystemCfg "star-platinum" "x86_64-linux";
-      };
-
-      ########################
-      # USER CONFIGURATIONS. #
-      ########################
-      homeConfigurations = {
-        # macOS home configurations.
-        crazy-diamond = mkMacOSHomeCfg "crazy-diamond" "x86_64-darwin";
-
-        # Linux home configurations.
-      };
+    # Utility function to construct a NixOS home configuration.
+    mkLinuxHomeCfg = hostname: system: {
     };
+  in {
+    #############################
+    # DEVELOPMENT ENVIRONMENTS. #
+    #############################
+    devShells."x86_64-darwin".default = let
+      pkgs = mkPkgsFor "x86_64-darwin" macosPkgs;
+    in
+      pkgs.mkShell {
+        buildInputs = with pkgs; [
+          alejandra
+        ];
+      };
+
+    ##########################
+    # SYSTEM CONFIGURATIONS. #
+    ##########################
+    # macOS system configurations.
+    darwinConfigurations = {
+      crazy-diamond = mkMacOSSystemCfg "crazy-diamond" "x86_64-darwin";
+    };
+
+    # NixOS system configurations.
+    nixosConfigurations = {
+      enigma = mkNixOSSystemCfg "enigma" "x86_64-linux";
+      kraftwerk = mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
+      star-platinum = mkNixOSSystemCfg "star-platinum" "x86_64-linux";
+    };
+
+    ########################
+    # USER CONFIGURATIONS. #
+    ########################
+    homeConfigurations = {
+      # macOS home configurations.
+      crazy-diamond = mkMacOSHomeCfg "crazy-diamond" "x86_64-darwin";
+
+      # Linux home configurations.
+    };
+  };
 }

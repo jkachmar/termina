@@ -1,8 +1,11 @@
 # This module is courtesy of Conor Prussin's dotfiles:
 #
 # https://github.com/cprussin/dotfiles/blob/d6730b1ae9a5d7d2acbf440693f8656134f69914/modules/nixos/preLVMTempMount.nix
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.boot.preLVMTempMount;
 
   fsTypes = filesystems:
@@ -13,11 +16,9 @@ let
     then ""
     else "s";
 
-  awaitingMsg = filesystems:
-    "Waiting for temp mount filesystem${plural filesystems} to appear..";
+  awaitingMsg = filesystems: "Waiting for temp mount filesystem${plural filesystems} to appear..";
 
-  closingMsg = filesystems:
-    "Closing temp mount filesystem${plural filesystems}...";
+  closingMsg = filesystems: "Closing temp mount filesystem${plural filesystems}...";
 
   awaitCondition = filesystems:
     lib.concatStringsSep " -o " (
@@ -27,33 +28,30 @@ let
   doMounting = filesystems:
     lib.concatStringsSep "\n" (
       lib.mapAttrsToList
-        (
-          mountPoint: opts:
-            ''
-              mkdir -m 0755 -p "${mountPoint}"
-              mount -n \
-                -t ${opts.fsType} \
-                -o ro \
-                "${opts.device}" "${mountPoint}"
-            ''
-        )
-        filesystems
+      (
+        mountPoint: opts: ''
+          mkdir -m 0755 -p "${mountPoint}"
+          mount -n \
+            -t ${opts.fsType} \
+            -o ro \
+            "${opts.device}" "${mountPoint}"
+        ''
+      )
+      filesystems
     );
 
   cleanUp = filesystems:
     lib.concatStringsSep "\n" (
       lib.mapAttrsToList
-        (
-          mountPoint: _:
-            ''
-              umount "${mountPoint}"
-              rmdir "${mountPoint}"
-            ''
-        )
-        filesystems
+      (
+        mountPoint: _: ''
+          umount "${mountPoint}"
+          rmdir "${mountPoint}"
+        ''
+      )
+      filesystems
     );
-in
-{
+in {
   options.boot.preLVMTempMount = lib.mkOption {
     description = ''
       An attrset containing descriptions of filesystems to temporarily mount
@@ -81,7 +79,7 @@ in
 
   config = lib.mkIf (cfg != null) {
     boot.initrd = {
-      kernelModules = [ "loop" "usb_storage" ] ++ (fsTypes cfg);
+      kernelModules = ["loop" "usb_storage"] ++ (fsTypes cfg);
 
       preLVMCommands = lib.mkMerge [
         (

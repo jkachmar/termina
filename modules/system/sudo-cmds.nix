@@ -1,8 +1,12 @@
 ########################################################
 # Per-command passwordless sudo configuration options. #
 ########################################################
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mapAttrsToList mkAfter mkOption types;
   inherit (pkgs.stdenv.targetPlatform) isLinux;
 
@@ -10,13 +14,12 @@ let
 
   nopasswd = command: {
     inherit command;
-    options = [ "NOPASSWD" ];
+    options = ["NOPASSWD"];
   };
-in
-{
+in {
   options.sudo-cmds = mkOption {
     type = types.attrsOf (types.listOf types.str);
-    default = { };
+    default = {};
     description = ''
       An attrset mapping usernames to lists of sudo commands to allow those
       users to run without passwords.
@@ -24,12 +27,12 @@ in
   };
   config.security.sudo.extraRules = mkAfter (
     mapAttrsToList
-      (
-        username: commands: {
-          users = [ username ];
-          commands = map nopasswd commands;
-        }
-      )
-      cfg
+    (
+      username: commands: {
+        users = [username];
+        commands = map nopasswd commands;
+      }
+    )
+    cfg
   );
 }

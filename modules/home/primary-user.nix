@@ -1,13 +1,17 @@
 ############################################################################
 # OS-agnostic home config options for the system's primary account holder. #
 ############################################################################
-{ config, lib, options, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  options,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkAliasDefinitions mkAliasOptionModule mkIf mkOption types;
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
   cfg = config.primary-user;
-in
-{
+in {
   # `mkAliasOptionModule` won't work here, as `home-manager` takes a `pkgs`
   # argument which cannot be "mapped over".
 
@@ -19,7 +23,8 @@ in
 
   options.primary-user.home = mkOption {
     type = types.nullOr types.str;
-    default = if isDarwin
+    default =
+      if isDarwin
       then "/Users/${cfg.name}"
       else "/home/${cfg.name}";
     description = "The system primary account holder's home directory.";

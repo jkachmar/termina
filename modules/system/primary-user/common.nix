@@ -1,12 +1,16 @@
 ##############################################################################
 # OS-agnostic configuration options for the system's primary account holder. #
 ##############################################################################
-{ config, lib, options, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  options,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkAliasOptionModule mkOption types;
   cfg = config.primary-user;
-in
-{
+in {
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
     default = null;
@@ -27,10 +31,10 @@ in
   # any additional OS-specific options/aliases.
   imports = [
     # OS-agnostic option aliases.
-    (mkAliasOptionModule [ "primary-user" "user" ] [ "users" "users" cfg.name ])
-    (mkAliasOptionModule [ "primary-user" "description" ] [ "users" "users" cfg.name "description" ])
-    (mkAliasOptionModule [ "primary-user" "home" "directory" ] [ "users" "users" cfg.name "home" ])
-    (mkAliasOptionModule [ "primary-user" "uid" ] [ "users" "users" cfg.name "uid" ])
-    (mkAliasOptionModule [ "primary-user" "shell" ] [ "users" "users" cfg.name "shell" ])
+    (mkAliasOptionModule ["primary-user" "user"] ["users" "users" cfg.name])
+    (mkAliasOptionModule ["primary-user" "description"] ["users" "users" cfg.name "description"])
+    (mkAliasOptionModule ["primary-user" "home" "directory"] ["users" "users" cfg.name "home"])
+    (mkAliasOptionModule ["primary-user" "uid"] ["users" "users" cfg.name "uid"])
+    (mkAliasOptionModule ["primary-user" "shell"] ["users" "users" cfg.name "shell"])
   ];
 }

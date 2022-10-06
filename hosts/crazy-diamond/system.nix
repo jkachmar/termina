@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ../../modules/system/primary-user/macos.nix
     ../../config/system
@@ -10,7 +12,7 @@
   #
   # For now:
   #   - 2x maxJobs = up to 2 derivations may be built in parallel
-  #   - 2x buildCores = each derivation will be given 2 cores to work with 
+  #   - 2x buildCores = each derivation will be given 2 cores to work with
   nix = {
     buildCores = lib.mkDefault 2;
     maxJobs = lib.mkDefault 2;
@@ -21,7 +23,7 @@
         hostName = "10.0.1.150";
         sshUser = "jkachmar";
         sshKey = "/Users/jkachmar/.ssh/id_enigma";
-        systems = [ "x86_64-linux" ];
+        systems = ["x86_64-linux"];
         maxJobs = 2;
       }
     ];
