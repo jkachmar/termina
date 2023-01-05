@@ -11,7 +11,7 @@
   cfg = config.primary-user;
 in {
   # OS-agnostic options/aliases.
-  imports = [./common.nix];
+  imports = [./shared.nix];
   # Define macOS-specific `primary-user` configuration.
   config = mkIf (cfg.name != null) {
     primary-user.uid = mkDefault 1000;

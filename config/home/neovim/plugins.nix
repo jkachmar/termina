@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 # TODO: Source this from a JSON file and write an update script.
 #
 # cf. The Plex Server 'update.sh'.

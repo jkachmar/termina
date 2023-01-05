@@ -15,7 +15,7 @@ in {
   imports = [
     ../sudo-cmds.nix
     # OS-agnostic option aliases.
-    ./common.nix
+    ./shared.nix
     # NixOS-specific option aliases.
     (mkAliasOptionModule ["primary-user" "initialHashedPassword"] ["users" "users" cfg.name "initialHashedPassword"])
     (mkAliasOptionModule ["primary-user" "passwordFile"] ["users" "users" cfg.name "passwordFile"])

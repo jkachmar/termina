@@ -61,33 +61,6 @@
       };
     };
 
-    helix = {
-      enable = true;
-      package = unstable.helix;
-      settings = {
-        theme = "gruvbox_light";
-
-        editor = {
-          color-modes = true;
-          rulers = [80];
-          cursor-shape = {
-            insert = "bar";
-            normal = "block";
-            select = "underline";
-          };
-        };
-      };
-
-      languages = [
-        {
-          name = "nix";
-          auto-format = false;
-          formatter.command = "alejandra";
-          formatter.args = ["--quiet"];
-        }
-      ];
-    };
-
     starship = {
       enable = true;
       settings = {

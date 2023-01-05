@@ -1,3 +1,3 @@
 {...}: {
-  xdg.configFile."nixpkgs/config.nix".source = ../common/nixpkgs.nix;
+  xdg.configFile."nixpkgs/config.nix".source = ../shared/nixpkgs.nix;
 }

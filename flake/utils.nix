@@ -14,7 +14,7 @@ inputs @ {
   mkPkgsFor = system: pkgset:
     import pkgset {
       inherit system;
-      config = import ../config/common/nixpkgs.nix;
+      config = import ../config/shared/nixpkgs.nix;
     };
 
   # Utility function to construct a macOS system config.

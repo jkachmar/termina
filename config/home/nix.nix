@@ -6,8 +6,7 @@
 }: let
   inherit (lib) mkIf mkMerge;
   inherit (pkgs.stdenv.targetPlatform) isDarwin isAarch64;
-  inherit (import ../common/caches.nix) substituters trusted-public-keys;
-
+  inherit (import ../shared/caches.nix) substituters trusted-public-keys;
 in {
   nix = {
     enable = true;
@@ -26,7 +25,10 @@ in {
 
     # FIXME: Duplicated; see system-level Nix config.
     registry = {
-      nixpkgs.flake = if isDarwin then inputs.macosPkgs else inputs.nixosPkgs;
+      nixpkgs.flake =
+        if isDarwin
+        then inputs.macosPkgs
+        else inputs.nixosPkgs;
       unstable.flake = inputs.unstable;
     };
   };
