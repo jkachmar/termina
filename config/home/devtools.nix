@@ -2,8 +2,10 @@
 # OS-agnostic system tools. #
 #############################
 {
+  config,
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   inherit (lib) optionals;

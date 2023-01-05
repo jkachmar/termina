@@ -10,6 +10,8 @@
       then macosPkgs
       else nixosPkgs;
     pkgs = utils.mkPkgsFor "${arch}-${os}" pkgset;
+    inherit (pkgs.lib) optionals;
+    inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
   in
     pkgs.mkShell {
       buildInputs = with pkgs; [
@@ -18,6 +20,12 @@
           name = "home";
           text = builtins.readFile ../scripts/home;
         })
+      ] ++ optionals isDarwin [
+        (writeShellApplication {
+          name = "darwin";
+          text = builtins.readFile ../scripts/darwin;
+        })
+      ] ++ optionals isLinux [
       ];
     };
 in {

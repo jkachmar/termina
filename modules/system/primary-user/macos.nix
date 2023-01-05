@@ -14,15 +14,13 @@ in {
   imports = [./shared.nix];
   # Define macOS-specific `primary-user` configuration.
   config = mkIf (cfg.name != null) {
-    primary-user.uid = mkDefault 1000;
-    users.users.${cfg.name}.name = cfg.name;
     nix = {
       # Run the garbage collector as the primary-user.
       gc.user = cfg.name;
       # TODO: Should this use `lib.mkMerge` and _only_ specify the primary user
       # as an allowed and/or trusted user?
-      allowedUsers = ["root" cfg.name "@admin" "@wheel"];
-      trustedUsers = ["root" cfg.name "@admin" "@wheel"];
+      settings.allowed-users = ["root" cfg.name "@admin" "@wheel"];
+      settings.trusted-users = ["root" cfg.name "@admin" "@wheel"];
     };
   };
 }

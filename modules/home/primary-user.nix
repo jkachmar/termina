@@ -15,7 +15,7 @@ in {
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
     default = null;
-    description = "The system primary account holder's username.";
+    description = "The primary account holder's username.";
   };
 
   options.primary-user.home = mkOption {
@@ -24,7 +24,7 @@ in {
       if isDarwin
       then "/Users/${cfg.name}"
       else "/home/${cfg.name}";
-    description = "The system primary account holder's home directory.";
+    description = "The primary account holder's home directory.";
   };
 
   options.primary-user.git.user.name = mkOption {

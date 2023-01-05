@@ -14,10 +14,12 @@ in {
     ../../config/home/vscode
   ];
 
-  primary-user.name = "jkachmar";
-  primary-user.git.user = {
-    inherit (config.primary-user) name;
-    email = "git@jkachmar.com";
+  primary-user = {
+    name = "jkachmar";
+    git.user = {
+      inherit (config.primary-user) name;
+      email = "git@jkachmar.com";
+    };
   };
 
   # programs.ssh = {

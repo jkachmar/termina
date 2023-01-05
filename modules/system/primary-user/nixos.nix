@@ -28,9 +28,6 @@ in {
   # Define NixOS-specific `primary-user` configuration.
   config = mkIf (cfg.name != null) {
     users.users.${cfg.name} = {
-      name = cfg.name;
-      uid = mkDefault 1000;
-      home = "/home/${cfg.name}";
       isNormalUser = true;
       extraGroups = ["wheel"];
     };

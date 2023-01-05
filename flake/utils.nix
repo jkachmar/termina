@@ -19,13 +19,20 @@ inputs @ {
 
   # Utility function to construct a macOS system config.
   mkMacOSSystemCfg = hostname: system:
-    darwin.lib.darwinSystem {
-      modules = [(../hosts + "/${hostname}/system.nix")];
+    darwin.lib.darwinSystem rec {
       specialArgs = {
         inputs = inputs // {nixpkgs = macosPkgs;};
         pkgs = mkPkgsFor system macosPkgs;
         unstable = mkPkgsFor system unstable;
       };
+      modules = [
+        macosHome.darwinModules.home-manager
+        ({
+          home-manager.extraSpecialArgs = specialArgs;
+          networking.hostName = hostname;
+        })
+        (../hosts + "/${hostname}/system.nix")
+      ];
     };
 
   # Utility function to construct a macOS user config.
@@ -36,22 +43,29 @@ inputs @ {
         unstable = mkPkgsFor system unstable;
       };
       pkgs = mkPkgsFor system macosPkgs;
-      modules = [(../hosts + "/${hostname}/home.nix")];
+      modules = [
+        (../hosts + "/${hostname}/home.nix")
+      ];
     };
 
   # Utility function to construct a NixOS system config.
   mkNixOSSystemCfg = hostname: system:
-    nixosPkgs.lib.nixosSystem {
+    nixosPkgs.lib.nixosSystem rec {
       inherit system;
-      modules = [
-        nixosPkgs.nixosModules.notDetected
-        (../hosts + "/${hostname}/home.nix")
-      ];
       specialArgs = {
         inputs = inputs // {nixpkgs = nixosPkgs;};
         pkgs = mkPkgsFor system nixosPkgs;
         unstable = mkPkgsFor system unstable;
       };
+      modules = [
+        nixosPkgs.nixosModules.notDetected
+        nixosHome.nixosModules.home-manager
+        ({
+          home-manager.extraSpecialArgs = specialArgs;
+          networking.hostName = hostname;
+        })
+        (../hosts + "/${hostname}/home.nix")
+      ];
     };
 
   # Utility function to construct a NixOS/Linux user config.
