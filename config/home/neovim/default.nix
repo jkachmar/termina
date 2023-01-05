@@ -29,16 +29,13 @@ in {
       # Language support.
       vim-nix
       # UI.
-      everforest
       gruvbox-material
       lightline-vim
-      nvim-base16
-      oceanic-next
       # Misc. tooling.
       commentary
       direnv-vim
       # Version control.
-      # fugitive
+      fugitive
       gitgutter
     ];
 
