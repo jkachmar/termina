@@ -1,26 +1,40 @@
+#############################
+# OS-agnostic system tools. #
+#############################
 {
-  config,
+  lib,
   pkgs,
-  unstable,
   ...
-}: {
-  imports = [
-    ./cli.nix
-    ./neovim
-    ./nix.nix
-    ./nixpkgs.nix
-  ];
+}: let
+  inherit (lib) optionals;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
 
+  gcoreutils = pkgs.coreutils.override {
+    singleBinary = false;
+    withPrefix = true;
+  };
+in {
   home.packages =
-    (with pkgs; [
-      starship # XXX: unclear why it's necessary to manually install this...
-    ])
+    (with pkgs;
+      [
+        # Misc. common programs without a better place to go.
+        alejandra
+        curl
+        fd
+        findutils
+        libvterm-neovim
+        nix-index
+        ripgrep
+        shellcheck
+        starship # XXX: unclear why this is necessary; it's enabled below too.
+        wget
+      ]
+      ++ optionals isDarwin [
+        gcoreutils
+      ])
     ++ (with unstable; []);
 
   programs = {
-    # Allow 'home-manager' to manage its own install.
-    home-manager.enable = true;
-
     bash.enable = true;
     fish.enable = true;
     zsh.enable = true;
