@@ -12,9 +12,6 @@
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
   cfg = config.primary-user;
 in {
-  # `mkAliasOptionModule` won't work here, as `home-manager` takes a `pkgs`
-  # argument which cannot be "mapped over".
-
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
     default = null;
