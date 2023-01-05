@@ -7,7 +7,7 @@
   imports = [
     ./cli.nix
     ./neovim
-    # ./nix
+    ./nix.nix
     ./nixpkgs.nix
   ];
 

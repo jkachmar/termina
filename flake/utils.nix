@@ -14,7 +14,7 @@ inputs @ {
   mkPkgsFor = system: pkgset:
     import pkgset {
       inherit system;
-      config = import ../config/nixpkgs.nix;
+      config = import ../config/common/nixpkgs.nix;
     };
 
   # Utility function to construct a macOS system config.
@@ -31,6 +31,10 @@ inputs @ {
   # Utility function to construct a macOS user config.
   mkMacOSHomeCfg = hostname: system:
     macosHome.lib.homeManagerConfiguration {
+      extraSpecialArgs = {
+        inputs = inputs // {nixpkgs = macosPkgs;};
+        unstable = mkPkgsFor system unstable;
+      };
       pkgs = mkPkgsFor system macosPkgs;
       modules = [(../hosts + "/${hostname}/home.nix")];
     };

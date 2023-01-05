@@ -36,5 +36,7 @@ in {
     (mkAliasOptionModule ["primary-user" "home" "directory"] ["users" "users" cfg.name "home"])
     (mkAliasOptionModule ["primary-user" "uid"] ["users" "users" cfg.name "uid"])
     (mkAliasOptionModule ["primary-user" "shell"] ["users" "users" cfg.name "shell"])
+    # OS-agnostic `home-manager` option aliases.
+    (mkAliasOptionModule [ "primary-user" "home-manager" ] [ "home-manager" "users" cfg.name ])
   ];
 }
