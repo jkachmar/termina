@@ -22,7 +22,7 @@
         })
       ] ++ optionals isDarwin [
         (writeShellApplication {
-          name = "darwin";
+          name = "rebuild";
           text = builtins.readFile ../scripts/darwin;
         })
       ] ++ optionals isLinux [

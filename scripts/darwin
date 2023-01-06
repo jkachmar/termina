@@ -8,12 +8,12 @@ nix build \
   --experimental-features 'flakes nix-command' \
   --show-trace \
   --no-link \
-  "${CONFIG_PATH}/#darwinConfigurations.${machine}.system"
+  "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
 
 result=$(
   nix path-info \
     --extra-experimental-features 'flakes nix-command' \
-    "${CONFIG_PATH}/#darwinConfigurations.${machine}.system"
+    "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
 )
 
 if [ "$mode" = "check" ]; then

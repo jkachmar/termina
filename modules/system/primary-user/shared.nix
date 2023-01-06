@@ -47,8 +47,7 @@ in {
     home-manager.useGlobalPkgs = lib.mkDefault true;
     home-manager.useUserPackages = lib.mkDefault true;
     users.users.${cfg.name} = {
-      name = cfg.name;
-      home = cfg.home;
+      inherit (cfg) name home;
       uid = mkDefault 1000;
     };
   };
