@@ -1,8 +1,7 @@
 mode=${1:-"check"}
 machine=${2:-$(hostname -s)}
 
-# CONFIG_PATH="${HOME}/.config/dotfiles"
-CONFIG_PATH="${HOME}/Code/morioh"
+CONFIG_PATH="${HOME}/.config/dotfiles"
 
 nix build \
   --experimental-features 'flakes nix-command' \
