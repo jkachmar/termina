@@ -3,14 +3,14 @@ machine=${2:-$(hostname -s)}
 
 CONFIG_PATH="${HOME}/.config/dotfiles"
 
-nix build \
+/nix/var/nix/profiles/default/bin/nix build \
   --experimental-features 'flakes nix-command' \
   --show-trace \
   --no-link \
   "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
 
 result=$(
-  nix path-info \
+  /nix/var/nix/profiles/default/bin/nix path-info \
     --extra-experimental-features 'flakes nix-command' \
     "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
 )

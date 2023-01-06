@@ -9,8 +9,8 @@
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
 in {
   nix = {
-    enable = false;
-    # package = pkgs.nixFlakes;
+    enable = true;
+    package = lib.mkForce pkgs.nixFlakes;
     settings = mkMerge [
       {
         experimental-features = ["nix-command" "flakes"];

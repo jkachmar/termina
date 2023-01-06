@@ -13,6 +13,10 @@
     home-manager = import ./home.nix;
   };
 
+  programs.bash.enable = true;
+  programs.fish.enable = true;
+  programs.zsh.enable = true;
+
   nix.configureBuildUsers = true;
   services.nix-daemon.enable = true;
 

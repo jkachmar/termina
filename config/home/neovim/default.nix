@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
@@ -24,20 +25,23 @@ in {
     withPython3 = true;
 
     # Always pull the latest plugins.
-    plugins = with pkgs.vimPlugins;
-    with myPlugins; [
-      # Language support.
-      vim-nix
-      # UI.
-      gruvbox-material
-      lightline-vim
-      # Misc. tooling.
-      commentary
-      direnv-vim
-      # Version control.
-      fugitive
-      gitgutter
-    ];
+    plugins =
+      (with unstable.vimPlugins; [
+        # Language support.
+        vim-nix
+        # Misc. tooling.
+        commentary
+        direnv-vim
+        # UI
+        lightline-vim
+        # Version control.
+        fugitive
+        gitgutter
+      ])
+      ++ (with myPlugins; [
+        # UI.
+        gruvbox-material
+      ]);
 
     # Minimal init.lua to load Lua config.
     #
@@ -49,5 +53,5 @@ in {
   # XXX: It's important that all systems store dotfiles at the same location.
   xdg.configFile."nvim/lua".source =
     mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/.config/dotfiles/config/neovim/lua";
+    "${config.home.homeDirectory}/.config/dotfiles/config/home/neovim/lua";
 }

@@ -9,7 +9,7 @@
   ...
 }: let
   inherit (lib) mkAliasOptionModule mkDefault mkIf mkOption types;
-  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
   cfg = config.primary-user;
 in {
   options.primary-user.name = mkOption {
@@ -45,7 +45,9 @@ in {
 
   config = mkIf (cfg.name != null) {
     home-manager.useGlobalPkgs = lib.mkDefault true;
-    home-manager.useUserPackages = lib.mkDefault true;
+    # NOTE: For some reason if this enabled on macOS it totally breaks
+    # home-manager's package installation.
+    home-manager.useUserPackages = lib.mkDefault isLinux;
     users.users.${cfg.name} = {
       inherit (cfg) name home;
       uid = mkDefault 1000;
