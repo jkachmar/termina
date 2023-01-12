@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) optionalAttrs optionalString;
   inherit (pkgs.stdenv.targetPlatform) isDarwin;
   sshConfigDir = "${config.home.homeDirectory}/.ssh";

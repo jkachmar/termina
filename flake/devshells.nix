@@ -14,19 +14,22 @@
     inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
   in
     pkgs.mkShell {
-      buildInputs = with pkgs; [
-        alejandra
-        (writeShellApplication {
-          name = "home";
-          text = builtins.readFile ../scripts/home;
-        })
-      ] ++ optionals isDarwin [
-        (writeShellApplication {
-          name = "rebuild";
-          text = builtins.readFile ../scripts/darwin;
-        })
-      ] ++ optionals isLinux [
-      ];
+      buildInputs = with pkgs;
+        [
+          alejandra
+          (writeShellApplication {
+            name = "home";
+            text = builtins.readFile ../scripts/home;
+          })
+        ]
+        ++ optionals isDarwin [
+          (writeShellApplication {
+            name = "rebuild";
+            text = builtins.readFile ../scripts/darwin;
+          })
+        ]
+        ++ optionals isLinux [
+        ];
     };
 in {
   "x86_64-darwin".default = mkShellFor "x86_64" "darwin";

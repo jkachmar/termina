@@ -27,10 +27,10 @@ inputs @ {
       };
       modules = [
         macosHome.darwinModules.home-manager
-        ({
+        {
           home-manager.extraSpecialArgs = specialArgs;
           networking.hostName = hostname;
-        })
+        }
         (../hosts + "/${hostname}/system.nix")
       ];
     };
@@ -60,10 +60,10 @@ inputs @ {
       modules = [
         nixosPkgs.nixosModules.notDetected
         nixosHome.nixosModules.home-manager
-        ({
+        {
           home-manager.extraSpecialArgs = specialArgs;
           networking.hostName = hostname;
-        })
+        }
         (../hosts + "/${hostname}/home.nix")
       ];
     };
