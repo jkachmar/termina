@@ -14,8 +14,8 @@
 in {
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
-    default = null;
-    description = "The primary account holder's username.";
+    default = "jkachmar";
+    description = "The primary account holder's username (defaults to 'jkachmar').";
   };
 
   options.primary-user.home = mkOption {
@@ -40,7 +40,7 @@ in {
     (mkAliasOptionModule ["primary-user" "uid"] ["users" "users" cfg.name "uid"])
     (mkAliasOptionModule ["primary-user" "shell"] ["users" "users" cfg.name "shell"])
     # OS-agnostic `home-manager` option aliases.
-    (mkAliasOptionModule [ "primary-user" "home-manager" ] [ "home-manager" "users" cfg.name ])
+    (mkAliasOptionModule ["primary-user" "home-manager"] ["home-manager" "users" cfg.name])
   ];
 
   config = mkIf (cfg.name != null) {

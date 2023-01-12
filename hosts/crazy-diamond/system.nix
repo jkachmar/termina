@@ -9,10 +9,7 @@
     ../../config/system/nix.nix
   ];
 
-  primary-user = {
-    name = "jkachmar";
-    home-manager = import ./home.nix;
-  };
+  primary-user.home-manager = import ./home.nix;
 
   nix.configureBuildUsers = true;
   services.nix-daemon.enable = true;

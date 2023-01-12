@@ -1,8 +1,4 @@
-{config, ...}: let
-  name = "jkachmar";
-  secretAgentDataPath = "/Users/${name}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data";
-  secretAgentPubKeysPath = "${secretAgentDataPath}/PublicKeys";
-in {
+{config, ...}: {
   imports = [
     ../../modules/home/primary-user.nix
     ../../config/home/devtools.nix
@@ -15,7 +11,6 @@ in {
   ];
 
   primary-user = {
-    name = "jkachmar";
     git.user = {
       inherit (config.primary-user) name;
       email = "git@jkachmar.com";

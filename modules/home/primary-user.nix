@@ -14,8 +14,8 @@
 in {
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
-    default = null;
-    description = "The primary account holder's username.";
+    default = "jkachmar";
+    description = "The primary account holder's username (defaults to 'jkachmar').";
   };
 
   options.primary-user.home = mkOption {
