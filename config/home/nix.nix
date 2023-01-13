@@ -10,7 +10,6 @@
 in {
   nix = {
     enable = true;
-    package = lib.mkForce pkgs.nixFlakes;
     settings = mkMerge [
       {
         experimental-features = ["nix-command" "flakes"];
