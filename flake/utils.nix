@@ -5,10 +5,30 @@ inputs @ {
   unstable,
   # 3rd-party utilities.
   darwin,
+  flake-utils,
   macosHome,
   nixosHome,
   ...
 }: rec {
+    # system = string
+    # systems :: [system]
+    systems = with flake-utils.lib.system; [
+      aarch64-darwin
+      x86_64-darwin
+      x86_64-linux
+    ];
+
+    # eachSystem :: [system] -> (system -> derivation) -> derivation
+    # forEachSystem :: (system -> pkgs -> derivation) -> derivation
+    forEachSystem = fn: flake-utils.lib.eachSystem systems (system: 
+      let
+        nixpkgs =
+          if (builtins.match ".*darwin" system != null)
+          then macosPkgs
+          else nixosPkgs;
+      in fn nixpkgs.legacyPackages.${system}
+    );
+
   # Utility function to construct a package set based on the given system
   # along with the shared `nixpkgs` configuration defined in this repo.
   mkPkgsFor = system: pkgset:

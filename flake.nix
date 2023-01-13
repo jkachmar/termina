@@ -74,12 +74,7 @@
   #############################################################################
   outputs = inputs: let
     utils = (import ./flake/utils.nix) inputs;
-  in {
-    #######################
-    # SHELL ENVIRONMENTS. #
-    #######################
-    devShells = (import ./flake/devshells.nix) (inputs // {inherit utils;});
-
+  in ({
     ##########################
     # SYSTEM CONFIGURATIONS. #
     ##########################
@@ -104,5 +99,24 @@
 
       # Linux home configurations.
     };
-  };
+  } // utils.forEachSystem (pkgs: {
+    devShells.default = pkgs.mkShell {
+      buildInputs = with pkgs;
+        [
+          alejandra
+          (writeShellApplication {
+            name = "home";
+            text = builtins.readFile ./scripts/home;
+          })
+        ]
+        ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+          (writeShellApplication {
+            name = "rebuild";
+            text = builtins.readFile ./scripts/darwin;
+          })
+        ]
+        ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+        ];
+    };
+  }));
 }
