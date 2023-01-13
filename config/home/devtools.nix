@@ -47,12 +47,11 @@ in {
       #
       # cf. https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1299764109
       (mkIf isDarwin {
-        shellInit = ''
-          for p in /usr/local/bin /nix/var/nix/profiles/default/bin ~/.nix-profile/bin
-            if not contains $p $fish_user_paths
-              set -g fish_user_paths $p $fish_user_paths
-            end
-          end
+        loginShellInit = ''
+          fish_add_path --move --prepend --path \
+            $HOME/.nix-profile/bin \
+            /run/current-system/sw/bin \
+            /nix/var/nix/profiles/default/bin
         '';
       })
     ];
