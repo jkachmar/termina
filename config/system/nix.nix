@@ -10,6 +10,8 @@
   darwinCfg = "${dotfiles}/hosts/${config.networking.hostName}/system.nix";
 in {
   nix = {
+    package = pkgs.nixFlakes;
+
     nixPath = lib.mkForce ([
         "unstable=${inputs.unstable}"
       ]
