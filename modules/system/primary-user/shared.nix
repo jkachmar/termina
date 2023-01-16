@@ -47,7 +47,7 @@ in {
     home-manager.useGlobalPkgs = lib.mkDefault true;
     # NOTE: For some reason if this enabled on macOS it totally breaks
     # home-manager's package installation.
-    home-manager.useUserPackages = lib.mkDefault isLinux;
+    home-manager.useUserPackages = lib.mkDefault true;
     users.users.${cfg.name} = {
       inherit (cfg) name home;
       uid = mkDefault 1000;

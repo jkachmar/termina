@@ -37,14 +37,27 @@ inputs @ {
       config = import ../config/shared/nixpkgs.nix;
     };
 
+  # Utility function to construct a default `specialArgs` attrset (for NixOS &
+  # nix-darwin deployments) pre-populated with:
+  # - flake `inputs`, passed through more-or-less unmodified
+  # - stable `pkgs` for the target system
+  # - `unstable` packages
+  mkSpecialArgs = system: 
+    let
+      nixpkgs =
+        if (builtins.match ".*darwin" system != null)
+        then macosPkgs
+        else nixosPkgs;
+    in {
+      inputs = inputs // {inherit nixpkgs;};
+      pkgs = mkPkgsFor system nixpkgs;
+      unstable = mkPkgsFor system unstable;
+    };
+
   # Utility function to construct a macOS system config.
   mkMacOSSystemCfg = hostname: system:
     darwin.lib.darwinSystem rec {
-      specialArgs = {
-        inputs = inputs // {nixpkgs = macosPkgs;};
-        pkgs = mkPkgsFor system macosPkgs;
-        unstable = mkPkgsFor system unstable;
-      };
+      specialArgs = mkSpecialArgs system;
       modules = [
         macosHome.darwinModules.home-manager
         {
@@ -57,12 +70,9 @@ inputs @ {
 
   # Utility function to construct a macOS user config.
   mkMacOSHomeCfg = hostname: system:
-    macosHome.lib.homeManagerConfiguration {
-      extraSpecialArgs = {
-        inputs = inputs // {nixpkgs = macosPkgs;};
-        unstable = mkPkgsFor system unstable;
-      };
-      pkgs = mkPkgsFor system macosPkgs;
+    macosHome.lib.homeManagerConfiguration rec {
+      extraSpecialArgs = mkSpecialArgs system;
+      pkgs = extraSpecialArgs.pkgs;
       modules = [
         (../hosts + "/${hostname}/home.nix")
       ];
