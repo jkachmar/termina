@@ -49,7 +49,8 @@ in {
       (mkIf isDarwin {
         loginShellInit = ''
           fish_add_path --move --prepend --path \
-            $HOME/.nix-profile/bin \
+            ${config.primary-user.home}/.nix-profile/bin \
+            /etc/profiles/per-user/${config.primary-user.name}/bin \
             /run/current-system/sw/bin \
             /nix/var/nix/profiles/default/bin
         '';
