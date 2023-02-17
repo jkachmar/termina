@@ -27,17 +27,6 @@
     ##############
     # UTILITIES. #
     ##############
-
-    # Stateless NixOS deployment tool.
-    colmena = {
-      inputs = {
-        nixpkgs.follows = "unstable";
-        stable.follows = "nixosPkgs";
-        flake-utils.follows = "flake-utils";
-      };
-      url = "github:zhaofengli/colmena";
-    };
-
     # Declarative, NixOS-style configuration for macOS.
     darwin = {
       inputs.nixpkgs.follows = "macosPkgs";
@@ -75,48 +64,49 @@
   outputs = inputs: let
     utils = (import ./flake/utils.nix) inputs;
   in ({
-    ##########################
-    # SYSTEM CONFIGURATIONS. #
-    ##########################
-    # macOS system configurations.
-    darwinConfigurations = {
-      crazy-diamond = utils.mkMacOSSystemCfg "crazy-diamond" "x86_64-darwin";
-    };
+      ##########################
+      # SYSTEM CONFIGURATIONS. #
+      ##########################
+      # macOS system configurations.
+      darwinConfigurations = {
+        crazy-diamond = utils.mkMacOSSystemCfg "crazy-diamond" "aarch64-darwin";
+      };
 
-    # NixOS system configurations.
-    nixosConfigurations = {
-      enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
-      kraftwerk = utils.mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
-      star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
-    };
+      # NixOS system configurations.
+      nixosConfigurations = {
+        enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
+        kraftwerk = utils.mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
+        star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
+      };
 
-    ########################
-    # USER CONFIGURATIONS. #
-    ########################
-    homeConfigurations = {
-      # macOS home configurations.
-      crazy-diamond = utils.mkMacOSHomeCfg "crazy-diamond" "x86_64-darwin";
+      ########################
+      # USER CONFIGURATIONS. #
+      ########################
+      homeConfigurations = {
+        # macOS home configurations.
+        crazy-diamond = utils.mkMacOSHomeCfg "crazy-diamond" "aarch64-darwin";
 
-      # Linux home configurations.
-    };
-  } // utils.forEachSystem (pkgs: {
-    devShells.default = pkgs.mkShell {
-      buildInputs = with pkgs;
-        [
-          alejandra
-          (writeShellApplication {
-            name = "home";
-            text = builtins.readFile ./scripts/home;
-          })
-        ]
-        ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
-          (writeShellApplication {
-            name = "rebuild";
-            text = builtins.readFile ./scripts/darwin;
-          })
-        ]
-        ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
-        ];
-    };
-  }));
+        # Linux home configurations.
+      };
+    }
+    // utils.forEachSystem (pkgs: {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs;
+          [
+            alejandra
+            (writeShellApplication {
+              name = "home";
+              text = builtins.readFile ./scripts/home;
+            })
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+            (writeShellApplication {
+              name = "rebuild";
+              text = builtins.readFile ./scripts/darwin;
+            })
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+          ];
+      };
+    }));
 }

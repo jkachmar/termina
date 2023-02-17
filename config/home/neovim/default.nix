@@ -9,10 +9,6 @@
   myPlugins = pkgs.callPackage ./plugins.nix {};
 in {
   # Lua needs a formatter.
-  #
-  # NOTE: Not this formatter, though; takes forever to compile.
-  #
-  # home.packages = with pkgs; [ luaformatter ];
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
@@ -43,7 +39,7 @@ in {
         gruvbox-material
       ]);
 
-    # Minimal init.lua to load Lua config.
+    # Minimal `init.lua` to load Lua config.
     #
     # Rather than configure this in Nix, it's more pleasant to manage this in
     # a separate file that we ensure it's symlinked appropriately.

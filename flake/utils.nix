@@ -10,23 +10,25 @@ inputs @ {
   nixosHome,
   ...
 }: rec {
-    # system = string
-    # systems :: [system]
-    systems = with flake-utils.lib.system; [
-      aarch64-darwin
-      x86_64-darwin
-      x86_64-linux
-    ];
+  # system = string
+  # systems :: [system]
+  systems = with flake-utils.lib.system; [
+    aarch64-darwin
+    x86_64-darwin
+    x86_64-linux
+  ];
 
-    # eachSystem :: [system] -> (system -> derivation) -> derivation
-    # forEachSystem :: (system -> pkgs -> derivation) -> derivation
-    forEachSystem = fn: flake-utils.lib.eachSystem systems (system: 
-      let
+  # eachSystem :: [system] -> (system -> derivation) -> derivation
+  # forEachSystem :: (system -> pkgs -> derivation) -> derivation
+  forEachSystem = fn:
+    flake-utils.lib.eachSystem systems (
+      system: let
         nixpkgs =
           if (builtins.match ".*darwin" system != null)
           then macosPkgs
           else nixosPkgs;
-      in fn nixpkgs.legacyPackages.${system}
+      in
+        fn nixpkgs.legacyPackages.${system}
     );
 
   # Utility function to construct a package set based on the given system
@@ -42,17 +44,16 @@ inputs @ {
   # - flake `inputs`, passed through more-or-less unmodified
   # - stable `pkgs` for the target system
   # - `unstable` packages
-  mkSpecialArgs = system: 
-    let
-      nixpkgs =
-        if (builtins.match ".*darwin" system != null)
-        then macosPkgs
-        else nixosPkgs;
-    in {
-      inputs = inputs // {inherit nixpkgs;};
-      pkgs = mkPkgsFor system nixpkgs;
-      unstable = mkPkgsFor system unstable;
-    };
+  mkSpecialArgs = system: let
+    nixpkgs =
+      if (builtins.match ".*darwin" system != null)
+      then macosPkgs
+      else nixosPkgs;
+  in {
+    inputs = inputs // {inherit nixpkgs;};
+    pkgs = mkPkgsFor system nixpkgs;
+    unstable = mkPkgsFor system unstable;
+  };
 
   # Utility function to construct a macOS system config.
   mkMacOSSystemCfg = hostname: system:

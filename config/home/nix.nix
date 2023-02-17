@@ -10,7 +10,7 @@
 in {
   nix = {
     enable = true;
-    # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both 
+    # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both
     # trying to set `home-manager.${user}.nix.package` when both this & the
     # system-level `nix.package` are set.
     #

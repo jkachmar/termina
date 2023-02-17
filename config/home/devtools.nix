@@ -38,24 +38,7 @@ in {
 
   programs = {
     bash.enable = true;
-    fish = mkMerge [
-      {enable = true;}
-      # Fixes a bug where fish shell doesn't properly set up the PATH on macOS.
-      #
-      # FIXME: Looks like a clean reinstall of Nix should fix this now that the
-      # installer provides a fish config.
-      #
-      # cf. https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1299764109
-      (mkIf isDarwin {
-        loginShellInit = ''
-          fish_add_path --move --prepend --path \
-            ${config.primary-user.home}/.nix-profile/bin \
-            /etc/profiles/per-user/${config.primary-user.name}/bin \
-            /run/current-system/sw/bin \
-            /nix/var/nix/profiles/default/bin
-        '';
-      })
-    ];
+    fish.enable = true;
     zsh = mkMerge [
       {enable = true;}
       # NOTE: macOS version upgrades reset '/etc/zshrc', which means that the
