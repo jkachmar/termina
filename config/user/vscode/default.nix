@@ -24,7 +24,7 @@ in {
   };
 
   home.file."${configFilePath}".source =
-    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/vscode/settings.json";
+    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/settings.json";
   home.file."${keybindingsFilePath}".source =
-    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/vscode/keybindings.json";
+    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/keybindings.json";
 }

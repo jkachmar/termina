@@ -49,5 +49,5 @@ in {
   # XXX: It's important that all systems store dotfiles at the same location.
   xdg.configFile."nvim/lua".source =
     mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/.config/dotfiles/config/home/neovim/lua";
+    "${config.home.homeDirectory}/.config/dotfiles/config/user/neovim/lua";
 }

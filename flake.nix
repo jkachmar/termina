@@ -82,11 +82,11 @@
       ########################
       # USER CONFIGURATIONS. #
       ########################
-      homeConfigurations = {
-        # macOS home configurations.
-        crazy-diamond = utils.mkMacOSHomeCfg "crazy-diamond" "aarch64-darwin";
+      userConfigurations = {
+        # macOS user configurations.
+        crazy-diamond = utils.mkMacOSUserCfg "crazy-diamond" "aarch64-darwin";
 
-        # Linux home configurations.
+        # Linux user configurations.
       };
     }
     // utils.forEachSystem (pkgs: {

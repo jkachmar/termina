@@ -70,12 +70,12 @@ inputs @ {
     };
 
   # Utility function to construct a macOS user config.
-  mkMacOSHomeCfg = hostname: system:
+  mkMacOSUserCfg = hostname: system:
     macosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs system;
       pkgs = extraSpecialArgs.pkgs;
       modules = [
-        (../hosts + "/${hostname}/home.nix")
+        (../hosts + "/${hostname}/user.nix")
       ];
     };
 
@@ -100,6 +100,6 @@ inputs @ {
     };
 
   # Utility function to construct a NixOS/Linux user config.
-  mkLinuxHomeCfg = hostname: system: {
+  mkLinuxUserCfg = hostname: system: {
   };
 }
