@@ -1,14 +1,38 @@
 [
-  {
-    "name": "nix",
-    "publisher": "bbenoist",
-    "version": "1.0.1",
-    "sha256": "sha256-qwxqOGublQeVP2qrLF94ndX/Be9oZOn+ZMCFX1yyoH0="
-  },
-  {
-    "name": "shellcheck",
-    "publisher": "timonwong",
-    "version": "0.29.4",
-    "sha256": "sha256-qdka6OFKVPJcRHBpWg3rSfzk1h6VpD0eK8tDburaroc="
-  }
+    {
+        "publisher": "bbenoist",
+        "name": "nix",
+        "version": "1.0.1",
+        "src": {
+            "name": "bbenoist-nix-1.0.1.zip",
+            "url": "https://bbenoist.gallerycdn.vsassets.io/extensions/bbenoist/nix/1.0.1/1474455192924/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-qwxqOGublQeVP2qrLF94ndX/Be9oZOn+ZMCFX1yyoH0="
+        }
+    },
+    {
+        "publisher": "rust-lang",
+        "name": "rust-analyzer",
+        "version": "0.4.1421",
+        "src": {
+            "name": "rust-lang-rust-analyzer-0.4.1421.zip",
+            "platforms": {
+                "x86_64-linux": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1421/1677717875393/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-mGZ1Y+eptM0txujn+HcmNZS9d/ojqC0jocYrRvV9Erg="
+                },
+                "aarch64-linux": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1421/1677717866503/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-ntSQMRA6+yX6ycb+RmLy7TE/n/Gyg//rXz17wSF7IsM="
+                },
+                "aarch64-darwin": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1421/1677717858909/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-HXAnozhtFFcQGO8gUwHLViLgTuy6/tp8PXfQT4ISqYM="
+                },
+                "x86_64-darwin": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1421/1677717862515/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-nEvd6goH4faYYfS3b3z8aFeebMHnaeLdAStoO+LmqFk="
+                }
+            }
+        }
+    }
 ]
