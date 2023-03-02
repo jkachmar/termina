@@ -19,8 +19,11 @@
 in {
   programs.vscode = {
     enable = true;
-    package = unstable.vscode;
-    extensions = unstable.callPackage ./extensions.nix {};
+    # XXX: Workaround until https://github.com/nix-community/home-manager/pull/3588
+    # lands in the 22.05 stable branch.
+    package = unstable.vscode-with-extensions.override {
+      vscodeExtensions = unstable.callPackage ./extensions.nix {};
+    } // { pname = "vscode"; };
   };
 
   home.file."${configFilePath}".source =

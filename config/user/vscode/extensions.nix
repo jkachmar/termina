@@ -21,7 +21,6 @@
     in
       buildVscodeMarketplaceExtension {
         inherit mktplcRef vsix;
-        inherit (args) url sha256;
       }
   );
 in
