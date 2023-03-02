@@ -34,5 +34,15 @@
                 }
             }
         }
+    },
+    {
+        "publisher": "ms-vscode-remote",
+        "name": "remote-ssh",
+        "version": "0.97.2023022415",
+        "src": {
+            "name": "ms-vscode-remote-remote-ssh-0.97.2023022415.zip",
+            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.97.2023022415/1677252551222/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-Xovzs9WFX4Mnyg6zgYBeY0T7WCSj268+UZkPJPdALm8="
+        }
     }
 ]
