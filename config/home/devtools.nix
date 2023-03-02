@@ -109,5 +109,10 @@ in {
       enableFishIntegration = config.programs.fish.enable;
       enableZshIntegration = config.programs.zsh.enable;
     };
+
+    tmux = {
+      enable = true;
+      keyMode = "vi";
+    };
   };
 }
