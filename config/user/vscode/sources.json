@@ -1,5 +1,45 @@
 [
     {
+        "publisher": "tamasfe",
+        "name": "even-better-toml",
+        "version": "0.19.0",
+        "src": {
+            "name": "tamasfe-even-better-toml-0.19.0.zip",
+            "url": "https://tamasfe.gallerycdn.vsassets.io/extensions/tamasfe/even-better-toml/0.19.0/1667317056512/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU="
+        }
+    },
+    {
+        "publisher": "trond-snekvik",
+        "name": "simple-rst",
+        "version": "1.5.2",
+        "src": {
+            "name": "trond-snekvik-simple-rst-1.5.2.zip",
+            "url": "https://trond-snekvik.gallerycdn.vsassets.io/extensions/trond-snekvik/simple-rst/1.5.2/1645885645221/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-pV7/S8kkDIbhD2K5P2TA8E0pM4F8gsFIlc+4FIheBbc="
+        }
+    },
+    {
+        "publisher": "gruntfuggly",
+        "name": "todo-tree",
+        "version": "0.0.224",
+        "src": {
+            "name": "gruntfuggly-todo-tree-0.0.224.zip",
+            "url": "https://gruntfuggly.gallerycdn.vsassets.io/extensions/gruntfuggly/todo-tree/0.0.224/1675976341182/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-ObFmzAaOlbtWC31JRYR/1y+JK1h22SVDPPRWWqPzrQs="
+        }
+    },
+    {
+        "publisher": "vscodevim",
+        "name": "vim",
+        "version": "1.25.2",
+        "src": {
+            "name": "vscodevim-vim-1.25.2.zip",
+            "url": "https://vscodevim.gallerycdn.vsassets.io/extensions/vscodevim/vim/1.25.2/1677732062761/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-hy2Ks6oRc9io6vfgql9aFGjUiRzBCS4mGdDO3NqIFEg="
+        }
+    },
+    {
         "publisher": "bbenoist",
         "name": "nix",
         "version": "1.0.1",
