@@ -97,6 +97,12 @@ def get_ext_info(source):
     version_blobs = get_ext_blobs(publisher, ext_name)
     latest = version_blobs[0]
     version = latest["version"]
+
+    # If the version hasn't changed, don't do any more work.
+    current_version = source.get('version')
+    if (current_version is not None) and (version == current_version):
+        return source
+
     is_multiarch = "targetPlatform" in latest
 
     src = {"name": f"{publisher}-{ext_name}-{version}.zip"}
