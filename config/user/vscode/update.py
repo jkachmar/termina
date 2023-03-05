@@ -76,8 +76,12 @@ def get_multiarch_ext_urls(target_version, version_blobs):
     futures = []
     with ThreadPoolExecutor(max_workers=4) as executer:
         for blob in version_blobs:
-            if (blob["targetPlatform"] in PLATFORMS) and (
-                blob["version"] == target_version
+            blob_platform = blob.get("targetPlatform")
+            blob_version = blob.get("version")
+            if (
+                blob_platform is not None
+                and blob_platform in PLATFORMS
+                and blob_version == target_version
             ):
                 future = executer.submit(get_multiarch_ext_url, blob)
                 futures.append(future)
