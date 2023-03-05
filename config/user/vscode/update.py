@@ -1,6 +1,28 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i python3 -p python3Packages.beautifulsoup4 python3Packages.requests
 
+"""
+Simple update script for managing Visual Studio Code extensions with Nix.
+
+Given a file named `sources.json`, in the same directory as this script, with
+a list of objects containing keys that correspond to the extension's publisher
+and name:
+
+.. highlight:: json
+.. code-block:: json
+
+    [{
+        "publisher": "bbenoist",
+        "name": "nix"
+    }]
+
+...this script will update that file in-place with version, download URL, and
+hash information.
+
+If the extension has architecture-specific versions available, the download
+URLs for any matching platforms in the global `PLATFORMS` dict.
+"""
+
 import json
 from concurrent.futures import ThreadPoolExecutor
 import os
@@ -49,13 +71,14 @@ def get_multiarch_ext_url(version_blob):
 
 def get_multiarch_ext_urls(target_version, version_blobs):
     """Get the extension download URLs for any matching platforms."""
+    # pylint: disable=redefined-outer-name
     futures = []
-    with ThreadPoolExecutor(max_workers=4) as e:
+    with ThreadPoolExecutor(max_workers=4) as executer:
         for blob in version_blobs:
             if (blob["targetPlatform"] in PLATFORMS) and (
                 blob["version"] == target_version
             ):
-                future = e.submit(get_multiarch_ext_url, blob)
+                future = executer.submit(get_multiarch_ext_url, blob)
                 futures.append(future)
 
     results = {}
@@ -66,7 +89,7 @@ def get_multiarch_ext_urls(target_version, version_blobs):
 
 def get_ext_url(version_blob):
     """Get the extension download URL for a VS Code extension."""
-    # XXX: Presumably there's a more idiomatic way to do this...
+    # Presumably there's a more idiomatic way to do this...
     return next(
         (
             file["source"]
@@ -99,7 +122,7 @@ def get_ext_info(source):
     version = latest["version"]
 
     # If the version hasn't changed, don't do any more work.
-    current_version = source.get('version')
+    current_version = source.get("version")
     if (current_version is not None) and (version == current_version):
         return source
 
@@ -120,13 +143,14 @@ sources = []
 with open(f"{ROOT_PATH}/sources.json", "r", encoding="utf-8") as f:
     sources = json.load(f)
 
+# pylint: disable=invalid-name
 futures = None
-with ThreadPoolExecutor(max_workers=4) as e:
-    futures = e.map(get_ext_info, sources)
+with ThreadPoolExecutor(max_workers=4) as executor:
+    futures = executor.map(get_ext_info, sources)
 
-updated_sources = [future for future in futures]
+updated_sources = list(futures)
 
 with open(f"{ROOT_PATH}/sources.tmp.json", "w", encoding="utf-8") as f:
     json.dump(updated_sources, f, ensure_ascii=False, indent=4)
 
-os.replace(f"{ROOT_PATH}/sources.tmp.json",f"{ROOT_PATH}/sources.json")
+os.replace(f"{ROOT_PATH}/sources.tmp.json", f"{ROOT_PATH}/sources.json")
