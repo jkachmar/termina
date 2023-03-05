@@ -1,5 +1,6 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i python3 -p python3Packages.beautifulsoup4 python3Packages.requests
+# SPDX-License-Identifier: MPL-2.0
 
 """
 Simple update script for managing Visual Studio Code extensions with Nix.
