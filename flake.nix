@@ -3,6 +3,57 @@
   description = "jkachmar's personal dotfiles and machine configurations.";
 
   #############################################################################
+  outputs = inputs: let
+    utils = (import ./flake/utils.nix) inputs;
+  in ({
+      ##########################
+      # SYSTEM CONFIGURATIONS. #
+      ##########################
+      # macOS system configurations.
+      darwinConfigurations = {
+        crazy-diamond = utils.mkMacOSSystemCfg "crazy-diamond" "aarch64-darwin";
+      };
+
+      # NixOS system configurations.
+      nixosConfigurations = {
+        enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
+        star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
+      };
+
+      ########################
+      # USER CONFIGURATIONS. #
+      ########################
+      userConfigurations = {
+        # macOS user configurations.
+        crazy-diamond = utils.mkMacOSUserCfg "crazy-diamond" "aarch64-darwin";
+        manhattan-transfer = utils.mkMacOSUserCfg "manhattan-transfer" "aarch64-darwin";
+
+        # Linux user configurations.
+        highway-star = utils.mkLinuxUserCfg "highway-star" "aarch64-darwin";
+      };
+    }
+    // utils.forEachSystem (pkgs: {
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs;
+          [
+            alejandra
+            (writeShellApplication {
+              name = "home";
+              text = builtins.readFile ./scripts/home;
+            })
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+            (writeShellApplication {
+              name = "rebuild";
+              text = builtins.readFile ./scripts/darwin;
+            })
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isLinux [
+          ];
+      };
+    }));
+
+  #############################################################################
   inputs = {
     #################
     # PACKAGE SETS. #
@@ -59,54 +110,4 @@
       url = "github:nix-community/home-manager/release-22.11";
     };
   };
-
-  #############################################################################
-  outputs = inputs: let
-    utils = (import ./flake/utils.nix) inputs;
-  in ({
-      ##########################
-      # SYSTEM CONFIGURATIONS. #
-      ##########################
-      # macOS system configurations.
-      darwinConfigurations = {
-        crazy-diamond = utils.mkMacOSSystemCfg "crazy-diamond" "aarch64-darwin";
-      };
-
-      # NixOS system configurations.
-      nixosConfigurations = {
-        enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
-        kraftwerk = utils.mkNixOSSystemCfg "kraftwerk" "x86_64-linux";
-        star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
-      };
-
-      ########################
-      # USER CONFIGURATIONS. #
-      ########################
-      userConfigurations = {
-        # macOS user configurations.
-        crazy-diamond = utils.mkMacOSUserCfg "crazy-diamond" "aarch64-darwin";
-
-        # Linux user configurations.
-      };
-    }
-    // utils.forEachSystem (pkgs: {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [
-            alejandra
-            (writeShellApplication {
-              name = "home";
-              text = builtins.readFile ./scripts/home;
-            })
-          ]
-          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
-            (writeShellApplication {
-              name = "rebuild";
-              text = builtins.readFile ./scripts/darwin;
-            })
-          ]
-          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
-          ];
-      };
-    }));
 }
