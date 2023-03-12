@@ -2,7 +2,6 @@
   homebrew = {
     brews = [];
     casks = [
-      "amethyst" # Tiling window manager.
       "balenaetcher" # USB drive imager.
       "discord" # Nerd chat.
       "element" # Nerdier chat.
@@ -27,7 +26,6 @@
     #
     # e.g. `mas search 1Password`
     masApps = {
-      "1Password 7 - Password Manager" = 1333542190;
       "Slack" = 803453959;
       "Strongbox Pro" = 1481853033;
       "Wireguard" = 1451685025;
