@@ -7,6 +7,7 @@
     ../../modules/system/primary-user/macos.nix
     ../../config/system/devtools.nix
     ../../config/system/nix.nix
+    ../../config/system/macos
   ];
 
   primary-user.home-manager = import ./user.nix;
