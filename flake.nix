@@ -32,6 +32,10 @@
         highway-star = utils.mkLinuxUserCfg "highway-star" "aarch64-darwin";
       };
     }
+    # Any system-agnostic stuff, pretty much just `devShells` for now.
+    #
+    # NOTE: `utils.forEachSystem` implicitly selects between `macosPkgs` and
+    # `nixosPkgs` depending on the system being built via a silly regex match.
     // utils.forEachSystem (pkgs: {
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs;
