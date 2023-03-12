@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/home/primary-user.nix
     ../../config/user/devtools.nix
@@ -10,7 +14,7 @@
     ../../config/user/vscode
   ];
 
-  home.packages = with pkgs; [ colima ];
+  home.packages = with pkgs; [colima];
 
   primary-user = {
     git.user = {
