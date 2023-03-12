@@ -1,5 +1,15 @@
 {
   homebrew = {
+    enable = true;
+
+    global.autoUpdate = true;
+    onActivation = {
+      cleanup = "zap";
+      upgrade = true;
+    };
+
+    taps = ["homebrew/cask"];
+
     brews = [];
     casks = [
       "balenaetcher" # USB drive imager.
@@ -14,9 +24,7 @@
       "signal" # Secret chat.
       # "virtualbox" # Virtualization (duh).
       # "virtualbox-extension-pack" # Virtualization helpers.
-      # XXX: For now, the Safari connector is only available in the Zotero beta
-      # (which is not available on homebrew).
-      # "zotero" # Research paper catalog & organizer.
+      "zotero" # Research paper catalog & organizer.
     ];
 
     # Mac App Store applications.
