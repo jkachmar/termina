@@ -95,11 +95,17 @@ inputs @ {
           home-manager.extraSpecialArgs = specialArgs;
           networking.hostName = hostname;
         }
-        (../hosts + "/${hostname}/home.nix")
+        (../hosts + "/${hostname}/system.nix")
       ];
     };
 
   # Utility function to construct a NixOS/Linux user config.
-  mkLinuxUserCfg = hostname: system: {
-  };
+  mkLinuxUserCfg = hostname: system:
+    nixosHome.lib.homeManagerConfiguration rec {
+      extraSpecialArgs = mkSpecialArgs system;
+      pkgs = extraSpecialArgs.pkgs;
+      modules = [
+        (../hosts + "/${hostname}/user.nix")
+      ];
+    };
 }
