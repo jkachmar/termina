@@ -3,7 +3,8 @@
 mode=${1:-"check"}
 machine=${2:-$(hostname -s)}
 
-CONFIG_PATH="${HOME}/.config/dotfiles"
+# The base config will always be one level above this script's directory.
+CONFIG_PATH=$(dirname "$(dirname "$0")")
 
 nix build \
   --experimental-features 'flakes nix-command' \
