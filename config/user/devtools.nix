@@ -38,7 +38,15 @@ in {
 
   programs = {
     bash.enable = true;
-    fish.enable = true;
+
+    fish = {
+      enable = true;
+      shellInit = ''
+        # Disable greeting text.
+        set -g fish_greeting
+      '';
+    };
+
     zsh = mkMerge [
       {enable = true;}
       # NOTE: macOS version upgrades reset '/etc/zshrc', which means that the
