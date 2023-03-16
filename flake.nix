@@ -43,8 +43,8 @@
           [
             alejandra
             (writeShellApplication {
-              name = "home";
-              text = builtins.readFile ./scripts/home;
+              name = "user";
+              text = builtins.readFile ./scripts/user;
             })
           ]
           ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [

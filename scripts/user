@@ -10,12 +10,12 @@ nix build \
   --experimental-features 'flakes nix-command' \
   --show-trace \
   --no-link \
-  "${CONFIG_PATH}/#homeConfigurations.${machine}.activationPackage"
+  "${CONFIG_PATH}/#userConfigurations.${machine}.activationPackage"
 
 result=$(
   nix path-info \
     --extra-experimental-features 'flakes nix-command' \
-    "${CONFIG_PATH}/#homeConfigurations.${machine}.activationPackage"
+    "${CONFIG_PATH}/#userConfigurations.${machine}.activationPackage"
 )
 
 if [ "$mode" = "check" ]; then
