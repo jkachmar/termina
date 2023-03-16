@@ -78,25 +78,25 @@
     {
         "publisher": "rust-lang",
         "name": "rust-analyzer",
-        "version": "0.4.1433",
+        "version": "0.4.1438",
         "src": {
-            "name": "rust-lang-rust-analyzer-0.4.1433.zip",
+            "name": "rust-lang-rust-analyzer-0.4.1438.zip",
             "platforms": {
                 "x86_64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1433/1678581644068/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-AAmdSbBvBGstMGSlufIh9AAovBjD1TtJ3Kt9RSwIo4Y="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1438/1678927962972/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-vff7hn4kiRXE83cx6AyY4mhkSG9jIb6KmPUr+T/mzlA="
                 },
                 "aarch64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1433/1678581633369/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-83ADuVv/kyuIEWMKsdEIgd3n0XlwBIUygVgG3BUplnE="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1438/1678927757606/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-D1rRuZgLvlkibm6xsguJDpzc8c8D+Nj1U4FxTzoJqYM="
                 },
                 "x86_64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1433/1678581628707/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-fvgZkpA/SK0E5lHWjO7IzWwmsIKU26t/5ZN/z0pGAXM="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1438/1678927654993/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-yR0M5YSDq9KWcFLQISd4kPHXrofpTY0RREJqIOUoV+Q="
                 },
                 "aarch64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1433/1678581623933/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-QSP/5Pt9AejjezuRT7Gyemes6w+9K+IP8yEZcuzZW+U="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1438/1678927552686/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-fIj178VQGzxduLVdYjDE9KjnlhJTiBmPggV4SbCHkeI="
                 }
             }
         }
@@ -104,11 +104,11 @@
     {
         "publisher": "ms-vscode-remote",
         "name": "remote-ssh",
-        "version": "0.99.2023030315",
+        "version": "0.99.2023031515",
         "src": {
-            "name": "ms-vscode-remote-remote-ssh-0.99.2023030315.zip",
-            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.99.2023030315/1677856391806/Microsoft.VisualStudio.Services.VSIXPackage",
-            "sha256": "sha256-ORnjrwilx6wP+xjZY4bDStm6Nj5/PYInbi3Q/qr/KSI="
+            "name": "ms-vscode-remote-remote-ssh-0.99.2023031515.zip",
+            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.99.2023031515/1678893354122/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-X77QJER3u+MhhP87TBEw8S+mTDkUymQM0aanHipRod4="
         }
     }
 ]
