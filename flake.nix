@@ -17,6 +17,7 @@
       # NixOS system configurations.
       nixosConfigurations = {
         enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
+        oasis = utils.mkNixOSSystemCfg "oasis" "x86_64-linux";
         star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
       };
 
