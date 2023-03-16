@@ -65,7 +65,12 @@ inputs @ {
           home-manager.extraSpecialArgs = specialArgs;
           networking.hostName = hostname;
         }
+        ../modules/system/primary-user/macos.nix
         (../hosts + "/${hostname}/system.nix")
+        {
+          primary-user.home-manager =
+            import (../hosts + "/${hostname}/user.nix");
+        }
       ];
     };
 
@@ -94,6 +99,11 @@ inputs @ {
         {
           home-manager.extraSpecialArgs = specialArgs;
           networking.hostName = hostname;
+        }
+        ../modules/system/primary-user/nixos.nix
+        {
+          primary-user.home-manager =
+            import (../hosts + "/${hostname}/user.nix");
         }
         (../hosts + "/${hostname}/system.nix")
       ];
