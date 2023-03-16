@@ -18,6 +18,10 @@ inputs @ {
     x86_64-linux
   ];
 
+  # Utility function to iterate over a set of default systems and construct a
+  # derivation for either of `macosPkgs` or `nixosPkgs` depending on whether
+  # the target is Linux or macOS.
+  #
   # eachSystem :: [system] -> (system -> derivation) -> derivation
   # forEachSystem :: (system -> pkgs -> derivation) -> derivation
   forEachSystem = fn:
@@ -63,10 +67,7 @@ inputs @ {
         }
         ../modules/system/primary-user/macos.nix
         (../hosts + "/${hostname}/system.nix")
-        {
-          primary-user.home-manager =
-            import (../hosts + "/${hostname}/user.nix");
-        }
+        {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
       ];
     };
 
@@ -79,9 +80,7 @@ inputs @ {
     macosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs macosPkgs system;
       inherit (extraSpecialArgs) pkgs;
-      modules = [
-        (../hosts + "/${hostname}/user.nix")
-      ];
+      modules = [(../hosts + "/${hostname}/user.nix")];
     };
 
   # Utility function to construct a NixOS system config for some version of
@@ -98,10 +97,7 @@ inputs @ {
           networking.hostName = hostname;
         }
         ../modules/system/primary-user/nixos.nix
-        {
-          primary-user.home-manager =
-            import (../hosts + "/${hostname}/user.nix");
-        }
+        {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
         (../hosts + "/${hostname}/system.nix")
       ];
     };
@@ -114,9 +110,7 @@ inputs @ {
   mkLinuxUserCfg = hostname: system:
     nixosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs nixosPkgs system;
-      pkgs = extraSpecialArgs.pkgs;
-      modules = [
-        (../hosts + "/${hostname}/user.nix")
-      ];
+      inherit (extraSpecialArgs) pkgs;
+      modules = [(../hosts + "/${hostname}/user.nix")];
     };
 }
