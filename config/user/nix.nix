@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) mkIf mkMerge;
-  inherit (pkgs.stdenv.targetPlatform) isDarwin isAarch64;
+  inherit (pkgs.buildPlatform) isDarwin isAarch64;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
 in {
   nix = {

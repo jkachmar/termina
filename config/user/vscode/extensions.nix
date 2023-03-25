@@ -1,11 +1,11 @@
 {
+  buildPlatform,
   fetchurl,
   lib,
-  stdenv,
   vscode-extensions,
   vscode-utils,
 }: let
-  inherit (stdenv.targetPlatform) system;
+  inherit (buildPlatform) system;
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
 
   sources = builtins.fromJSON (builtins.readFile ./sources.json);

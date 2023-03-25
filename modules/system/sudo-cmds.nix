@@ -8,7 +8,6 @@
   ...
 }: let
   inherit (lib) mapAttrsToList mkAfter mkOption types;
-  inherit (pkgs.stdenv.targetPlatform) isLinux;
 
   cfg = config.sudo-cmds;
 

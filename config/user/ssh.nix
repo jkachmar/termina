@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) optionalAttrs optionalString;
-  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+  inherit (pkgs.buildPlatform) isDarwin;
   sshConfigDir = "${config.home.homeDirectory}/.ssh";
 in {
   programs.ssh = {

@@ -9,7 +9,7 @@
   ...
 }: let
   inherit (lib) mkIf mkMerge optionals;
-  inherit (pkgs.stdenv.targetPlatform) isDarwin isLinux;
+  inherit (pkgs.buildPlatform) isDarwin isLinux;
 
   gcoreutils = pkgs.coreutils.override {
     singleBinary = false;
@@ -91,17 +91,6 @@ in {
       # Conditionally enable direnv integration for shells that home-manager manages.
       enableBashIntegration = config.programs.bash.enable;
       enableZshIntegration = config.programs.zsh.enable;
-    };
-
-    git = {
-      enable = true;
-      extraConfig = {
-        core.editor = "vim";
-        init.defaultBranch = "main";
-        pull.rebase = true;
-        push.default = "simple";
-        rerere.enabled = true;
-      };
     };
 
     starship = {

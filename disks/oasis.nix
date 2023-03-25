@@ -1,0 +1,1 @@
+../hosts/oasis/disks.nix

@@ -4,7 +4,7 @@
 
   #############################################################################
   outputs = inputs: let
-    utils = (import ./flake/utils.nix) inputs;
+    utils = (import ./utils/flakes.nix) inputs;
   in ({
       ##########################
       # SYSTEM CONFIGURATIONS. #
@@ -17,7 +17,16 @@
       # NixOS system configurations.
       nixosConfigurations = {
         enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
-        oasis = utils.mkNixOSSystemCfg "oasis" "x86_64-linux";
+
+        oasis = utils.mkNixOSSystemCfgWith {
+          hostname = "oasis";
+          system = "x86_64-linux";
+          extraModules = [
+            inputs.disko.nixosModules.disko
+            inputs.impermanence.nixosModule
+          ];
+        };
+
         star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
       };
 
@@ -47,13 +56,15 @@
               text = builtins.readFile ./scripts/user;
             })
           ]
-          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
+          ++ lib.optionals buildPlatform.isDarwin [
             (writeShellApplication {
               name = "rebuild";
               text = builtins.readFile ./scripts/darwin;
             })
           ]
-          ++ pkgs.lib.optionals pkgs.stdenv.targetPlatform.isLinux [
+          ++ lib.optionals buildPlatform.isLinux [
+            inputs.disko.packages.${buildPlatform.system}.disko
+            rng-tools
           ];
       };
     }));
@@ -77,8 +88,15 @@
     #
     # NOTE: `unstable-small` indicates that a "minimum" set of unstable
     # packages passes CI; there may still be binary cache misses and other
-    # issues, but it's a good compromise between `trunk` and `stable`.
+    # issues, but it's a good compromise between `trunk` and `nixosPkgs`.
     unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
+
+    # Tip of the unstable (rolling-release) NixOS package set.
+    #
+    # NOTE: `unstable-small` indicates that a "minimum" set of unstable
+    # packages passes CI; `trunk` makes no such guarantees, but can be useful
+    # to quickly incorporate changes that have been incorporated very recently.
+    trunk.url = "github:nixos/nixpkgs";
 
     ##############
     # UTILITIES. #
@@ -91,11 +109,13 @@
 
     # Declarative disk partitioning for NixOS.
     disko = {
-      inputs.nixpkgs.follows = "nixosPkgs";
-      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "unstable";
+      url = "github:jkachmar/disko/luks-params";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    impermanence.url = "github:nix-community/impermanence";
 
     # Declarative user configuration for macOS systems.
     macosHome = {
@@ -103,6 +123,7 @@
         nixpkgs.follows = "macosPkgs";
         utils.follows = "flake-utils";
       };
+      # NOTE: Update this when `macosPkgs` is updated to a new stable release!
       url = "github:nix-community/home-manager/release-22.11";
     };
 
@@ -112,6 +133,7 @@
         nixpkgs.follows = "nixosPkgs";
         utils.follows = "flake-utils";
       };
+      # NOTE: Update this when `nixosPkgs` is updated to a new stable release!
       url = "github:nix-community/home-manager/release-22.11";
     };
   };

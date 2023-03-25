@@ -9,7 +9,7 @@
   ...
 }: let
   inherit (lib) mkAliasDefinitions mkAliasOptionModule mkIf mkOption types;
-  inherit (pkgs.stdenv.targetPlatform) isDarwin;
+  inherit (pkgs.buildPlatform) isDarwin;
   cfg = config.primary-user;
 in {
   options.primary-user.name = mkOption {

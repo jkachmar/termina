@@ -23,19 +23,20 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixosPkgs"
+          "unstable"
         ]
       },
       "locked": {
-        "lastModified": 1678951780,
-        "narHash": "sha256-Bve469g/b+AQ8cBIjlmaDVW/XZdZK9HUh8/UwV9Wbdc=",
-        "owner": "nix-community",
+        "lastModified": 1679772283,
+        "narHash": "sha256-NvMionkCSD3d3g+tL3J6njdgJaorqi+lwH7PlW9yhkE=",
+        "owner": "jkachmar",
         "repo": "disko",
-        "rev": "a2dec6e4e0fe54a9e1610299ac3aaeeb48eab50c",
+        "rev": "1ed3f9aca3677395cb5c66ee2f67550dd485662b",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "jkachmar",
+        "ref": "luks-params",
         "repo": "disko",
         "type": "github"
       }
@@ -52,6 +53,21 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1675359654,
+        "narHash": "sha256-FPxzuvJkcO49g4zkWLSeuZkln54bLoTtrggZDJBH90I=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "6138eb8e737bffabd4c8fc78ae015d4fd6a7e2fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
         "type": "github"
       }
     },
@@ -140,11 +156,28 @@
         "darwin": "darwin",
         "disko": "disko",
         "flake-utils": "flake-utils",
+        "impermanence": "impermanence",
         "macosHome": "macosHome",
         "macosPkgs": "macosPkgs",
         "nixosHome": "nixosHome",
         "nixosPkgs": "nixosPkgs",
+        "trunk": "trunk",
         "unstable": "unstable"
+      }
+    },
+    "trunk": {
+      "locked": {
+        "lastModified": 1679777855,
+        "narHash": "sha256-7WmKknmDlL6upSk5QDLiX4J7Id/OGCOfZhV2q0OYVEc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "7d1420d5a971351b286f74ebde76bbe74c975023",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "unstable": {

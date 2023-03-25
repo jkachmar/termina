@@ -56,26 +56,37 @@ inputs @ {
 
   # Utility function to construct a macOS system config for some version of
   # stable nixpkgs passed in as an argument.
-  mkMacOSSystemCfgWith = stable: home: hostname: system:
+  mkMacOSSystemCfgWith = {
+    stable ? macosPkgs,
+    home ? macosHome,
+    extraModules ? [],
+    hostname,
+    system,
+  }:
     darwin.lib.darwinSystem rec {
       specialArgs = mkSpecialArgs stable system;
-      modules = [
-        home.darwinModules.home-manager
-        {
-          home-manager.extraSpecialArgs = specialArgs;
-          networking.hostName = hostname;
-        }
-        ../modules/system/primary-user/macos.nix
-        (../hosts + "/${hostname}/system.nix")
-        {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
-      ];
+      modules =
+        extraModules
+        ++ [
+          home.darwinModules.home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+            networking.hostName = hostname;
+          }
+          ../modules/system/primary-user/macos.nix
+          (../hosts + "/${hostname}/system.nix")
+          {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
+        ];
     };
 
   # Utility function to construct a macOS system config using the default
   # stable `macosPkgs` & `macosHome` passed in to this util module.
-  mkMacOSSystemCfg = mkMacOSSystemCfgWith macosPkgs macosHome;
+  mkMacOSSystemCfg = hostname: system:
+    mkMacOSSystemCfgWith {inherit hostname system;};
 
   # Utility function to construct a macOS user config.
+  #
+  # TODO: Factor out common parts from `mkLinuxUserCfg`.
   mkMacOSUserCfg = hostname: system:
     macosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs macosPkgs system;
@@ -85,28 +96,39 @@ inputs @ {
 
   # Utility function to construct a NixOS system config for some version of
   # stable nixpkgs passed in as an argument.
-  mkNixOSSystemCfgWith = stable: home: hostname: system:
+  mkNixOSSystemCfgWith = {
+    stable ? nixosPkgs,
+    home ? nixosHome,
+    extraModules ? [],
+    hostname,
+    system,
+  }:
     stable.lib.nixosSystem rec {
       inherit system;
       specialArgs = mkSpecialArgs stable system;
-      modules = [
-        stable.nixosModules.notDetected
-        home.nixosModules.home-manager
-        {
-          home-manager.extraSpecialArgs = specialArgs;
-          networking.hostName = hostname;
-        }
-        ../modules/system/primary-user/nixos.nix
-        {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
-        (../hosts + "/${hostname}/system.nix")
-      ];
+      modules =
+        extraModules
+        ++ [
+          stable.nixosModules.notDetected
+          home.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+            networking.hostName = hostname;
+          }
+          ../modules/system/primary-user/nixos.nix
+          {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
+          (../hosts + "/${hostname}/system.nix")
+        ];
     };
 
   # Utility function to construct a NixOS system config using the default \
   # stable `nixosPkgs` & `nixosHome` passed in to this util module.
-  mkNixOSSystemCfg = mkNixOSSystemCfgWith nixosPkgs nixosHome;
+  mkNixOSSystemCfg = hostname: system:
+    mkNixOSSystemCfgWith {inherit hostname system;};
 
   # Utility function to construct a NixOS/Linux user config.
+  #
+  # TODO: Factor out common parts from `mkMacOSUserCfg`.
   mkLinuxUserCfg = hostname: system:
     nixosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs nixosPkgs system;
