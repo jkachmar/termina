@@ -15,22 +15,30 @@ useful.
   - [`system/`] - system-level configuration options
     - [`macos/`] - macOS system-level configs
   - [`user/`] - user-level configs
-- [`flake/`] - utility functions used to make writing the flake a little easier
+- [`disks/`] - declarative disk partition configuration, courtesy of [`disko`]
+- [`profiles/`] - collections of configuration options from which high-level
+  system "profiles" are comprised
+  - e.g. `profiles/user/base.nix` is a user-level profile for all systems
 - [`hosts/`] - system & user configs for the different hosts administered here
 - [`modules/`] - option modules used here
 - [`overlays/`] - just what it says: any overlays applied to my package sets
 - [`scripts/`] - shell scripts & other utilities, typically for `devShells`
+- [`utils/`] - misc. utility functions
 
 [`config/`]: ./config
 [`shared/`]: ./config/shared
 [`system/`]: ./config/system
 [`macos/`]: ./configsystem/macos
 [`user/`]: ./config/user
-[`flake/`]: ./flake
+[`disks/`]: ./disks
+[`profiles/`]: ./profiles
 [`hosts/`]: ./hosts
 [`modules/`]: ./modules
 [`overlays/`]: ./overlays
 [`scripts/`]: ./scripts
+[`utils/`]: ./utils
+
+[`disko`]: https://www.github.com/nix-community/disko
 
 ## NOTES
 
