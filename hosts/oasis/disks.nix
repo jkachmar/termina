@@ -6,7 +6,7 @@
 }: let
   devicename = builtins.baseNameOf device;
 in {
-  # TODO: Documentation!
+  # Construct the partition table for the system's primary disk.
   disk.${devicename} = {
     type = "disk";
     inherit device;
@@ -33,6 +33,15 @@ in {
             mountOptions = ["defaults"];
           };
         }
+        # Partition the remainder of the disk as a LUKS container.
+        #
+        # This system should be able to boot without manual intervention, so
+        # the LUKS container will be set up to use a random segment data from
+        # an external device constructed in a separate step.
+        #
+        # XXX: It's _extremely_ important to set up a separate LUKS passphrase
+        # to unlock this container, so that the system is not irrecoverable if
+        # something happens to the key file.
         {
           type = "partition";
           name = "phainon";
@@ -74,7 +83,7 @@ in {
     mountOptions = ["defaults" "size=16G" "mode=1777"];
   };
 
-  # TODO: Documentation!
+  # Construct the primary ZFS pool for this system.
   zpool.titan = {
     type = "zpool";
 
@@ -109,7 +118,7 @@ in {
         options.secondarycache = "none";
       };
 
-      # Nix store.
+      # `/nix/store` dataset; no snapshots required. 
       nix = {
         zfs_type = "filesystem";
         mountpoint = "/nix";
@@ -142,7 +151,7 @@ in {
         options.secondarycache = "none";
       };
 
-      # Location for runtime "secrets".
+      # Arbitrary runtime secrets.
       #
       # NOTE: It would be nice to replace this with something like Vault.
       "state/secrets" = {
