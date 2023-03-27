@@ -5,11 +5,10 @@
 }: {
   imports = [
     ../../profiles/user/base.nix
-    ../../config/user/fonts.nix
-    ../../config/user/neovim
-    ../../config/user/vscode
+    ../../profiles/user/development.nix
     # SSH identity management
     # TODO: There's absolutely a better solution than this...
+    ../../config/user/ssh
     ../../config/user/ssh/enigma.nix
     ../../config/user/ssh/github.nix
     ../../config/user/ssh/gitlab.nix

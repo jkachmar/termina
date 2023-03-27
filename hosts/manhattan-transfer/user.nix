@@ -6,6 +6,7 @@ in {
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
+    ../../config/user/ssh
     ../../config/user/ssh/github.nix
   ];
 
