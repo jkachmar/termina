@@ -39,7 +39,10 @@
         manhattan-transfer = utils.mkMacOSUserCfg "manhattan-transfer" "aarch64-darwin";
 
         # Linux user configurations.
-        highway-star = utils.mkLinuxUserCfg "highway-star" "x86_64-linux";
+        #
+        # NOTE: $WORK configures my development VM automatically & assigns it a
+        # hostname based off of my username.
+        jkachmar = utils.mkLinuxUserCfg "highway-star" "x86_64-linux";
       };
     }
     # Any system-agnostic stuff, pretty much just `devShells` for now.

@@ -1,4 +1,4 @@
-{config, ...}: let
+{config, ...}:
 {
   imports = [
     ../../profiles/user/base.nix
