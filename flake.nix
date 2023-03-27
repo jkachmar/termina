@@ -39,7 +39,7 @@
         manhattan-transfer = utils.mkMacOSUserCfg "manhattan-transfer" "aarch64-darwin";
 
         # Linux user configurations.
-        highway-star = utils.mkLinuxUserCfg "highway-star" "aarch64-darwin";
+        highway-star = utils.mkLinuxUserCfg "highway-star" "x86_64-linux";
       };
     }
     # Any system-agnostic stuff, pretty much just `devShells` for now.

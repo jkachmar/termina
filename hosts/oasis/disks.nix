@@ -118,7 +118,7 @@ in {
         options.secondarycache = "none";
       };
 
-      # `/nix/store` dataset; no snapshots required. 
+      # `/nix/store` dataset; no snapshots required.
       nix = {
         zfs_type = "filesystem";
         mountpoint = "/nix";
