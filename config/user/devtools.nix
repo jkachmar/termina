@@ -24,6 +24,7 @@ in {
         curl
         fd
         findutils
+        fzf
         libvterm-neovim
         nix-index
         ripgrep
@@ -73,6 +74,25 @@ in {
       config.theme = "ansi";
     };
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+
+      # Conditionally enable direnv integration for shells that home-manager manages.
+      enableBashIntegration = config.programs.bash.enable;
+      enableZshIntegration = config.programs.zsh.enable;
+    };
+
+    fzf = {
+      enable = true;
+      # Conditionally enable 'fzf' integration for interactive shells managed
+      # via home-manager.
+      enableBashIntegration = config.programs.bash.enable;
+      enableFishIntegration = config.programs.fish.enable;
+      enableZshIntegration = config.programs.zsh.enable;
+      tmux.enableShellIntegration = config.programs.tmux.enable;
+    };
+
     htop = {
       enable = true;
       settings = {
@@ -82,15 +102,6 @@ in {
         tree_view = true;
         vim_mode = true;
       };
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-
-      # Conditionally enable direnv integration for shells that home-manager manages.
-      enableBashIntegration = config.programs.bash.enable;
-      enableZshIntegration = config.programs.zsh.enable;
     };
 
     starship = {
