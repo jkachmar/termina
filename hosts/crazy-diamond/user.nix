@@ -9,6 +9,7 @@
     # SSH identity management
     # TODO: There's absolutely a better solution than this...
     ../../config/user/ssh
+    ../../config/user/ssh/cofree.nix
     ../../config/user/ssh/enigma.nix
     ../../config/user/ssh/github.nix
     ../../config/user/ssh/gitlab.nix
