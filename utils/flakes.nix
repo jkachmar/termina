@@ -91,7 +91,17 @@ inputs @ {
     macosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs macosPkgs system;
       inherit (extraSpecialArgs) pkgs;
-      modules = [(../hosts + "/${hostname}/user.nix")];
+      modules = [
+        (../hosts + "/${hostname}/user.nix")
+        # FIXME: Workaround for the fact that 'NIX_PATH' isn't set when not
+        # using the system config.
+        ({inputs, lib, ...}: {
+          home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
+            "nixpkgs=${inputs.macosPkgs}"
+            "unstable=${inputs.unstable}"
+          ];
+        })
+      ];
     };
 
   # Utility function to construct a NixOS system config for some version of
@@ -133,6 +143,16 @@ inputs @ {
     nixosHome.lib.homeManagerConfiguration rec {
       extraSpecialArgs = mkSpecialArgs nixosPkgs system;
       inherit (extraSpecialArgs) pkgs;
-      modules = [(../hosts + "/${hostname}/user.nix")];
+      modules = [
+        (../hosts + "/${hostname}/user.nix")
+        # FIXME: Workaround for the fact that 'NIX_PATH' isn't set when not
+        # using the system config.
+        ({inputs, lib, ...}: {
+          home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
+            "nixpkgs=${inputs.nixosPkgs}"
+            "unstable=${inputs.unstable}"
+          ];
+        })
+      ];
     };
 }
