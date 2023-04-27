@@ -6,8 +6,9 @@ in {
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
+    # TODO: Surely this can be abstracted behind a module or something...
+    ../../config/user/gpg/linux.nix
     ../../config/user/ssh
-    ../../config/user/ssh/github.nix
   ];
 
   # XXX: Partial workaround for https://github.com/nix-community/home-manager/issues/2769

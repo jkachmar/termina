@@ -2,7 +2,6 @@
   imports = [
     ../../config/system/macos/applications.nix
     ../../config/system/macos/dock.nix
-    ../../config/system/macos/gpg.nix
     ../../config/system/macos/inputs.nix
   ];
 

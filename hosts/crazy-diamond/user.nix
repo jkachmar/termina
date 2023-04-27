@@ -6,6 +6,8 @@
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
+    # TODO: Surely this can be abstracted behind a module or something...
+    ../../config/user/gpg/macos.nix
     # SSH identity management
     # TODO: There's absolutely a better solution than this...
     ../../config/user/ssh
