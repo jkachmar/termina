@@ -6,7 +6,7 @@
   imports = [
     ../../config/system/devtools.nix
     ../../config/system/nix.nix
-    ../../config/system/macos
+    ../../profiles/system/macos.nix
   ];
 
   # 2x maxJobs = up to 2 derivations may be built in parallel

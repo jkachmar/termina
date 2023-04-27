@@ -5,5 +5,6 @@ in {
     hostname = "cofree.coffee";
     user = "jkachmar";
     identityFile = ["${sshDir}/id_cofree"];
+    forwardAgent = true;
   };
 }
