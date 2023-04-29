@@ -13,6 +13,9 @@ let
       unstable.sequoia-chameleon-gnupg
     ];
     postBuild = ''
+      mv $out/bin/gpg $out/bin/gnupg
+      mv $out/bin/gpgv $out/bin/gnupgv
+
       mv $out/bin/gpg-sq $out/bin/gpg
       mv $out/bin/gpgv-sq $out/bin/gpgv
     '';
