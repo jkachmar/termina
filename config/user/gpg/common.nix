@@ -6,6 +6,9 @@
   ...
 }:
 let
+  # NOTE: This works in practice, however `sequoia-chameleon-gnupg` doesn't
+  # mutate `trustdb.gpg`; this prevents some of the `home-manager` automations
+  # from working properly, so it's "better" to stick with `gnupg` (for now).
   sequoia-gnupg-tools = pkgs.symlinkJoin {
     name = "sequoia-gnupg-tools";
     paths = [
@@ -22,9 +25,9 @@ let
   };
 in
 {
+  home.packages = [ unstable.sequoia-chameleon-gnupg ];
   programs.gpg = {
     enable = true;
-    package = sequoia-gnupg-tools;
     scdaemonSettings = { disable-ccid = true; };
   };
 }
