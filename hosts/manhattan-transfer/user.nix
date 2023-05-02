@@ -7,7 +7,7 @@ in {
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
     # TODO: Surely this can be abstracted behind a module or something...
-    ../../config/user/gpg/linux.nix
+    ../../config/user/gpg/macos.nix
     ../../config/user/ssh
   ];
 

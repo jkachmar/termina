@@ -4,6 +4,7 @@
     ../../profiles/user/base.nix
     ../../config/user/neovim
     ../../config/user/devtools.nix
+    ../../config/user/gpg/linux.nix
   ];
 
   # NOTE: Works w/ the tmux config (below) to set the Okta auth stuff.
