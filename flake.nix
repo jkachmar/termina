@@ -94,12 +94,12 @@
     # issues, but it's a good compromise between `trunk` and `nixosPkgs`.
     unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
-    # Tip of the unstable (rolling-release) NixOS package set.
-    #
-    # NOTE: `unstable-small` indicates that a "minimum" set of unstable
-    # packages passes CI; `trunk` makes no such guarantees, but can be useful
-    # to quickly incorporate changes that have been incorporated very recently.
-    trunk.url = "github:nixos/nixpkgs";
+    # # Tip of the unstable (rolling-release) NixOS package set.
+    # #
+    # # NOTE: `unstable-small` indicates that a "minimum" set of unstable
+    # # packages passes CI; `trunk` makes no such guarantees, but can be useful
+    # # to quickly incorporate changes that have been incorporated very recently.
+    # trunk.url = "github:nixos/nixpkgs";
 
     ##############
     # UTILITIES. #
