@@ -110,5 +110,15 @@
             "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.101.2023050515/1683299181532/Microsoft.VisualStudio.Services.VSIXPackage",
             "sha256": "sha256-o+JowlbR/sELkf3QGvZW0MH3bsAJBneEDBq2G+iluwc="
         }
+    },
+    {
+        "publisher": "ms-vscode",
+        "name": "remote-explorer",
+        "version": "0.5.2023040509",
+        "src": {
+            "name": "ms-vscode-remote-explorer-0.5.2023040509.zip",
+            "url": "https://ms-vscode.gallerycdn.vsassets.io/extensions/ms-vscode/remote-explorer/0.5.2023040509/1680687704474/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-ZVjk/Gp4tCtPw7sxoxrjOIdpEBxAZqTcjdKIlMGSXJ8="
+        }
     }
 ]
