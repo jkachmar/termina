@@ -82,10 +82,10 @@
     # NOTE: `darwin` indicates that this channel passes CI on macOS builders;
     # this should increase the binary cache hit rate, but may result in it
     # lagging behind the equivalent NixOS/Linux package set.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-22.11-darwin";
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
 
     # Latest stable NixOS & Linux package set.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixosPkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     # Unstable (rolling-release) NixOS package set.
     #
@@ -113,7 +113,7 @@
     # Declarative disk partitioning for NixOS.
     disko = {
       inputs.nixpkgs.follows = "unstable";
-      url = "github:jkachmar/disko/luks-params";
+      url = "github:nix-community/disko";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
@@ -124,20 +124,18 @@
     macosHome = {
       inputs = {
         nixpkgs.follows = "macosPkgs";
-        utils.follows = "flake-utils";
       };
       # NOTE: Update this when `macosPkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
     };
 
     # Declarative user configuration for NixOS & Linux systems.
     nixosHome = {
       inputs = {
         nixpkgs.follows = "nixosPkgs";
-        utils.follows = "flake-utils";
       };
       # NOTE: Update this when `nixosPkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/release-23.05";
     };
   };
 }
