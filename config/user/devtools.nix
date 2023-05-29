@@ -33,6 +33,7 @@ in {
         wget
       ]
       ++ optionals isDarwin [
+        darwin.iproute2mac
         gcoreutils
       ])
     ++ (with unstable; []);
