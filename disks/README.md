@@ -15,9 +15,9 @@ sudo disko ./cassini.nix --mode zap_create_mount --argstr device <path to device
 
 [`cassini.nix`]: ./cassini.nix
 
-### [`oasis.nix`]
+### [`tatl.nix`]
 
-Symlink to the disk configuration module for [`oasis`].
+Symlink to the disk configuration module for [`tatl`].
 
-[`oasis.nix`]: ../hosts/oasis/disks.nix
-[`oasis`]: ../hosts/oasis
+[`tatl.nix`]: ../hosts/tatl/disks.nix
+[`tatl`]: ../hosts/tatl

@@ -18,8 +18,8 @@
       nixosConfigurations = {
         enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
 
-        oasis = utils.mkNixOSSystemCfgWith {
-          hostname = "oasis";
+        tatl = utils.mkNixOSSystemCfgWith {
+          hostname = "tatl";
           system = "x86_64-linux";
           extraModules = [
             inputs.disko.nixosModules.disko

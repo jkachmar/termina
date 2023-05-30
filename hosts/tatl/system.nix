@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./hardware.nix
+    ./networking.nix
     ../../profiles/system/base.nix
     ../../profiles/system/nixos.nix
     ../../profiles/server/base.nix
@@ -34,5 +35,5 @@
     ];
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
