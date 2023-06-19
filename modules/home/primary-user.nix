@@ -42,7 +42,7 @@ in {
   config = mkIf (cfg.name != null) {
     home.username = cfg.name;
     home.homeDirectory = cfg.home;
-    home.stateVersion = lib.mkDefault "22.11";
+    home.stateVersion = lib.mkDefault "23.05";
 
     # By default, allow `home-manager` to manage its own installation.
     programs.home-manager.enable = lib.mkDefault true;

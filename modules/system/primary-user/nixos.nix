@@ -38,5 +38,8 @@ in {
       allowed-users = ["root" cfg.name];
       trusted-users = ["root" cfg.name];
     };
+
+    # Keep this up-to-date with respect to the stable nixpkgs version.
+    system.stateVersion = lib.mkDefault "23.05";
   };
 }

@@ -34,6 +34,4 @@
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCQ2KyPZfXYoVPVlRLNFUHIAWkmQ4Tgqlq7m6l0z5R8TgOmoV+2CyhEjHcUvUs6ra4O7ZjB3PwM+xCx/FtCX+I0= wonder-of-u"
     ];
   };
-
-  system.stateVersion = "23.05";
 }

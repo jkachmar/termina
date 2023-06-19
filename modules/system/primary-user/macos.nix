@@ -22,5 +22,11 @@ in {
       settings.allowed-users = ["root" cfg.name "@admin" "@wheel"];
       settings.trusted-users = ["root" cfg.name "@admin" "@wheel"];
     };
+
+    # Used for backwards compatibility, please read the changelog before
+    # updating.
+    #
+    # $ darwin-rebuild changelog
+    system.stateVersion = lib.mkDefault 4;
   };
 }

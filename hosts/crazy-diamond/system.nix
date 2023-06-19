@@ -15,11 +15,4 @@
     cores = lib.mkDefault 2;
     max-jobs = lib.mkDefault 2;
   };
-
-  ###########################################################################
-  # Used for backwards compatibility, please read the changelog before
-  # updating.
-  #
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
 }
