@@ -10,6 +10,11 @@ useful.
 
 ### Structure
 
+- [`flake/`] - "flake modules" to be used with [`flake-parts`]
+  - [`devshells.nix`] - system-agnostic development shells
+  - [`macos.nix`] - macOS configuration targets
+  - [`nixos.nix`] - NixOS configuration targets
+  - [`user.nix`] - user-level configuration targets
 - [`config/`]
   - [`shared/`] - settings shared between system & user configs
   - [`system/`] - system-level configuration options
@@ -23,8 +28,12 @@ useful.
 - [`modules/`] - option modules used here
 - [`overlays/`] - just what it says: any overlays applied to my package sets
 - [`scripts/`] - shell scripts & other utilities, typically for `devShells`
-- [`utils/`] - misc. utility functions
 
+[`flake/`]: ./flake
+[`devshells.nix`]: ./flake/devshells.nix
+[`macos.nix`]: ./flake/macos.nix
+[`nixos.nix`]: ./flake/nixos.nix
+[`user.nix`]: ./flake/user.nix
 [`config/`]: ./config
 [`shared/`]: ./config/shared
 [`system/`]: ./config/system
@@ -36,9 +45,9 @@ useful.
 [`modules/`]: ./modules
 [`overlays/`]: ./overlays
 [`scripts/`]: ./scripts
-[`utils/`]: ./utils
 
 [`disko`]: https://www.github.com/nix-community/disko
+[`flake-parts`]: https://www.github.com/hercules-ci/flake-parts
 
 ## NOTES
 
