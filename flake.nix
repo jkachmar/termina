@@ -3,74 +3,11 @@
   description = "jkachmar's personal dotfiles and machine configurations.";
 
   #############################################################################
-  outputs = inputs: let
-    utils = (import ./utils/flakes.nix) inputs;
-  in ({
-      ##########################
-      # SYSTEM CONFIGURATIONS. #
-      ##########################
-      # macOS system configurations.
-      darwinConfigurations = {
-        crazy-diamond = utils.mkMacOSSystemCfg "crazy-diamond" "aarch64-darwin";
-      };
-
-      # NixOS system configurations.
-      nixosConfigurations = {
-        enigma = utils.mkNixOSSystemCfg "enigma" "x86_64-linux";
-
-        tatl = utils.mkNixOSSystemCfgWith {
-          hostname = "tatl";
-          system = "x86_64-linux";
-          extraModules = [
-            inputs.disko.nixosModules.disko
-            inputs.impermanence.nixosModule
-          ];
-        };
-
-        star-platinum = utils.mkNixOSSystemCfg "star-platinum" "x86_64-linux";
-      };
-
-      ########################
-      # USER CONFIGURATIONS. #
-      ########################
-      userConfigurations = {
-        # macOS user configurations.
-        crazy-diamond = utils.mkMacOSUserCfg "crazy-diamond" "aarch64-darwin";
-        manhattan-transfer = utils.mkMacOSUserCfg "manhattan-transfer" "aarch64-darwin";
-
-        # Linux user configurations.
-        #
-        # NOTE: $WORK configures my development VM automatically & assigns it a
-        # hostname based off of my username.
-        jkachmar = utils.mkLinuxUserCfg "highway-star" "x86_64-linux";
-      };
-    }
-    # Any system-agnostic stuff, pretty much just `devShells` for now.
-    #
-    # NOTE: `utils.forEachSystem` implicitly selects between `macosPkgs` and
-    # `nixosPkgs` depending on the system being built via a silly regex match.
-    // utils.forEachSystem (pkgs: {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs;
-          [
-            alejandra
-            (writeShellApplication {
-              name = "user";
-              text = builtins.readFile ./scripts/user;
-            })
-          ]
-          ++ lib.optionals buildPlatform.isDarwin [
-            (writeShellApplication {
-              name = "rebuild";
-              text = builtins.readFile ./scripts/darwin;
-            })
-          ]
-          ++ lib.optionals buildPlatform.isLinux [
-            inputs.disko.packages.${buildPlatform.system}.disko
-            rng-tools
-          ];
-      };
-    }));
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [./flake];
+      systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
+    };
 
   #############################################################################
   inputs = {
@@ -84,10 +21,10 @@
     # lagging behind the equivalent NixOS/Linux package set.
     macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
 
-    # Latest stable NixOS & Linux package set.
-    nixosPkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    # Latest stable Nix package set.
+    stablePkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
-    # Unstable (rolling-release) NixOS package set.
+    # Unstable (rolling-release) Nix package set.
     #
     # NOTE: `unstable-small` indicates that a "minimum" set of unstable
     # packages passes CI; there may still be binary cache misses and other
@@ -116,25 +53,23 @@
       url = "github:nix-community/disko";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    # Module system for Nix flakes.
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # Modules for persistence when mounting root & home on tmpfs.
     impermanence.url = "github:nix-community/impermanence";
 
-    # Declarative user configuration for macOS systems.
-    macosHome = {
-      inputs = {
-        nixpkgs.follows = "macosPkgs";
-      };
-      # NOTE: Update this when `macosPkgs` is updated to a new stable release!
+    # Declarative user configuration for Linux systems.
+    linuxHome = {
+      inputs.nixpkgs.follows = "stablePkgs";
+      # NOTE: Update this when `stablePkgs` is updated to a new stable release!
       url = "github:nix-community/home-manager/release-23.05";
     };
 
-    # Declarative user configuration for NixOS & Linux systems.
-    nixosHome = {
-      inputs = {
-        nixpkgs.follows = "nixosPkgs";
-      };
-      # NOTE: Update this when `nixosPkgs` is updated to a new stable release!
+    # Declarative user configuration for macOS systems.
+    macosHome = {
+      inputs.nixpkgs.follows = "macosPkgs";
+      # NOTE: Update this when `macosPkgs` is updated to a new stable release!
       url = "github:nix-community/home-manager/release-23.05";
     };
   };

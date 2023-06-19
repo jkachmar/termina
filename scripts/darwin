@@ -10,12 +10,12 @@ CONFIG_PATH=$(dirname "$(dirname "$0")")
   --experimental-features 'flakes nix-command' \
   --show-trace \
   --no-link \
-  "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
+  "${CONFIG_PATH}/#${machine}-system"
 
 result=$(
   /nix/var/nix/profiles/default/bin/nix path-info \
     --extra-experimental-features 'flakes nix-command' \
-    "${CONFIG_PATH}"/#darwinConfigurations."${machine}".system
+    "${CONFIG_PATH}/#${machine}-system"
 )
 
 if [ "$mode" = "check" ]; then
