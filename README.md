@@ -17,17 +17,16 @@ useful.
   - [`user.nix`] - user-level configuration targets
 - [`config/`]
   - [`shared/`] - settings shared between system & user configs
-  - [`system/`] - system-level configuration options
-    - [`macos/`] - macOS system-level configs
-  - [`user/`] - user-level configs
+  - [`system/`] - system-level configuration options (Nix itself, dev tools, services)
+    - [`macos/`] - macOS system-level configs (homebrew, app store, dock, inputs)
+  - [`user/`] - user-level configuration (i.e. dotfile management)
 - [`disks/`] - declarative disk partition configuration, courtesy of [`disko`]
-- [`profiles/`] - collections of configuration options from which high-level
-  system "profiles" are comprised
+- [`profiles/`] - collections of configuration options from which high-level system "profiles" are comprised
   - e.g. `profiles/user/base.nix` is a user-level profile for all systems
 - [`hosts/`] - system & user configs for the different hosts administered here
-- [`modules/`] - option modules used here
-- [`overlays/`] - just what it says: any overlays applied to my package sets
-- [`scripts/`] - shell scripts & other utilities, typically for `devShells`
+- [`modules/`] - custom modules used in system- or user-level configuration
+- [`overlays/`] - just what it says: any overlays that should be applied to the package sets used herein
+- [`scripts/`] - shell scripts & other utilities
 
 [`flake/`]: ./flake
 [`devshells.nix`]: ./flake/devshells.nix
@@ -37,7 +36,7 @@ useful.
 [`config/`]: ./config
 [`shared/`]: ./config/shared
 [`system/`]: ./config/system
-[`macos/`]: ./configsystem/macos
+[`macos/`]: ./config/system/macos
 [`user/`]: ./config/user
 [`disks/`]: ./disks
 [`profiles/`]: ./profiles
