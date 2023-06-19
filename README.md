@@ -1,6 +1,6 @@
 # I Fucking Hate Dotfiles
 
-![key frame towards the end of JoJo Part 4, Opening 3 'Great Days'](./breakdown.jpg)
+![Link standing on the Great Plateau, from Breath of the Wild, looking out over Hyrule](./plateau.jpg)
 
 ## TL;DR
 
