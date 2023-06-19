@@ -4,8 +4,7 @@
   pkgs,
   unstable,
   ...
-}:
-let
+}: let
   # NOTE: This works in practice, however `sequoia-chameleon-gnupg` doesn't
   # mutate `trustdb.gpg`; this prevents some of the `home-manager` automations
   # from working properly, so it's "better" to stick with `gnupg` (for now).
@@ -23,11 +22,10 @@ let
       mv $out/bin/gpgv-sq $out/bin/gpgv
     '';
   };
-in
-{
-  home.packages = [ unstable.sequoia-chameleon-gnupg ];
+in {
+  home.packages = [unstable.sequoia-chameleon-gnupg];
   programs.gpg = {
     enable = true;
-    scdaemonSettings = { disable-ccid = true; };
+    scdaemonSettings = {disable-ccid = true;};
   };
 }

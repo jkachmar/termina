@@ -1,5 +1,4 @@
-{config, ...}:
-{
+{config, ...}: {
   imports = [
     ../../profiles/user/base.nix
     ../../config/user/neovim

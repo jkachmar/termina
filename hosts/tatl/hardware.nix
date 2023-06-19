@@ -2,8 +2,9 @@
   config,
   pkgs,
   ...
-}: let inherit (config.networking) hostname; in
-{
+}: let
+  inherit (config.networking) hostname;
+in {
   # Import the hardware survey and apply changes/additions here.
   imports = [./survey.nix];
 
