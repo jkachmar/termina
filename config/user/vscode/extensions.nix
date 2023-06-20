@@ -24,4 +24,4 @@
       }
   );
 in
-  extensions ++ []
+  extensions
