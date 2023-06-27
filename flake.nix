@@ -72,5 +72,11 @@
       # NOTE: Update this when `macosPkgs` is updated to a new stable release!
       url = "github:nix-community/home-manager/release-23.05";
     };
+
+    # Autoformatting via `nix fmt`.
+    treefmt = {
+      inputs.nixpkgs.follows = "stablePkgs";
+      url = "github:numtide/treefmt-nix";
+    };
   };
 }

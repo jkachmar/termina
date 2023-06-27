@@ -159,6 +159,7 @@
         "macosHome": "macosHome",
         "macosPkgs": "macosPkgs",
         "stablePkgs": "stablePkgs",
+        "treefmt": "treefmt",
         "unstable": "unstable"
       }
     },
@@ -175,6 +176,26 @@
         "owner": "nixos",
         "ref": "nixos-23.05",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "treefmt": {
+      "inputs": {
+        "nixpkgs": [
+          "stablePkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1687600980,
+        "narHash": "sha256-Tbu9Hj7JVX+rCYyUPJNQTPQqw382ahAFNoDVTrXnjFk=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "b100498935f04a70605dfde0edc6e311d865b869",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     },
