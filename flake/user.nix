@@ -5,6 +5,7 @@
 }: let
   inherit (import ./utils.nix) mkSpecialArgs;
 
+  # Utility function to construct an OS-agnostic user-level config.
   mkUserConfig = hostname: system:
     withSystem system
     ({

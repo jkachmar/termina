@@ -4,10 +4,8 @@
   withSystem,
   ...
 }: let
-  # Utility function to construct a NixOS system config for some version of
-  # stable nixpkgs passed in as an argument.
-  #
-  # NOTE: Some code duplication with `mkMacOSSystemCfgWith`.
+  # Utility function to construct a NixOS system configuration with optional
+  # module overrides.
   mkNixOSConfigWith = {
     hostname,
     system,

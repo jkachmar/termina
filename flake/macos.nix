@@ -4,13 +4,9 @@
   withSystem,
   ...
 }: let
-  inherit (inputs) darwin macosHome macosPkgs unstable;
-  inherit (import ./utils.nix) mkSpecialArgs;
+  inherit (inputs) darwin;
 
-  # Utility function to construct a macOS system config for some version of
-  # stable nixpkgs passed in as an argument.
-  #
-  # NOTE: Some code duplication with `mkNixosSystemCfgWith`.
+  # Utility function to construct a macOS system config.
   mkMacOSConfig = hostname: system:
     withSystem system
     ({
