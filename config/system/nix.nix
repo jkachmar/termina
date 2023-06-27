@@ -1,10 +1,4 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config, inputs, lib, pkgs, pkgsets, ... }: let
   inherit (pkgs.buildPlatform) isDarwin isLinux;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
   dotfiles = "${config.primary-user.home-manager.xdg.configHome}/dotfiles";
@@ -19,24 +13,18 @@ in {
     };
 
     nixPath = lib.mkForce ([
-        "unstable=${inputs.unstable}"
+        "nixpkgs=${pkgsets.nixpkgs}"
+        "unstable=${pkgsets.unstable}"
       ]
       ++ lib.optionals isDarwin [
-        "nixpkgs=${inputs.macosPkgs}"
         "darwin=${inputs.darwin}"
         "darwin-config=${darwinCfg}"
-      ]
-      ++ lib.optionals isLinux [
-        "nixpkgs=${inputs.nixosPkgs}"
       ]);
 
     # FIXME: Duplicated; see user-level Nix config.
     registry = {
-      nixpkgs.flake =
-        if isDarwin
-        then inputs.macosPkgs
-        else inputs.nixosPkgs;
-      unstable.flake = inputs.unstable;
+      nixpkgs.flake = pkgsets.nixpkgs;
+      unstable.flake = pkgsets.nixpkgs;
     };
   };
 

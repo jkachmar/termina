@@ -1,9 +1,4 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib, pkgs, pkgsets, ... }: let
   inherit (lib) mkIf mkMerge;
   inherit (pkgs.buildPlatform) isDarwin isAarch64;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
@@ -32,11 +27,8 @@ in {
 
     # FIXME: Duplicated; see system-level Nix config.
     registry = {
-      nixpkgs.flake =
-        if isDarwin
-        then inputs.macosPkgs
-        else inputs.nixosPkgs;
-      unstable.flake = inputs.unstable;
+      nixpkgs.flake = pkgsets.nixpkgs;
+      unstable.flake = pkgsets.unstable;
     };
   };
 }
