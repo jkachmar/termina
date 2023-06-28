@@ -25,6 +25,7 @@ in {
         fd
         findutils
         fzf
+        jq
         libvterm-neovim
         nix-index
         ripgrep
