@@ -36,7 +36,7 @@ in {
   };
 
   nixpkgs = {
-    config = import ../shared/config.nix;
+    config = import ../shared/nixpkgs.nix;
     # TODO: Stick construct overlays in `flake.nix` and stick them in the
     # module args (or something).
     overlays = [];
