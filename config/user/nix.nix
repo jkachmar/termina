@@ -1,4 +1,9 @@
-{ lib, pkgs, pkgsets, ... }: let
+{
+  lib,
+  pkgs,
+  pkgsets,
+  ...
+}: let
   inherit (lib) mkIf mkMerge;
   inherit (pkgs.buildPlatform) isDarwin isAarch64;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;

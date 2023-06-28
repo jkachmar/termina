@@ -1,4 +1,11 @@
-{ config, inputs, lib, pkgs, pkgsets, ... }: let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  pkgsets,
+  ...
+}: let
   inherit (pkgs.buildPlatform) isDarwin isLinux;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
   dotfiles = "${config.primary-user.home-manager.xdg.configHome}/dotfiles";
