@@ -1,7 +1,7 @@
 {config, ...}: {
   imports = [
     ../../profiles/user/base.nix
-    ../../config/user/neovim
+    ../../profiles/user/development.nix
   ];
 
   primary-user.git.user = {

@@ -7,7 +7,7 @@
     #
     # cf. https://christine.website/blog/paranoid-nixos-2021-07-18
     settings = {
-      AllowAgentForwarding = false;
+      AllowAgentForwarding = true;
       AllowStreamLocalForwarding = false;
       AllowTcpForwarding = true;
       AuthenticationMethods = "publickey";
