@@ -21,8 +21,11 @@
     extraGroups = ["analytics" "downloads"];
     # TODO: Source this from an external file; keep in sync w/ all servers.
     openssh.authorizedKeys.keys = [
+      # yubikey
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKZJVgzxzU87/KHzc8u+RZot1/CHyW85zSC5jdlbDDUx openpgp:0xAAF3634A"
+
       # crazy-diamond
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrZAwektbexTFUtSn0vuCHP6lvTvA/jdOb+SF5TD9VA me@jkachmar.com"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF6xLftzyelmpJUdQPv4pf793s4JF1f/G1QuviDsFJzd jkachmar@crazy-diamond"
 
       # purple-haze
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBZcDYiijg9rjTJ8PkmEIbg8GeIcPh8cUAQTD2NWIis8CcVkPR9B5THM6OPAs2zps3/3HTzvNClBCHlhks/dVGE= purple-haze"
