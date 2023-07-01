@@ -2,20 +2,20 @@
   services.openssh = {
     enable = true;
     allowSFTP = lib.mkDefault false;
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
 
     # Stealing some "paranoid" OpenSSH configuration options.
     #
     # cf. https://christine.website/blog/paranoid-nixos-2021-07-18
-    extraConfig = ''
-      AllowAgentForwarding yes
-      AllowStreamLocalForwarding no
-      AllowTcpForwarding yes
-      AuthenticationMethods publickey
-      X11Forwarding no
-    '';
+    settings = {
+      AllowAgentForwarding = false;
+      AllowStreamLocalForwarding = false;
+      AllowTcpForwarding = true;
+      AuthenticationMethods = "publickey";
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      X11Forwarding = false;
+    };
 
     hostKeys = [
       {

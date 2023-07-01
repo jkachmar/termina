@@ -18,13 +18,13 @@
       homeManager,
       ...
     }:
-      pkgs.lib.nixosSystem rec {
+      pkgsets.nixpkgs.lib.nixosSystem rec {
         inherit system;
         specialArgs = {inherit inputs pkgsets pkgs unstable;};
         modules =
           extraModules
           ++ [
-            pkgs.nixosModules.notDetected
+            pkgsets.nixpkgs.nixosModules.notDetected
             homeManager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = specialArgs;
@@ -36,8 +36,8 @@
           ];
       });
 
-  # Utility function to construct a NixOS system config using the default
-  # `stablePkgs` & `linuxHome` arguments.
+  # Utility function to construct a NixOS system config without specifying any
+  # additional modules.
   mkNixOSConfig = hostname: system:
     mkNixOSConfigWith {inherit hostname system;};
 in {
