@@ -17,6 +17,7 @@
     ../../config/user/ssh/github.nix
     ../../config/user/ssh/gitlab.nix
     ../../config/user/ssh/stackage.nix
+    ../../config/user/ssh/tatl.nix
   ];
 
   home.packages = with pkgs; [colima];

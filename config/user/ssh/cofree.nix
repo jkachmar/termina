@@ -3,8 +3,8 @@
 in {
   programs.ssh.matchBlocks."cofree.coffee" = {
     hostname = "cofree.coffee";
-    user = "jkachmar";
-    identityFile = ["${sshDir}/id_cofree"];
+    user = config.home.username;
     forwardAgent = true;
+    identityFile = ["${sshDir}/id_cofree"];
   };
 }
