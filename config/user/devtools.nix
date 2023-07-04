@@ -21,6 +21,7 @@ in {
       [
         # Misc. common programs without a better place to go.
         alejandra
+        btop
         curl
         fd
         findutils
