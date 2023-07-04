@@ -55,10 +55,4 @@ in {
       flags = "-k -p --utc";
     };
   };
-
-  networking.useDHCP = false;
-  networking.interfaces = {
-    enp86s0.useDHCP = true;
-    wlo1.useDHCP = true;
-  };
 }
