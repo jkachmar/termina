@@ -5,6 +5,9 @@ in {
     hostname = "192.168.1.150";
     user = config.home.username;
     forwardAgent = true;
-    identityFile = ["${sshDir}/id_enigma"];
+    identityFile = [
+      "${sshDir}/id_gpg.pub"
+      "${sshDir}/id_enigma"
+    ];
   };
 }
