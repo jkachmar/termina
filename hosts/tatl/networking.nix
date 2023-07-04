@@ -5,14 +5,13 @@
   };
 
   networking = {
-    # FIXME: `resolved` tries to get its DNS servers from the presently
-    # configured network manager; until i set up `networkd` one basically
-    # doesn't exist on a headless server such as this.
-    nameservers = [ "192.168.1.150" ];
+    dhcpcd.enable = false;
     useDHCP = false;
+
+    useNetworkd = true;
     interfaces = {
       enp86s0.useDHCP = true;
-      wlo1.useDHCP = true;
+      # wlo1.useDHCP = false;
     };
 
     firewall = {
