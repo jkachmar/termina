@@ -1,4 +1,26 @@
 {lib, ...}: {
+  # Use `systemd-networkd`, but do not rely on the `networking.interfaces`
+  # module to set up their units.
+  #
+  # The reason for setting `networking.useNetworkd` in spite of this is that
+  # there are other modules for which that option controls whether they
+  # generate `systemd-networkd` units (e.g. `services.tailscale`).
+  networking.useDHCP = false;
+  networking.dhcpcd.enable = false;
+  networking.useNetworkd = true;
+  systemd.network = {
+    enable = true;
+    networks = {
+      "40-enp86s0" = {
+        matchConfig.Name = "enp86s0";
+        networkConfig = {
+          DHCP = "ipv4";
+          IPv6PrivacyExtensions = "kernel";
+        };
+      };
+    };
+  };
+
   services.resolved = {
     enable = true;
     fallbackDns = [ "9.9.9.9" "8.8.8.8" ];
@@ -14,15 +36,6 @@
   environment.etc."resolv.conf".source =
     lib.mkForce  "/run/systemd/resolve/resolv.conf";
 
-  networking = {
-    dhcpcd.enable = false;
-    useDHCP = false;
-    useNetworkd = true;
-    # This server is wired in, we only care about a single interface.
-    interfaces.enp86s0.useDHCP = true;
-
-    firewall = {
-      enable = true;
-    };
-  };
+  # The firewall gets its own section, even if it's very small right now.
+  networking.firewall.enable = true;
 }
