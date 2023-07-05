@@ -17,12 +17,9 @@
   networking = {
     dhcpcd.enable = false;
     useDHCP = false;
-
     useNetworkd = true;
-    interfaces = {
-      enp86s0.useDHCP = true;
-      # wlo1.useDHCP = false;
-    };
+    # This server is wired in, we only care about a single interface.
+    interfaces.enp86s0.useDHCP = true;
 
     firewall = {
       enable = true;
