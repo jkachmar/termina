@@ -30,6 +30,7 @@ in {
         libvterm-neovim
         nix-index
         ripgrep
+        rsync
         shellcheck
         starship # XXX: unclear why this is necessary; it's enabled below too.
         wget
