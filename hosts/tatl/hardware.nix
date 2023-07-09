@@ -51,13 +51,17 @@ in {
   environment.etc."default/qemu-kvm".text = ''
     AUTO
   '';
-  # 'pages_to_scan' defaults to 100, which is 400kb at the default page size.
-  #
-  # SUSE's docs recommend bumping this to 1000 pages (4mb) so let's do that.
-  #
-  # cf. https://documentation.suse.com/sles/15-SP1/single-html/SLES-vt-best-practices/#sec-vt-best-perf-ksm
   systemd.tmpfiles.rules = [
+    # 'pages_to_scan' defaults to 100, which is 400kb at the default page size.
+    #
+    # SUSE's docs recommend bumping this to 1000 pages (4mb) so let's do that.
+    #
+    # cf. https://documentation.suse.com/sles/15-SP1/single-html/SLES-vt-best-practices/#sec-vt-best-perf-ksm
     "w /sys/kernel/mm/ksm/pages_to_scan 644 root root - 1000"
+    # 'sleep_millisecs' defaults to '20' which can seriously overtax the CPU.
+    #
+    # SUSE's docs recommend setting this to >1000; let's start at 2 seconds.
+    "w /sys/kernel/mm/ksm/sleep_millisecs 644 root root - 2000"
   ];
 
 
