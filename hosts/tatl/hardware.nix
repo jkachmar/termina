@@ -32,7 +32,10 @@ in {
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.
   boot.kernel.sysctl."vm.swappiness" = 10;
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25; # 16G ought to be enough swap space for anybody.
+  };
 
   # XXX: Disko doesn't (yet) support marking filesystems as needed for boot.
   fileSystems = {
