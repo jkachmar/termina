@@ -78,25 +78,25 @@
     {
         "publisher": "rust-lang",
         "name": "rust-analyzer",
-        "version": "0.4.1573",
+        "version": "0.4.1581",
         "src": {
-            "name": "rust-lang-rust-analyzer-0.4.1573.zip",
+            "name": "rust-lang-rust-analyzer-0.4.1581.zip",
             "platforms": {
-                "x86_64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1573/1688258633294/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-X1pYrs+1O/jikeFMS0PBl/jsbmMfjp2qM10cDVjuzP8="
-                },
                 "x86_64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1573/1688258618407/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-9GY2TzeEWvSKLUpG5zQ/lb9aqOldkMfJ+cH/0CMotnQ="
-                },
-                "aarch64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1573/1688258623194/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-cWZsKqHCkcgQA0kQGXy9KfVwfKAbR+6lxas61KmEsC8="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863531532/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-4MCiOSVBRyN4sNvBFCIICi6IfPuGjLoi0X2K3NvgeeU="
                 },
                 "aarch64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1573/1688258614309/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-v7RHiWuLQTztOJhwtuVBH3sJn1Z7gQGFJbhfxTuirXg="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863527453/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-2hfHN8Kd01kh4EGAbRDve+itfR4YHanaHZpC2UcLfz8="
+                },
+                "x86_64-linux": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863545168/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-FwBEGxfzyGEFCniXl3a8vKZ2cMraDAuYHDgI8JXvhRw="
+                },
+                "aarch64-linux": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863536210/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-Ky9dsZvaZhkki2yj2dWmCYuomjwEY0mDxUTnyPBkdlI="
                 }
             }
         }
