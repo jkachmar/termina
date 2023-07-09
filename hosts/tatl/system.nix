@@ -14,9 +14,8 @@
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
 
-  environment.etc = {
-    "nixos".source = "${config.primary-user.home}/.config/dotfiles";
-  };
+  environment.etc."nixos".source =
+    "${config.primary-user.home}/.config/dotfiles";
 
   users = {
     mutableUsers = false;

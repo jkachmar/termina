@@ -43,6 +43,16 @@ in {
     "/var/log".neededForBoot = true;
   };
 
+  # Enable kernel same-page merging; this allows KVM guests to share identical
+  # memory pages, potentially reducing overall memory footprint for guests
+  # using identical (or even similar) guest operating systems.
+  hardware.ksm.enable = true;
+  # Ensure QEMU VMs use Kernel Samepage Merging.
+  environment.etc."default/qemu-kvm".text = ''
+    AUTO
+  '';
+
+
   # ZFS requires a stable networking host ID & system machine ID.
   networking.hostId = "b7706107";
   environment.etc."machine-id".source = "/secrets/${hostName}/machine-id";
