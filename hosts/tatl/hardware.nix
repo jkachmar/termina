@@ -62,6 +62,8 @@ in {
     #
     # SUSE's docs recommend setting this to >1000; let's start at 2 seconds.
     "w /sys/kernel/mm/ksm/sleep_millisecs 644 root root - 2000"
+    # Do _not_ merge across NUMA nodes, why is this on by default?
+    "w /sys/kernel/mm/ksm/merge_across_nodes 644 root root - 0"
   ];
 
 
