@@ -73,6 +73,12 @@
       url = "github:nix-community/home-manager/release-23.05";
     };
 
+    # Lightweight NixOS VMs.
+    microvm = {
+      inputs.nixpkgs.follows = "stablePkgs";
+      url = "github:astro/microvm.nix";
+    };
+
     # Autoformatting via `nix fmt`.
     treefmt = {
       inputs.nixpkgs.follows = "stablePkgs";

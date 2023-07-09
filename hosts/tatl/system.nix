@@ -17,6 +17,8 @@
   environment.etc."nixos".source =
     "${config.primary-user.home}/.config/dotfiles";
 
+  microvm.host.enable = true;
+
   users = {
     mutableUsers = false;
     users.root.initialHashedPassword = "$y$j9T$LJP1N/s5kGR36Mf4EZduG1$U74tnkAfZC8UWSmttUZjwPrNlMgOcjgDdswK36cPWq3";

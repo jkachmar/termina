@@ -51,6 +51,7 @@ in {
         system = "x86_64-linux";
         extraModules = [
           inputs.disko.nixosModules.disko
+          inputs.microvm.nixosModules.host
           inputs.impermanence.nixosModule
         ];
       };
