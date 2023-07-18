@@ -2,25 +2,25 @@
     {
         "publisher": "timonwong",
         "name": "shellcheck",
-        "version": "0.32.6",
+        "version": "0.33.0",
         "src": {
-            "name": "timonwong-shellcheck-0.32.6.zip",
+            "name": "timonwong-shellcheck-0.33.0.zip",
             "platforms": {
-                "aarch64-linux": {
-                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.32.6/1686085826124/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-rC0H32WluvdZMfsTo9ONKy0q5U2DWkGOfPXNGfIQ208="
-                },
                 "aarch64-darwin": {
-                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.32.6/1686085832148/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-0IaDMhr48NSmJDGzz1UJXMwhC3FzVTn54s1TR38VPHg="
+                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.33.0/1689619331946/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-ddcZBaFz9+OMvQp+BXUbglPzL9yNwGBfrPsf1iJAHSI="
                 },
                 "x86_64-darwin": {
-                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.32.6/1686085828642/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-pb4AyuGtBDb1V/7TO8yD1j6HPpSjlhOCFzlovTg+AiQ="
+                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.33.0/1689619328592/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-3PEsKlMSyss2ztQTiU1MTqOd96iIoLEufBkJOlN8LGo="
+                },
+                "aarch64-linux": {
+                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.33.0/1689619325292/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-kN79P/WhHE7wJQlazqynFSgovfkEUdmaxh/UdPQ/Plg="
                 },
                 "x86_64-linux": {
-                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.32.6/1686085822097/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-PUXflAbqwYb205Q5GpEWIFh6bxqFB803z2KqLjpCAhs="
+                    "url": "https://timonwong.gallerycdn.vsassets.io/extensions/timonwong/shellcheck/0.33.0/1689619320776/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-74EPW+DnP3zwzz9oX2qcH1oWVlku7TyVD6qcSc61stg="
                 }
             }
         }
@@ -28,11 +28,11 @@
     {
         "publisher": "tamasfe",
         "name": "even-better-toml",
-        "version": "0.19.0",
+        "version": "0.19.2",
         "src": {
-            "name": "tamasfe-even-better-toml-0.19.0.zip",
-            "url": "https://tamasfe.gallerycdn.vsassets.io/extensions/tamasfe/even-better-toml/0.19.0/1667317056512/Microsoft.VisualStudio.Services.VSIXPackage",
-            "sha256": "sha256-MqSQarNThbEf1wHDTf1yA46JMhWJN46b08c7tV6+1nU="
+            "name": "tamasfe-even-better-toml-0.19.2.zip",
+            "url": "https://tamasfe.gallerycdn.vsassets.io/extensions/tamasfe/even-better-toml/0.19.2/1689245905783/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-JKj6noi2dTe02PxX/kS117ZhW8u7Bhj4QowZQiJKP2E="
         }
     },
     {
@@ -78,25 +78,25 @@
     {
         "publisher": "rust-lang",
         "name": "rust-analyzer",
-        "version": "0.4.1581",
+        "version": "0.4.1592",
         "src": {
-            "name": "rust-lang-rust-analyzer-0.4.1581.zip",
+            "name": "rust-lang-rust-analyzer-0.4.1592.zip",
             "platforms": {
                 "x86_64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863531532/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-4MCiOSVBRyN4sNvBFCIICi6IfPuGjLoi0X2K3NvgeeU="
-                },
-                "aarch64-darwin": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863527453/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-2hfHN8Kd01kh4EGAbRDve+itfR4YHanaHZpC2UcLfz8="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1592/1689641831687/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-VDYAQP4WsLQYToMxBZO81lXcLylDvCXk2kWhqOVdfSE="
                 },
                 "x86_64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863545168/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-FwBEGxfzyGEFCniXl3a8vKZ2cMraDAuYHDgI8JXvhRw="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1592/1689641845095/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-PFFhUNuaS/OCMtua8Gd4HezWDi58xmMwKpskDhNyS00="
+                },
+                "aarch64-darwin": {
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1592/1689641828187/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-/gjXW2W50vVq0oMNKDASjHvuPxqZgSRBh9XzZymjuHU="
                 },
                 "aarch64-linux": {
-                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1581/1688863536210/Microsoft.VisualStudio.Services.VSIXPackage",
-                    "sha256": "sha256-Ky9dsZvaZhkki2yj2dWmCYuomjwEY0mDxUTnyPBkdlI="
+                    "url": "https://rust-lang.gallerycdn.vsassets.io/extensions/rust-lang/rust-analyzer/0.4.1592/1689641835854/Microsoft.VisualStudio.Services.VSIXPackage",
+                    "sha256": "sha256-3YiTI4PW8IyX6FfxiRVl3A2a/ZaEIWaz9KDwI/S5SP0="
                 }
             }
         }
@@ -104,21 +104,21 @@
     {
         "publisher": "ms-vscode-remote",
         "name": "remote-ssh",
-        "version": "0.103.2023062115",
+        "version": "0.103.2023071415",
         "src": {
-            "name": "ms-vscode-remote-remote-ssh-0.103.2023062115.zip",
-            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.103.2023062115/1687360049535/Microsoft.VisualStudio.Services.VSIXPackage",
-            "sha256": "sha256-aIeT+1K67UleLobzu+0ShcHP/Lkql+NVNn0RKeqG2gU="
+            "name": "ms-vscode-remote-remote-ssh-0.103.2023071415.zip",
+            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.103.2023071415/1689347250578/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-v9ys6jkJZd5dGv9vlAtwT57v/Wv3oFYGcxrGIV2+LRM="
         }
     },
     {
         "publisher": "ms-vscode",
         "name": "remote-explorer",
-        "version": "0.5.2023062609",
+        "version": "0.5.2023071709",
         "src": {
-            "name": "ms-vscode-remote-explorer-0.5.2023062609.zip",
-            "url": "https://ms-vscode.gallerycdn.vsassets.io/extensions/ms-vscode/remote-explorer/0.5.2023062609/1687770578609/Microsoft.VisualStudio.Services.VSIXPackage",
-            "sha256": "sha256-hGG5DBv6IXvLEM3epa79DCeMVC5Eg4X+R+oyZSGuff8="
+            "name": "ms-vscode-remote-explorer-0.5.2023071709.zip",
+            "url": "https://ms-vscode.gallerycdn.vsassets.io/extensions/ms-vscode/remote-explorer/0.5.2023071709/1689585055091/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-fQ7V8odv1Jd1C1PsdnOMWw0QB12Nxo4aQtX/o3wiYwY="
         }
     }
 ]
