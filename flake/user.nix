@@ -51,7 +51,7 @@ in {
         crazy-diamond.activationPackage;
       aarch64-darwin.manhattan-transfer-user =
         manhattan-transfer.activationPackage;
-      x86_64-linux.highway-star =
+      x86_64-linux.jkachmar-user =
         jkachmar.activationPackage;
     };
   };
