@@ -9,6 +9,7 @@
         [
           alejandra
           shellcheck
+          inputs'.nixos-anywhere.packages.default
         ]
         ++ lib.optionals buildPlatform.isDarwin [
         ]

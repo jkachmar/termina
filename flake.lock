@@ -170,6 +170,64 @@
         "type": "github"
       }
     },
+    "nixos-anywhere": {
+      "inputs": {
+        "disko": [
+          "disko"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixos-2305": [
+          "stablePkgs"
+        ],
+        "nixos-images": "nixos-images",
+        "nixpkgs": [
+          "stablePkgs"
+        ],
+        "treefmt-nix": [
+          "treefmt"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690804881,
+        "narHash": "sha256-q960icB/AQwQO6mjGMbtjEtGFk4bzNrxr7HfH6BLPdg=",
+        "owner": "numtide",
+        "repo": "nixos-anywhere",
+        "rev": "e71ef009e630aa0b004872145ac386eb5a60b562",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixos-anywhere",
+        "type": "github"
+      }
+    },
+    "nixos-images": {
+      "inputs": {
+        "nixos-2305": [
+          "nixos-anywhere",
+          "nixos-2305"
+        ],
+        "nixos-unstable": [
+          "nixos-anywhere",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1686819168,
+        "narHash": "sha256-IbRVStbKoMC2fUX6TxNO82KgpVfI8LL4Cq0bTgdYhnY=",
+        "owner": "nix-community",
+        "repo": "nixos-images",
+        "rev": "ccc1a2c08ce2fc38bcece85d2a6e7bf17bac9e37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-images",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -198,6 +256,7 @@
         "macosHome": "macosHome",
         "macosPkgs": "macosPkgs",
         "microvm": "microvm",
+        "nixos-anywhere": "nixos-anywhere",
         "stablePkgs": "stablePkgs",
         "treefmt": "treefmt",
         "unstable": "unstable"

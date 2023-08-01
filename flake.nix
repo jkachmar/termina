@@ -79,6 +79,17 @@
       url = "github:astro/microvm.nix";
     };
 
+    nixos-anywhere = {
+      url = "github:numtide/nixos-anywhere";
+      inputs = {
+        disko.follows = "disko";
+        flake-parts.follows = "flake-parts";
+        nixos-2305.follows = "stablePkgs";
+        nixpkgs.follows = "stablePkgs";
+        treefmt-nix.follows = "treefmt";
+      };
+    };
+
     # Autoformatting via `nix fmt`.
     treefmt = {
       inputs.nixpkgs.follows = "stablePkgs";
