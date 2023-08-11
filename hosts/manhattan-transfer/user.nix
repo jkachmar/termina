@@ -6,6 +6,7 @@ in {
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
+    ../../profiles/user/ui.nix
     # TODO: Surely this can be abstracted behind a module or something...
     ../../config/user/gpg/macos.nix
     ../../config/user/ssh

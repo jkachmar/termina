@@ -8,8 +8,9 @@
   inherit (pkgs.buildPlatform) isDarwin isAarch64;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
 in {
-  # XXX: See note below.
-  home.packages = lib.mkOverride 1000 [ pkgs.nixFlakes ];
+  # XXX: Related to the note, below; this ensures that the appropriate version
+  # of `nix` is available for user-only installations.
+  home.packages = [ pkgs.nixFlakes ];
   nix = {
     enable = true;
     # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both
