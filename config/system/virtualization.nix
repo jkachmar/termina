@@ -13,6 +13,14 @@
     podman = {
       enable = true;
       autoUpdate = true;
+      defaultNetwork.settings = {
+        subnets = [
+          {
+            gateway = "172.25.0.1";
+            subnet = "172.25.0.0/23";
+          }
+        ];
+      };
     };
 
     oci-containers.backend = "podman";
