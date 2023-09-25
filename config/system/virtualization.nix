@@ -13,8 +13,6 @@
     podman = {
       enable = true;
       autoUpdate = true;
-      # NOTE: Workaround for https://github.com/NixOS/nixpkgs/pull/213036
-      extraPackages = [pkgs.zfs];
     };
 
     oci-containers.backend = "podman";
