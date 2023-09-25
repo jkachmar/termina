@@ -13,4 +13,5 @@
     cores = lib.mkDefault 2;
     max-jobs = lib.mkDefault 2;
   };
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
 }
