@@ -47,6 +47,11 @@
       url = "github:lnl7/nix-darwin";
     };
 
+    deploy-rs = {
+      inputs.nixpkgs.follows = "unstable";
+      url = "github:serokell/deploy-rs";
+    };
+
     # Declarative disk partitioning for NixOS.
     disko = {
       inputs.nixpkgs.follows = "unstable";
