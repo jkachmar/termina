@@ -1,4 +1,9 @@
-{config, pkgs, modulesPath, ...}: {
+{
+  config,
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     "${modulesPath}/profiles/hardened.nix" # Hardened config defaults.
     ./hardware.nix
@@ -14,8 +19,7 @@
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
 
-  environment.etc."nixos".source =
-    "${config.primary-user.home}/.config/dotfiles";
+  environment.etc."nixos".source = "${config.primary-user.home}/.config/dotfiles";
 
   microvm.host.enable = true;
 

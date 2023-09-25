@@ -10,7 +10,7 @@
 in {
   # XXX: Related to the note, below; this ensures that the appropriate version
   # of `nix` is available for user-only installations.
-  home.packages = [ pkgs.nixFlakes ];
+  home.packages = [pkgs.nixFlakes];
   nix = {
     enable = true;
     # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both

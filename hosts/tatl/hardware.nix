@@ -69,7 +69,6 @@ in {
     "w /sys/kernel/mm/ksm/merge_across_nodes 644 root root - 0"
   ];
 
-
   # ZFS requires a stable networking host ID & system machine ID.
   networking.hostId = "b7706107";
   environment.etc."machine-id".source = "/secrets/${hostName}/machine-id";
