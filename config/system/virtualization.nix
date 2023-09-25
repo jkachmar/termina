@@ -3,6 +3,7 @@
   virtualisation = {
     containers = {
       enable = true;
+      # containersConf.settings.engine.helper_binaries_dir = [ "${pkgs.netavark}/bin" ];
       storage.settings.storage = {
         driver = "zfs";
         graphroot = "/state/podman/containers";

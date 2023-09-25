@@ -1,5 +1,6 @@
 {lib, ...}: {
   imports = [
+    ../../modules/nixos/podman.nix
     ../../modules/nixos/sudo-cmds.nix
     ../../config/system/fail2ban.nix
     ../../config/system/openssh.nix
