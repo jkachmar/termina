@@ -25,6 +25,4 @@
 
     oci-containers.backend = "podman";
   };
-
-  environment.persistence."/state/root".directories = ["/var/lib/cni"];
 }
