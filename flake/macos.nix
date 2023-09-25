@@ -32,7 +32,7 @@
             home-manager.extraSpecialArgs = specialArgs;
             networking.hostName = hostname;
           }
-          ../modules/system/primary-user/macos.nix
+          ../modules/macos/primary-user.nix
           (../hosts + "/${hostname}/system.nix")
           {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
         ];

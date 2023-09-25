@@ -1,6 +1,6 @@
 {lib, ...}: {
   imports = [
-    ../../modules/system/sudo-cmds.nix
+    ../../modules/nixos/sudo-cmds.nix
     ../../config/system/fail2ban.nix
     ../../config/system/openssh.nix
     ../../config/system/systemd-boot.nix

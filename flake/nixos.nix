@@ -30,7 +30,7 @@
               home-manager.extraSpecialArgs = specialArgs;
               networking.hostName = hostname;
             }
-            ../modules/system/primary-user/nixos.nix
+            ../modules/nixos/primary-user.nix
             {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
             (../hosts + "/${hostname}/system.nix")
           ];

@@ -3,9 +3,9 @@
     "${modulesPath}/profiles/hardened.nix" # Hardened config defaults.
     ./hardware.nix
     ./networking.nix
-    ../../profiles/system/base.nix
-    ../../profiles/system/nixos.nix
-    ../../profiles/server/base.nix
+    ../../profiles/nixos/base.nix
+    ../../profiles/nixos/node.nix
+    ../../profiles/nixos/server.nix
   ];
 
   # The hardened profile disables this by default but it's too useful.

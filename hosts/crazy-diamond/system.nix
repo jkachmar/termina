@@ -3,11 +3,7 @@
   lib,
   ...
 }: {
-  imports = [
-    ../../config/system/devtools.nix
-    ../../config/system/nix.nix
-    ../../profiles/system/macos.nix
-  ];
+  imports = [ ../../profiles/macos ];
 
   homebrew.casks = [ "steam" ];
 
