@@ -9,5 +9,5 @@
     ports = [":8123"];
     extraOptions = ["--label=\"io.containers.autoupdate=registry\""];
   };
-  systemd.services.podman-linkding.after = [ "var-lib-hass.mount" ];
+  systemd.services.podman-linkding.after = ["var-lib-hass.mount"];
 }

@@ -43,8 +43,6 @@
 in {
   flake = {
     nixosConfigurations = {
-      enigma = mkNixOSConfig "enigma" "x86_64-linux";
-      star-platinum = mkNixOSConfig "star-platinum" "x86_64-linux";
       # NOTE: Testing `disko` & `impermanence` again.
       tatl = mkNixOSConfigWith {
         hostname = "tatl";

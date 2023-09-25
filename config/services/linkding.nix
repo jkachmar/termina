@@ -6,5 +6,5 @@
     ports = ["9090:9090"];
     extraOptions = ["--label=\"io.containers.autoupdate=registry\""];
   };
-  systemd.services.podman-linkding.after = [ "var-lib-linkding.mount" ];
+  systemd.services.podman-linkding.after = ["var-lib-linkding.mount"];
 }
