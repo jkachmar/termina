@@ -1,8 +1,21 @@
 {config, ...}: {
   environment.persistence."/state/root".directories = ["/var/lib/homebridge"];
+  # NOTE: Ports & port ranges need to match up with the homebridge config.json
   networking.firewall = {
-    allowedTCPPorts = [ 5353 8581 51241 51535 ];
-    allowedUDPPorts = [ 5353 8581 51241 51535 ];
+    allowedTCPPorts = [5353 8581 51241];
+    allowedTCPPortRanges = [
+      {
+        from = 52100;
+        to = 52150;
+      }
+    ];
+    allowedUDPPorts = [5353 8581 51241];
+    allowedUDPPortRanges = [
+      {
+        from = 52100;
+        to = 52150;
+      }
+    ];
   };
   virtualisation.oci-containers.containers.homebridge = {
     image = "homebridge/homebridge:latest";
