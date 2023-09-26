@@ -11,6 +11,8 @@
     ../../profiles/nixos/base.nix
     ../../profiles/nixos/node.nix
     ../../profiles/nixos/server.nix
+    ../../config/services/homebridge.nix
+    ../../config/services/linkding.nix
   ];
 
   # The hardened profile disables this by default but it's too useful.
