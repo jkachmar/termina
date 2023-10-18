@@ -13,6 +13,7 @@
     brews = [];
     casks = [
       "balenaetcher" # USB drive imager.
+      "calibre" # Digital library.
       "discord" # Nerd chat.
       "element" # Nerdier chat.
       "firefox" # A good web browser.
