@@ -6,6 +6,7 @@
     ../../config/system/systemd-boot.nix
   ];
 
+  security.ssh-agent.enable = true;
   services.fail2ban.enable = true;
   time.timeZone = lib.mkDefault "America/New_York";
   virtualisation.podman.enable = true;
