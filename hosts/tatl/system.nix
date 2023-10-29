@@ -8,12 +8,11 @@
     "${modulesPath}/profiles/hardened.nix" # Hardened config defaults.
     ./hardware.nix
     ./networking.nix
-    ../../profiles/nixos/base.nix
-    ../../profiles/nixos/node.nix
     ../../profiles/nixos/server.nix
-    ../../config/services/homebridge.nix
-    ../../config/services/linkding.nix
   ];
+
+  services.homebridge.enable = true;
+  services.linkding.enable = true;
 
   # The hardened profile disables this by default but it's too useful.
   security.allowSimultaneousMultithreading = true;

@@ -1,5 +1,6 @@
 {lib, ...}: {
   imports = [
+    ./base.nix # Every node inherits from the base profile.
     ../../modules/nixos
     ../../config/system/openssh.nix
     ../../config/system/systemd-boot.nix
