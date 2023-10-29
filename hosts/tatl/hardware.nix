@@ -20,15 +20,9 @@ in {
     (import ./disks.nix {inherit device;})
   ];
 
+  # Needed for automatic LUKS unlock.
+  boot.initrd.kernelModules = [ "usb_storage" ];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
-  # XXX: Ensure that the device name matches up with the LUKS container
-  # declared by disko!
-  boot.initrd.luks.devices.kronos = {
-    inherit keyFile keyFileSize keyFileOffset;
-    allowDiscards = true;
-    fallbackToPassword = true;
-  };
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.
   boot.kernel.sysctl."vm.swappiness" = 10;

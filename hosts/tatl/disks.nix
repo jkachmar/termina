@@ -50,17 +50,12 @@ in {
           content = {
             type = "luks";
             name = "kronos";
-            extraFormatArgs = [
-              "${keyFile}"
-              "--keyfile-size ${builtins.toString keyFileSize}"
-              "--keyfile-offset ${builtins.toString keyFileOffset}"
-            ];
-            extraOpenArgs = [
-              "--allow-discards"
-              "--key-file ${keyFile}"
-              "--keyfile-size ${builtins.toString keyFileSize}"
-              "--keyfile-offset ${builtins.toString keyFileOffset}"
-            ];
+            settings = { 
+              inherit keyFile keyFileSize keyFileOffset;
+              allowDiscards = true;
+              # XXX: implied by `systemd` stage 1 boot.
+              # fallbackToPassword = true;
+            };
             content = {
               type = "zfs";
               pool = "titan";
