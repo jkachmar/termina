@@ -50,7 +50,7 @@ in {
           content = {
             type = "luks";
             name = "kronos";
-            settings = { 
+            settings = {
               inherit keyFile keyFileSize keyFileOffset;
               allowDiscards = true;
               # XXX: implied by `systemd` stage 1 boot.

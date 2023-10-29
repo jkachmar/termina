@@ -4,24 +4,15 @@
   ...
 }: let
   inherit (config.networking) hostName;
-  # XXX: This _must_ match up with the same values declared in `disks.nix`,
-  # so that the device can be decrypted.
-  #
-  # FIXME: Factor this out so it's explicitly shared with `disks.nix`.
-  device = "/dev/nvme0n1";
-  keyLabel = "huygens";
-  keyFile = "/dev/disk/by-partlabel/${keyLabel}";
-  keyFileSize = 8096; # 8KiB
-  keyFileOffset = 4194304; # 4MiB
 in {
   # Import the hardware survey and apply changes/additions here.
   imports = [
     ./survey.nix
-    (import ./disks.nix {inherit device;})
+    (import ./disks.nix {device = "/dev/nvme0n1";})
   ];
 
   # Needed for automatic LUKS unlock.
-  boot.initrd.kernelModules = [ "usb_storage" ];
+  boot.initrd.kernelModules = ["usb_storage"];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.
