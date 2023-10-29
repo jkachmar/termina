@@ -13,7 +13,7 @@
   cfg = config.primary-user;
 in {
   imports = [
-    ./sudo-cmds.nix
+    ./security/sudo-cmds.nix
     # OS-agnostic option aliases.
     ../shared/primary-user.nix
     # NixOS-specific option aliases.
