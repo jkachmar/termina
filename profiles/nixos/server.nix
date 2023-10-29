@@ -1,4 +1,4 @@
-{
+{...}: {
   imports = [
     ./node.nix # Every server inherits from the node profile.
     ../../modules/nixos/services/homebridge.nix

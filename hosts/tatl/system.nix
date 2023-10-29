@@ -1,11 +1,9 @@
 {
   config,
   pkgs,
-  modulesPath,
   ...
 }: {
   imports = [
-    "${modulesPath}/profiles/hardened.nix" # Hardened config defaults.
     ./hardware.nix
     ./networking.nix
     ../../profiles/nixos/server.nix
@@ -13,9 +11,6 @@
 
   services.homebridge.enable = true;
   services.linkding.enable = true;
-
-  # The hardened profile disables this by default but it's too useful.
-  security.allowSimultaneousMultithreading = true;
 
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
