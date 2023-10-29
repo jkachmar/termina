@@ -18,7 +18,7 @@
     ];
   };
   virtualisation.oci-containers.containers.homebridge = {
-    image = "homebridge/homebridge:latest";
+    image = "docker.io/homebridge/homebridge:latest";
     volumes = ["/var/lib/homebridge:/homebridge"];
     environment = {
       TZ = config.time.timeZone;
@@ -28,7 +28,7 @@
       "--privileged"
       "--net=host"
       # "--cap-add=CAP_NET_RAW,CAP_NET_BIND_SERVICE"
-      "--label=\"io.containers.autoupdate=registry\""
+      "--label=io.containers.autoupdate=registry"
     ];
   };
   systemd.services.podman-homebridge.after = [

@@ -18,7 +18,7 @@
       "--net=host"
       "--privileged"
       # "--cap-add=CAP_NET_RAW,CAP_NET_BIND_SERVICE"
-      "--label=\"io.containers.autoupdate=registry\""
+      "--label=io.containers.autoupdate=registry"
     ];
   };
   systemd.services.podman-home-assistant.after = [
