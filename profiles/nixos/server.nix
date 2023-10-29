@@ -4,5 +4,6 @@
     ../../modules/nixos/services/homebridge.nix
     ../../modules/nixos/services/linkding.nix
   ];
+
   programs.mosh.enable = true;
 }
