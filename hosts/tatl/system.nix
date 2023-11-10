@@ -4,9 +4,10 @@
   ...
 }: {
   imports = [
+    ../../profiles/nixos/server.nix
     ./hardware.nix
     ./networking.nix
-    ../../profiles/nixos/server.nix
+    ./proxy.nix
   ];
 
   networking = {
