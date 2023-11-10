@@ -4,6 +4,7 @@
   ...
 }: let
   inherit (lib) types;
+  inherit (config.networking) fqdn;
   cfg = config.services.pihole;
   nginxCfg = config.services.nginx;
 
@@ -39,14 +40,6 @@ in {
       description = lib.mkDoc ''
         Gateway port to forward DNS requests to; typically set to whatever
         'dnscrypt-proxy' is using to listen on the container network.
-      '';
-    };
-    fqdn = lib.mkOption {
-      type = types.str;
-      readOnly = true;
-      default = "pihole.${config.networking.fqdn}";
-      description = ''
-        Fully qualified domain name for this PiHole service.
       '';
     };
   };
@@ -92,7 +85,7 @@ in {
           REV_SERVER_CIDR = "192.168.0.0/16";
           TZ = config.time.timeZone;
           PROXY_LOCATION = "pihole";
-          VIRTUAL_HOST = cfg.fqdn;
+          VIRTUAL_HOST = "pihole.${fqdn}";
           # TODO: Change this to something secure, obviously.
           WEBPASSWORD = "hunter2";
         };
@@ -107,9 +100,9 @@ in {
       };
     })
     (lib.mkIf nginxCfg.enable {
-      services.nginx.virtualHosts."${cfg.fqdn}" = {
-        # forceSSL = true;
-        # useACMEHost = domain;
+      services.nginx.virtualHosts."pihole.${fqdn}" = {
+        forceSSL = config.security.acme.enable;
+        useACMEHost = fqdn;
         locations."/".proxyPass = "http://localhost:${builtins.toString cfg.port}";
       };
     })

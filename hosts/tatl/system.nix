@@ -13,6 +13,7 @@
     domain = "thempire.dev";
     enableIPv6 = false; # TODO: Figure out IPv6...
   };
+  security.acme.enable = true;
   services = {
     dnscrypt-proxy2.enable = true;
     homebridge.enable = true;
