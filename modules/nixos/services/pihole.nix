@@ -19,13 +19,6 @@ in {
         for my personal deployment with Podman & root on tmpfs.
       '';
     };
-    ip = lib.mkOption {
-      type = types.str;
-      default = "172.25.0.2";
-      description = lib.mkDoc ''
-        PiHole container IP address; make sure this is
-      '';
-    };
     port = lib.mkOption {
       type = types.int;
       default = 7000;
@@ -90,7 +83,6 @@ in {
           WEBPASSWORD = "hunter2";
         };
         extraOptions = [
-          "--ip=${cfg.ip}"
           "--dns=127.0.0.1"
           "--dns=9.9.9.9"
           "--label=io.containers.autoupdate=registry"
