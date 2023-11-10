@@ -12,8 +12,8 @@ in {
       default = false;
       description = lib.mkDoc ''
         Enable "HomeKit support for the impatient" self-hosted bookmark manager
-        with some reasonable defaults my own deployment with Podman & root on
-        tmpfs.
+        with some reasonable defaults for my personal deployment with Podman &
+        root on tmpfs.
       '';
     };
   };
