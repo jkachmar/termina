@@ -63,7 +63,6 @@ in {
         ];
       };
       systemd.services.podman-homebridge.after = [
-        "avahi-daemon.socket"
         "var-lib-homebridge.mount"
       ];
     })
