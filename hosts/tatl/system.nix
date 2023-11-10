@@ -9,8 +9,17 @@
     ../../profiles/nixos/server.nix
   ];
 
-  services.homebridge.enable = true;
-  services.linkding.enable = true;
+  networking = {
+    domain = "thempire.dev";
+    enableIPv6 = false; # TODO: Figure out IPv6...
+  };
+  services = {
+    dnscrypt-proxy2.enable = true;
+    homebridge.enable = true;
+    linkding.enable = true;
+    nginx.enable = true;
+    pihole.enable = true;
+  };
 
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
