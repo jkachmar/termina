@@ -11,8 +11,12 @@ in {
     (import ./disks.nix {device = "/dev/nvme0n1";})
   ];
 
-  # Needed for automatic LUKS unlock.
-  boot.initrd.kernelModules = ["usb_storage"];
+  boot.initrd = {
+    kernelModules = [
+      # Needed for automatic LUKS unlock.
+      "usb_storage"
+    ];
+  };
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.
@@ -29,16 +33,35 @@ in {
     "/secrets".neededForBoot = true;
     "/tmp".neededForBoot = true;
     "/var/log".neededForBoot = true;
+
+    # NFS mounts (to the synology) cannot & should not be managed by disko.
+    #
+    # NOTE: [nfs-rpcbind-workaround]
+    "/net/downloads" = {
+      device = "192.168.1.155:/volume1/downloads";
+      fsType = "nfs";
+      options = [ "auto" "defaults" "nfsvers=4.1" ];
+    };
+    "/net/media" = {
+      device = "192.168.1.155:/volume1/media";
+      fsType = "nfs";
+      options = [ "auto" "defaults" "nfsvers=4.1" ];
+    };
   };
+
+  # NOTE: [nfs-rpcbind-workaround]
+  #
+  # Filesystem declarations with 'fsType = "nfs"' will fail to mount without
+  # the following configuration enabled.
+  #
+  # cf. https://github.com/NixOS/nixpkgs/issues/76671#issuecomment-1399044941
+  boot.supportedFilesystems = [ "nfs" ];
+  services.rpcbind.enable = true;
 
   # Enable kernel same-page merging; this allows KVM guests to share identical
   # memory pages, potentially reducing overall memory footprint for guests
   # using identical (or even similar) guest operating systems.
   hardware.ksm.enable = true;
-  # Ensure QEMU VMs use Kernel Samepage Merging.
-  environment.etc."default/qemu-kvm".text = ''
-    AUTO
-  '';
   systemd.tmpfiles.rules = [
     # 'pages_to_scan' defaults to 100, which is 400kb at the default page size.
     #
