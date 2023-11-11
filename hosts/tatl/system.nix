@@ -21,6 +21,10 @@
     linkding.enable = true;
     nginx.enable = true;
     pihole.enable = true;
+    plex = {
+      enable = true;
+      hardwareAcceleration = true;
+    };
   };
 
   # TODO: Factor this out into a separate module.

@@ -7,6 +7,7 @@
     ../../modules/nixos/services/linkding.nix
     ../../modules/nixos/services/nginx.nix
     ../../modules/nixos/services/pihole.nix
+    ../../modules/nixos/services/plex
   ];
 
   programs.mosh.enable = true;
