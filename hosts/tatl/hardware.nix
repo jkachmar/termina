@@ -40,12 +40,12 @@ in {
     "/net/downloads" = {
       device = "192.168.1.155:/volume1/downloads";
       fsType = "nfs";
-      options = [ "auto" "defaults" "nfsvers=4.1" ];
+      options = ["auto" "defaults" "nfsvers=4.1"];
     };
     "/net/media" = {
       device = "192.168.1.155:/volume1/media";
       fsType = "nfs";
-      options = [ "auto" "defaults" "nfsvers=4.1" ];
+      options = ["auto" "defaults" "nfsvers=4.1"];
     };
   };
 
@@ -55,7 +55,7 @@ in {
   # the following configuration enabled.
   #
   # cf. https://github.com/NixOS/nixpkgs/issues/76671#issuecomment-1399044941
-  boot.supportedFilesystems = [ "nfs" ];
+  boot.supportedFilesystems = ["nfs"];
   services.rpcbind.enable = true;
 
   # Enable kernel same-page merging; this allows KVM guests to share identical

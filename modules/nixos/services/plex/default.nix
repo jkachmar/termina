@@ -6,7 +6,6 @@
 }: let
   inherit (config.networking) fqdn;
   cfg = config.services.plex;
-  nginxCfg = config.services.nginx;
 in {
   imports = [
     ./hardware.nix
