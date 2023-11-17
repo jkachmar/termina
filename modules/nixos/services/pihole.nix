@@ -7,8 +7,6 @@
   inherit (config.networking) fqdn;
   cfg = config.services.pihole;
   nginxCfg = config.services.nginx;
-
-  inherit (config.networking) domain;
 in {
   options.services.pihole = {
     enable = lib.mkOption {
@@ -91,7 +89,8 @@ in {
         autoStart = true;
       };
     })
-    (lib.mkIf nginxCfg.enable {
+
+    (lib.mkIf (cfg.enable && nginxCfg.enable) {
       services.nginx.virtualHosts."pihole.${fqdn}" = {
         forceSSL = config.security.acme.enable;
         useACMEHost = fqdn;

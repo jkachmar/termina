@@ -25,6 +25,8 @@
       enable = true;
       hardwareAcceleration = true;
     };
+    radarr.enable = true;
+    sonarr.enable = true;
   };
 
   # TODO: Factor this out into a separate module.

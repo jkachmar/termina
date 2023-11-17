@@ -43,7 +43,7 @@ in {
       };
     })
 
-    (lib.mkIf nginxCfg.enable {
+    (lib.mkIf (cfg.enable && nginxCfg.enable) {
       services.nginx.virtualHosts."linkding.${fqdn}" = {
         forceSSL = config.security.acme.enable;
         useACMEHost = fqdn;

@@ -8,6 +8,8 @@
     ../../modules/nixos/services/nginx.nix
     ../../modules/nixos/services/pihole.nix
     ../../modules/nixos/services/plex
+    ../../modules/nixos/services/radarr.nix
+    ../../modules/nixos/services/sonarr.nix
   ];
 
   programs.mosh.enable = true;

@@ -67,7 +67,7 @@ in {
       ];
     })
 
-    (lib.mkIf nginxCfg.enable {
+    (lib.mkIf (cfg.enable && nginxCfg.enable) {
       services.nginx.virtualHosts."homebridge.${fqdn}" = {
         forceSSL = config.security.acme.enable;
         useACMEHost = fqdn;
