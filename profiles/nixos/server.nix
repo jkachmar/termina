@@ -9,6 +9,7 @@
     ../../modules/nixos/services/pihole.nix
     ../../modules/nixos/services/plex
     ../../modules/nixos/services/radarr.nix
+    ../../modules/nixos/services/sabnzbd.nix
     ../../modules/nixos/services/sonarr.nix
   ];
 

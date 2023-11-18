@@ -26,6 +26,7 @@
       hardwareAcceleration = true;
     };
     radarr.enable = true;
+    sabnzbd.enable = true;
     sonarr.enable = true;
   };
 
