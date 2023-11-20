@@ -11,12 +11,8 @@ in {
     (import ./disks.nix {device = "/dev/nvme0n1";})
   ];
 
-  boot.initrd = {
-    kernelModules = [
-      # Needed for automatic LUKS unlock.
-      "usb_storage"
-    ];
-  };
+  # Needed for automatic LUKS unlock.
+  boot.initrd.kernelModules = ["usb_storage"];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.

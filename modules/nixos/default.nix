@@ -1,5 +1,4 @@
-{lib, ... }:
-{
+{lib, ...}: {
   # Modules common across all NixOS nodes.
   imports = [
     ./primary-user.nix

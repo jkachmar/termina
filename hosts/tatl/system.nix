@@ -8,14 +8,20 @@
     ./hardware.nix
     ./networking.nix
     ./proxy.nix
+    ./wireguard.nix
   ];
 
   networking = {
     domain = "thempire.dev";
     enableIPv6 = false; # TODO: Figure out IPv6...
+    wireguard.enable = true;
   };
   security.acme.enable = true;
   services = {
+    ddclient = {
+      enable = true;
+      configFile = "/secrets/ddclient/config";
+    };
     dnscrypt-proxy2.enable = true;
     homebridge.enable = true;
     linkding.enable = true;
@@ -32,9 +38,7 @@
 
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
-
   environment.etc."nixos".source = "${config.primary-user.home}/.config/dotfiles";
-
   microvm.host.enable = true;
 
   users = {

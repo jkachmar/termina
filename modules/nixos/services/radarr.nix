@@ -17,7 +17,7 @@ in {
         inherit dataDir;
         openFirewall = true;
       };
-      users.users.${cfg.user}.extraGroups = [ "downloads" ];
+      users.users.${cfg.user}.extraGroups = ["downloads"];
     })
 
     (lib.mkIf (cfg.enable && nginxCfg.enable) {
