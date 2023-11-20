@@ -13,7 +13,9 @@ in {
       environment.persistence."/state/root".directories = [dataDir];
       # TODO: derive this from 'dataDir'.
       systemd.services.sabnzbd.after = ["var-lib-sabnzbd.mount"];
-      users.users.${cfg.user}.extraGroups = [ "downloads" ];
+      # NOTE: primary group must be 'downloads' so the files are saved with
+      # the appropriate group permissions.
+      services.sabnzbd.group = "downloads";
     })
 
     (lib.mkIf (cfg.enable && nginxCfg.enable) {
