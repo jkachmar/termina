@@ -4,9 +4,9 @@
     ./primary-user.nix
     ./security
     ./services
+    ./systemd-boot.nix
     ./virtualisation
   ];
 
-  # Modules common across all NixOS nodes.
   users.groups.downloads.gid = lib.mkDefault 1010;
 }

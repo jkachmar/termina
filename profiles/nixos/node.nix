@@ -5,9 +5,9 @@
 }: {
   imports = [
     "${modulesPath}/profiles/hardened.nix" # Hardened OS defaults.
-    ./base.nix # Every node inherits from the base profile.
+    ../../config/system/nix.nix
+    ../../config/system/devtools.nix
     ../../modules/nixos
-    ../../config/system/systemd-boot.nix
   ];
 
   # The hardened profile disables this by default but it's too useful.

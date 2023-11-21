@@ -5,7 +5,5 @@
     openFirewall = true;
     reflector = true;
     publish.enable = true;
-    # allowInterfaces = [ ];
-    # denyInterfaces = [ ];
   };
 }

@@ -12,7 +12,7 @@ in {
     boot.initrd.kernelModules = ["wireguard"];
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;
-      
+
       # 'rp_filter' is reverse path filtering; by default it will ensure that
       # the source of the received packet belongs to the receiving interface.
       #
