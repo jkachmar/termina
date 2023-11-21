@@ -43,7 +43,6 @@
 in {
   flake = {
     nixosConfigurations = {
-      # NOTE: Testing `disko` & `impermanence` again.
       tatl = mkNixOSConfigWith {
         hostname = "tatl";
         system = "x86_64-linux";
