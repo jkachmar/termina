@@ -16,21 +16,21 @@ in {
         transcoding.
       '';
     };
-    config = lib.mkIf (plexCfg.enable && plexCfg.hardwareAcceleration) {
-      hardware.opengl = {
-        enable = lib.mkDefault true;
-        extraPackages = with pkgs; [
-          # Hardware transcoding.
-          intel-media-driver # LIBVA_DRIVER_NAME=iHD
-          libvdpau-va-gl
-          vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but can work better for some applications)
-          vaapiVdpau
-          # HDR tone mapping.
-          beignet
-          intel-compute-runtime
-          ocl-icd
-        ];
-      };
+  };
+  config = lib.mkIf (plexCfg.enable && plexCfg.hardwareAcceleration) {
+    hardware.opengl = {
+      enable = lib.mkDefault true;
+      extraPackages = with pkgs; [
+        # Hardware transcoding.
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        libvdpau-va-gl
+        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but can work better for some applications)
+        vaapiVdpau
+        # HDR tone mapping.
+        beignet
+        intel-compute-runtime
+        ocl-icd
+      ];
     };
   };
 }

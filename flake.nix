@@ -19,10 +19,10 @@
     # NOTE: `darwin` indicates that this channel passes CI on macOS builders;
     # this should increase the binary cache hit rate, but may result in it
     # lagging behind the equivalent NixOS/Linux package set.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-23.11-darwin";
 
     # Latest stable Nix package set.
-    stablePkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    stablePkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
     # Unstable (rolling-release) Nix package set.
     #
@@ -68,14 +68,14 @@
     linuxHome = {
       inputs.nixpkgs.follows = "stablePkgs";
       # NOTE: Update this when `stablePkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
     };
 
     # Declarative user configuration for macOS systems.
     macosHome = {
       inputs.nixpkgs.follows = "macosPkgs";
       # NOTE: Update this when `macosPkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
     };
 
     # Lightweight NixOS VMs.
@@ -89,7 +89,7 @@
       inputs = {
         disko.follows = "disko";
         flake-parts.follows = "flake-parts";
-        nixos-2305.follows = "stablePkgs";
+        nixos-stable.follows = "stablePkgs";
         nixpkgs.follows = "stablePkgs";
         treefmt-nix.follows = "treefmt";
       };
