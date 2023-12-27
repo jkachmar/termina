@@ -21,11 +21,9 @@ in {
       [
         # Misc. common programs without a better place to go.
         alejandra
-        btop
         curl
         fd
         findutils
-        fzf
         jq
         libvterm-neovim
         nix-index
@@ -43,6 +41,7 @@ in {
 
   programs = {
     bash.enable = true;
+    btop.enable = true;
 
     fish = {
       enable = true;
@@ -97,14 +96,19 @@ in {
       tmux.enableShellIntegration = config.programs.tmux.enable;
     };
 
-    htop = {
+    jujutsu = {
       enable = true;
+      package = unstable.jujutsu;
+      # Conditionally enable 'jj' integration for interactive shells managed
+      # via home-manager.
+      enableBashIntegration = config.programs.bash.enable;
+      enableFishIntegration = config.programs.fish.enable;
+      enableZshIntegration = config.programs.zsh.enable;
+
       settings = {
-        hide_userland_threads = true;
-        highlight_base_name = true;
-        show_program_path = false;
-        tree_view = true;
-        vim_mode = true;
+        user.name = config.primary-user.git.user.name;
+        user.email = config.primary-user.git.user.email;
+        ui.editor = "vi";
       };
     };
 
