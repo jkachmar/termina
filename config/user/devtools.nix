@@ -96,22 +96,6 @@ in {
       tmux.enableShellIntegration = config.programs.tmux.enable;
     };
 
-    jujutsu = {
-      enable = true;
-      package = unstable.jujutsu;
-      # Conditionally enable 'jj' integration for interactive shells managed
-      # via home-manager.
-      enableBashIntegration = config.programs.bash.enable;
-      enableFishIntegration = config.programs.fish.enable;
-      enableZshIntegration = config.programs.zsh.enable;
-
-      settings = {
-        user.name = config.primary-user.git.user.name;
-        user.email = config.primary-user.git.user.email;
-        ui.editor = "vi";
-      };
-    };
-
     starship = {
       enable = true;
       settings = {
