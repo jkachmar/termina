@@ -11,6 +11,7 @@
     ./wireguard.nix
   ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   networking = {
     domain = "thempire.dev";
     enableIPv6 = false; # TODO: Figure out IPv6...
