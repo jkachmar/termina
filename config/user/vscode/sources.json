@@ -104,11 +104,11 @@
     {
         "publisher": "ms-vscode-remote",
         "name": "remote-ssh",
-        "version": "0.108.2024010515",
+        "version": "0.108.2023112915",
         "src": {
-            "name": "ms-vscode-remote-remote-ssh-0.108.2024010515.zip",
-            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.108.2024010515/1704467385395/Microsoft.VisualStudio.Services.VSIXPackage",
-            "sha256": "sha256-ojeW3zvejO1I1XOR7j7ppepaHoAuYnGqugp+Vpvd8LU="
+            "name": "ms-vscode-remote-remote-ssh-0.108.2023112915.zip",
+            "url": "https://ms-vscode-remote.gallerycdn.vsassets.io/extensions/ms-vscode-remote/remote-ssh/0.108.2023112915/1701270564567/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "sha256-os8qlQKMrBlwQpc3iY6+p7dT+frLKeFSlrHOon1LRfs="
         }
     },
     {
