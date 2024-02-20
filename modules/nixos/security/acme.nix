@@ -6,6 +6,8 @@
   inherit (config.networking) fqdn;
   inherit (lib) types;
   cfg = config.security.acme;
+  # FIXME: Put this in some kind of encrypted secret to obfuscate my actual
+  # got-damn email address.
   email = "me@jkachmar.com";
 in {
   options.security.acme = {

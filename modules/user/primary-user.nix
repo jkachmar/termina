@@ -27,18 +27,6 @@ in {
     description = "The primary account holder's home directory.";
   };
 
-  options.primary-user.git.user.name = mkOption {
-    type = types.nullOr types.str;
-    default = null;
-    description = "The primary account holder's global git user name.";
-  };
-
-  options.primary-user.git.user.email = mkOption {
-    type = types.nullOr types.str;
-    default = null;
-    description = "The primary account holder's global git email address.";
-  };
-
   config = mkIf (cfg.name != null) {
     home.username = cfg.name;
     home.homeDirectory = cfg.home;
@@ -46,9 +34,5 @@ in {
 
     # By default, allow `home-manager` to manage its own installation.
     programs.home-manager.enable = lib.mkDefault true;
-    programs.git = {
-      userName = mkAliasDefinitions options.primary-user.git.user.name;
-      userEmail = mkAliasDefinitions options.primary-user.git.user.email;
-    };
   };
 }
