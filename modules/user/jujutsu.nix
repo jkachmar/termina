@@ -16,7 +16,11 @@ in
         enableBashIntegration = config.programs.bash.enable;
         enableFishIntegration = config.programs.fish.enable;
         enableZshIntegration = config.programs.zsh.enable;
-        settings.ui.editor = "vim";
+        settings = {
+          colors."commit_id prefix".bold = true;
+          template-aliases."format_short_id(id)" = "id.shortest(12)";
+          ui.editor = "vim";
+        };
       };
     }
     # If 'git' is enabled, grab username & email address from that config.
