@@ -22,9 +22,4 @@
 
   home.packages = with pkgs; [colima];
   programs.jujutsu.enable = true;
-
-  primary-user.git.user = {
-    inherit (config.primary-user) name;
-    email = "git@jkachmar.com";
-  };
 }
