@@ -13,27 +13,33 @@ in {
     type = "disk";
     inherit device;
     content = {
-      type = "table";
-      format = "gpt";
-      partitions = [
+      type = "gpt";
+      # XXX: The explicit labels added below are workarounds to changes that
+      # 'disko' has made to the partition label mapping.
+      #
+      # When this system is rebuilt, they can be removed (since the partition
+      # map will be reconstructed). It would be nice to have a more reasonable
+      # solution to this problem but w/e.
+      partitions = {
         # Create a large boot partition.
         #
         # NixOS creates a separate boot entry for each generation, which
         # can fill up the partition faster than other operating systems.
         #
         # Storage is cheap, so this can be more generous than necessary.
-        {
+        esp = {
           name = "ESP";
+          label = "ESP";
+          type = "EF00";
           start = "1MiB";
           end = "2GiB";
-          bootable = true;
           content = {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
             mountOptions = ["defaults"];
           };
-        }
+        };
         # Partition the remainder of the disk as a LUKS container.
         #
         # This system should be able to boot without manual intervention, so
@@ -43,8 +49,9 @@ in {
         # XXX: It's _extremely_ important to set up a separate LUKS passphrase
         # to unlock this container, so that the system is not irrecoverable if
         # something happens to the key file.
-        {
+        phainon = {
           name = "phainon";
+          label = "phainon";
           start = "2GiB";
           end = "100%";
           content = {
@@ -61,8 +68,8 @@ in {
               pool = "titan";
             };
           };
-        }
-      ];
+        };
+      };
     };
   };
 
