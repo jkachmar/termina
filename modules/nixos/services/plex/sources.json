@@ -1,14 +1,14 @@
 [
   {
-    "version": "1.40.1.8227",
+    "version": "1.40.2.8395",
     "platform": "aarch64-linux",
-    "url": "https://downloads.plex.tv/plex-media-server-new/1.40.1.8227-c0dd5a73e/debian/plexmediaserver_1.40.1.8227-c0dd5a73e_arm64.deb",
-    "hash": "16gc8fwb29x3l9s263xs9c7nb0i1rzgaps2wlx0cil8bs2a9izz8"
+    "url": "https://downloads.plex.tv/plex-media-server-new/1.40.2.8395-c67dce28e/debian/plexmediaserver_1.40.2.8395-c67dce28e_arm64.deb",
+    "hash": "0m15ld71fr8947j2c7ca9q34mbp80chsi0rqas2mlzk0v89rp6k4"
   },
   {
-    "version": "1.40.1.8227",
+    "version": "1.40.2.8395",
     "platform": "x86_64-linux",
-    "url": "https://downloads.plex.tv/plex-media-server-new/1.40.1.8227-c0dd5a73e/debian/plexmediaserver_1.40.1.8227-c0dd5a73e_amd64.deb",
-    "hash": "03sx5fvwy2njpfh7k4xvkqscrxnafdvzh42g4hsn2hqxp0bqkl51"
+    "url": "https://downloads.plex.tv/plex-media-server-new/1.40.2.8395-c67dce28e/debian/plexmediaserver_1.40.2.8395-c67dce28e_amd64.deb",
+    "hash": "04qh6k5ayrr34nlgwf362ivyg7n8nmaq18in2phaaigshx063141"
   }
 ]
