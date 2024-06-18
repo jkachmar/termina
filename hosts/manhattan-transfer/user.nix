@@ -12,8 +12,9 @@ in
     # TODO: Surely this can be abstracted behind a module or something...
     ../../config/user/gpg/macos.nix
     ../../config/user/ssh
-    ../../config/user/vscode
   ];
+
+  programs.vscode.enable = true;
 
   # XXX: Partial workaround for https://github.com/nix-community/home-manager/issues/2769
   home.file."${matchFile}".text = ''

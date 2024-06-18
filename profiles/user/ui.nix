@@ -1,6 +1,3 @@
 {
-  imports = [
-    ../../config/user/fonts.nix
-    ../../config/user/vscode
-  ];
+  imports = [ ../../config/user/fonts.nix ];
 }

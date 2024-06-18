@@ -1,13 +1,12 @@
-###############################################
-# OS-agnostic Visual Studio Code configuration. #
-#################################################
 {
   config,
+  lib,
   pkgs,
   unstable,
   ...
 }:
 let
+  cfg = config.programs.vscode;
   inherit (config.lib.file) mkOutOfStoreSymlink;
 
   # Copied from `home-manager` source.
@@ -19,17 +18,17 @@ let
   configFilePath = "${userDir}/settings.json";
   keybindingsFilePath = "${userDir}/keybindings.json";
 in
-{
+lib.mkIf cfg.enable {
   programs.vscode = {
-    enable = true;
     package = unstable.vscode;
     extensions = unstable.callPackage ./extensions.nix { };
   };
 
+  # XXX: It's important that all systems store dotfiles at the same location.
   home.file."${
     configFilePath
-  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/settings.json";
+  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/modules/user/vscode/settings.json";
   home.file."${
     keybindingsFilePath
-  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/keybindings.json";
+  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/modules/user/vscode/keybindings.json";
 }

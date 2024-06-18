@@ -18,5 +18,6 @@
   ];
 
   home.packages = with pkgs; [ colima ];
-  programs.jujutsu.enable = true;
+  programs.neovim.enable = true;
+  programs.vscode.enable = true;
 }
