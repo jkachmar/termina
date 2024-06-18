@@ -6,14 +6,14 @@ machine=${2:-$(hostname -s)}
 # The base config will always be one level above this script's directory.
 CONFIG_PATH=$(dirname "$(dirname "$0")")
 
-/nix/var/nix/profiles/default/bin/nix build \
+nix build \
   --experimental-features 'flakes nix-command' \
   --show-trace \
   --no-link \
   "${CONFIG_PATH}/#${machine}-system"
 
 result=$(
-  /nix/var/nix/profiles/default/bin/nix path-info \
+  nix path-info \
     --extra-experimental-features 'flakes nix-command' \
     "${CONFIG_PATH}/#${machine}-system"
 )

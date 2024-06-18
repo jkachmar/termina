@@ -14,8 +14,6 @@ let
 in
 {
   nix = {
-    package = pkgs.nixFlakes;
-
     settings = {
       experimental-features = [
         "nix-command"

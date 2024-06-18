@@ -10,19 +10,8 @@ let
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
 in
 {
-  # XXX: Related to the note, below; this ensures that the appropriate version
-  # of `nix` is available for user-only installations.
-  home.packages = [ pkgs.nixFlakes ];
   nix = {
     enable = true;
-    # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both
-    # trying to set `home-manager.${user}.nix.package` when both this & the
-    # system-level `nix.package` are set.
-    #
-    # NOTE: `mkOverride 1000` is equivalent to `mkDefault`, but calling it
-    # explicitly serves as a reminder that this _isn't_ constructing a default
-    # value for the module system so much as it is working around an edge case.
-    package = lib.mkOverride 1000 pkgs.nixFlakes;
     settings = mkMerge [
       {
         experimental-features = [
