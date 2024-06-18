@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   plexCfg = config.services.plex;
-in {
+in
+{
   options.services.plex = {
     hardwareAcceleration = lib.mkOption {
       type = types.bool;

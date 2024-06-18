@@ -1,36 +1,41 @@
-{
-  self,
-  withSystem,
-  ...
-}: let
+{ self, withSystem, ... }:
+let
   inherit (import ./utils.nix) mkSpecialArgs;
 
   # Utility function to construct an OS-agnostic user-level config.
-  mkUserConfig = hostname: system:
-    withSystem system
-    ({
-      pkgsets,
-      pkgs,
-      unstable,
-      homeManager,
-      ...
-    }:
+  mkUserConfig =
+    hostname: system:
+    withSystem system (
+      {
+        pkgsets,
+        pkgs,
+        unstable,
+        homeManager,
+        ...
+      }:
       homeManager.lib.homeManagerConfiguration rec {
         inherit pkgs;
-        extraSpecialArgs = {inherit pkgsets pkgs unstable;};
+        extraSpecialArgs = {
+          inherit pkgsets pkgs unstable;
+        };
         modules = [
           (../hosts + "/${hostname}/user.nix")
           # FIXME: Workaround for the fact that 'NIX_PATH' isn't set when not
           # using the system config.
-          ({lib, ...}: {
-            home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
-              "nixpkgs=${pkgsets.nixpkgs}"
-              "unstable=${pkgsets.unstable}"
-            ];
-          })
+          (
+            { lib, ... }:
+            {
+              home.sessionVariables.NIX_PATH = lib.concatStringsSep ":" [
+                "nixpkgs=${pkgsets.nixpkgs}"
+                "unstable=${pkgsets.unstable}"
+              ];
+            }
+          )
         ];
-      });
-in {
+      }
+    );
+in
+{
   flake = {
     userConfigurations = {
       # macOS user configurations.
@@ -47,12 +52,9 @@ in {
     # Expose the activation package created by `home-manager`, so it can be
     # realized (and possibly applied) directly from the command line.
     packages = with self.outputs.userConfigurations; {
-      aarch64-darwin.crazy-diamond-user =
-        crazy-diamond.activationPackage;
-      aarch64-darwin.manhattan-transfer-user =
-        manhattan-transfer.activationPackage;
-      x86_64-linux.jkachmar-user =
-        jkachmar.activationPackage;
+      aarch64-darwin.crazy-diamond-user = crazy-diamond.activationPackage;
+      aarch64-darwin.manhattan-transfer-user = manhattan-transfer.activationPackage;
+      x86_64-linux.jkachmar-user = jkachmar.activationPackage;
     };
   };
 }

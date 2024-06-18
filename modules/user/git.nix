@@ -3,10 +3,12 @@
   lib,
   unstable,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   cfg = config.programs.git;
-in {
+in
+{
   programs.git = lib.mkIf cfg.enable {
     # Assume 'git' username is the same as the account username.
     userName = lib.mkDefault config.home.username;

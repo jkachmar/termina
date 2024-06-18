@@ -6,25 +6,30 @@
   pkgs,
   unstable,
   ...
-}: let
+}:
+let
   inherit (config.lib.file) mkOutOfStoreSymlink;
 
   # Copied from `home-manager` source.
   userDir =
-    if pkgs.stdenv.hostPlatform.isDarwin
-    then "Library/Application Support/Code/User"
-    else "${config.xdg.configHome}/Code/User";
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      "Library/Application Support/Code/User"
+    else
+      "${config.xdg.configHome}/Code/User";
   configFilePath = "${userDir}/settings.json";
   keybindingsFilePath = "${userDir}/keybindings.json";
-in {
+in
+{
   programs.vscode = {
     enable = true;
     package = unstable.vscode;
-    extensions = unstable.callPackage ./extensions.nix {};
+    extensions = unstable.callPackage ./extensions.nix { };
   };
 
-  home.file."${configFilePath}".source =
-    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/settings.json";
-  home.file."${keybindingsFilePath}".source =
-    mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/keybindings.json";
+  home.file."${
+    configFilePath
+  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/settings.json";
+  home.file."${
+    keybindingsFilePath
+  }".source = mkOutOfStoreSymlink "${config.xdg.configHome}/dotfiles/config/user/vscode/keybindings.json";
 }

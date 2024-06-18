@@ -7,11 +7,19 @@
   options,
   pkgs,
   ...
-}: let
-  inherit (lib) mkAliasDefinitions mkAliasOptionModule mkIf mkOption types;
+}:
+let
+  inherit (lib)
+    mkAliasDefinitions
+    mkAliasOptionModule
+    mkIf
+    mkOption
+    types
+    ;
   inherit (pkgs.buildPlatform) isDarwin;
   cfg = config.primary-user;
-in {
+in
+{
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
     default = "jkachmar";
@@ -20,10 +28,7 @@ in {
 
   options.primary-user.home = mkOption {
     type = types.nullOr types.str;
-    default =
-      if isDarwin
-      then "/Users/${cfg.name}"
-      else "/home/${cfg.name}";
+    default = if isDarwin then "/Users/${cfg.name}" else "/home/${cfg.name}";
     description = "The primary account holder's home directory.";
   };
 

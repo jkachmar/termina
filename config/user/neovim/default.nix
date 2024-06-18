@@ -4,10 +4,12 @@
   pkgs,
   unstable,
   ...
-}: let
+}:
+let
   inherit (config.lib.file) mkOutOfStoreSymlink;
-  myPlugins = pkgs.callPackage ./plugins.nix {};
-in {
+  myPlugins = pkgs.callPackage ./plugins.nix { };
+in
+{
   # Lua needs a formatter.
   programs.neovim = {
     enable = true;
@@ -47,7 +49,5 @@ in {
   };
 
   # XXX: It's important that all systems store dotfiles at the same location.
-  xdg.configFile."nvim/lua".source =
-    mkOutOfStoreSymlink
-    "${config.home.homeDirectory}/.config/dotfiles/config/user/neovim/lua";
+  xdg.configFile."nvim/lua".source = mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/dotfiles/config/user/neovim/lua";
 }

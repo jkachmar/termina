@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
@@ -20,6 +17,6 @@
     ../../config/user/ssh/tatl.nix
   ];
 
-  home.packages = with pkgs; [colima];
+  home.packages = with pkgs; [ colima ];
   programs.jujutsu.enable = true;
 }

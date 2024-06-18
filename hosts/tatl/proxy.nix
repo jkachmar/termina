@@ -1,14 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (config.networking) domain;
   nginxCfg = config.services.nginx;
   ip = "192.168.1.155";
-in {
+in
+{
   config = lib.mkIf nginxCfg.enable {
-    security.acme.certs."moody-blues.${domain}".extraDomainNames = ["*.moody-blues.${domain}"];
+    security.acme.certs."moody-blues.${domain}".extraDomainNames = [ "*.moody-blues.${domain}" ];
 
     services.nginx.virtualHosts = {
       # NOTE: Ensure this server is trusted by adding its IP to the NAS via

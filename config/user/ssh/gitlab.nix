@@ -1,9 +1,11 @@
-{config, ...}: let
+{ config, ... }:
+let
   sshDir = "${config.home.homeDirectory}/.ssh";
-in {
+in
+{
   programs.ssh.matchBlocks."gitlab.com" = {
     hostname = "gitlab.com";
     user = "git";
-    identityFile = ["${sshDir}/id_gitlab"];
+    identityFile = [ "${sshDir}/id_gitlab" ];
   };
 }

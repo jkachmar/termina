@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) types;
   cfg = config.security.ssh-agent;
-in {
+in
+{
   options.security.ssh-agent.enable = lib.mkOption {
     type = types.bool;
     default = false;

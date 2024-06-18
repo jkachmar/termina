@@ -1,6 +1,4 @@
 ############################################
 # Shared `nixpkgs` configuration settings. #
 ############################################
-{
-  allowUnfree = true;
-}
+{ allowUnfree = true; }

@@ -3,14 +3,16 @@
   pkgs,
   pkgsets,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkMerge;
   inherit (pkgs.buildPlatform) isDarwin isAarch64;
   inherit (import ../shared/caches.nix) substituters trusted-public-keys;
-in {
+in
+{
   # XXX: Related to the note, below; this ensures that the appropriate version
   # of `nix` is available for user-only installations.
-  home.packages = [pkgs.nixFlakes];
+  home.packages = [ pkgs.nixFlakes ];
   nix = {
     enable = true;
     # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both
@@ -23,13 +25,19 @@ in {
     package = lib.mkOverride 1000 pkgs.nixFlakes;
     settings = mkMerge [
       {
-        experimental-features = ["nix-command" "flakes"];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         inherit substituters trusted-public-keys;
       }
       # NOTE: This should allow ARM-based macOS targets to build x86 software
       # by way of Rosetta.
       (mkIf (isDarwin && isAarch64) {
-        extra-platforms = ["aarch64-darwin" "x86_64-darwin"];
+        extra-platforms = [
+          "aarch64-darwin"
+          "x86_64-darwin"
+        ];
       })
     ];
 

@@ -1,6 +1,8 @@
-{device, ...}: let
+{ device, ... }:
+let
   devicename = builtins.baseNameOf device;
-in {
+in
+{
   #############################################################################
   # Wipe some disk (typically a flash drive) and fill (approx.) the first 10M
   # of space with randomness, from which a LUKS key will be derived.

@@ -7,7 +7,8 @@
   pkgs,
   unstable,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkMerge optionals;
   inherit (pkgs.buildPlatform) isDarwin isLinux;
 
@@ -15,9 +16,11 @@
     singleBinary = false;
     withPrefix = true;
   };
-in {
+in
+{
   home.packages =
-    (with pkgs;
+    (
+      with pkgs;
       [
         # Misc. common programs without a better place to go.
         alejandra
@@ -36,8 +39,9 @@ in {
       ++ optionals isDarwin [
         darwin.iproute2mac
         gcoreutils
-      ])
-    ++ (with unstable; []);
+      ]
+    )
+    ++ (with unstable; [ ]);
 
   programs = {
     bash.enable = true;
@@ -52,7 +56,7 @@ in {
     };
 
     zsh = mkMerge [
-      {enable = true;}
+      { enable = true; }
       # NOTE: macOS version upgrades reset '/etc/zshrc', which means that the
       # shell no longer "knows" how to source all Nix-related stuff.
       #

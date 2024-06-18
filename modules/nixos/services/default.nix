@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./security
-  ];
-}
+{ imports = [ ./security ]; }

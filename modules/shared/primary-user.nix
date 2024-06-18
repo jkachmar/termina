@@ -7,11 +7,19 @@
   options,
   pkgs,
   ...
-}: let
-  inherit (lib) mkAliasOptionModule mkDefault mkIf mkOption types;
+}:
+let
+  inherit (lib)
+    mkAliasOptionModule
+    mkDefault
+    mkIf
+    mkOption
+    types
+    ;
   inherit (pkgs.buildPlatform) isDarwin isLinux;
   cfg = config.primary-user;
-in {
+in
+{
   options.primary-user.name = mkOption {
     type = types.nullOr types.str;
     default = "jkachmar";
@@ -20,10 +28,7 @@ in {
 
   options.primary-user.home = mkOption {
     type = types.nullOr types.str;
-    default =
-      if isDarwin
-      then "/Users/${cfg.name}"
-      else "/home/${cfg.name}";
+    default = if isDarwin then "/Users/${cfg.name}" else "/home/${cfg.name}";
     description = "The primary account holder's home directory.";
   };
 
@@ -35,12 +40,65 @@ in {
   # any additional OS-specific options/aliases.
   imports = [
     # OS-agnostic option aliases.
-    (mkAliasOptionModule ["primary-user" "user"] ["users" "users" cfg.name])
-    (mkAliasOptionModule ["primary-user" "description"] ["users" "users" cfg.name "description"])
-    (mkAliasOptionModule ["primary-user" "uid"] ["users" "users" cfg.name "uid"])
-    (mkAliasOptionModule ["primary-user" "shell"] ["users" "users" cfg.name "shell"])
+    (mkAliasOptionModule
+      [
+        "primary-user"
+        "user"
+      ]
+      [
+        "users"
+        "users"
+        cfg.name
+      ]
+    )
+    (mkAliasOptionModule
+      [
+        "primary-user"
+        "description"
+      ]
+      [
+        "users"
+        "users"
+        cfg.name
+        "description"
+      ]
+    )
+    (mkAliasOptionModule
+      [
+        "primary-user"
+        "uid"
+      ]
+      [
+        "users"
+        "users"
+        cfg.name
+        "uid"
+      ]
+    )
+    (mkAliasOptionModule
+      [
+        "primary-user"
+        "shell"
+      ]
+      [
+        "users"
+        "users"
+        cfg.name
+        "shell"
+      ]
+    )
     # OS-agnostic `home-manager` option aliases.
-    (mkAliasOptionModule ["primary-user" "home-manager"] ["home-manager" "users" cfg.name])
+    (mkAliasOptionModule
+      [
+        "primary-user"
+        "home-manager"
+      ]
+      [
+        "home-manager"
+        "users"
+        cfg.name
+      ]
+    )
   ];
 
   config = mkIf (cfg.name != null) {

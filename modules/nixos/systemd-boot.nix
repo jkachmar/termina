@@ -1,6 +1,8 @@
-{config, ...}: let
+{ config, ... }:
+let
   cfg = config.boot.initrd.systemd;
-in {
+in
+{
   config = {
     boot = {
       initrd.systemd.enable = true;

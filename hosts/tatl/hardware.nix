@@ -1,18 +1,16 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config, pkgs, ... }:
+let
   inherit (config.networking) hostName;
-in {
+in
+{
   # Import the hardware survey and apply changes/additions here.
   imports = [
     ./survey.nix
-    (import ./disks.nix {device = "/dev/nvme0n1";})
+    (import ./disks.nix { device = "/dev/nvme0n1"; })
   ];
 
   # Needed for automatic LUKS unlock.
-  boot.initrd.kernelModules = ["usb_storage"];
+  boot.initrd.kernelModules = [ "usb_storage" ];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # ZRAM swap is in-memory, so there's no SSD wear; increase from 1 -> 10.
@@ -36,12 +34,20 @@ in {
     "/net/downloads" = {
       device = "192.168.1.155:/volume1/downloads";
       fsType = "nfs";
-      options = ["auto" "defaults" "nfsvers=4.1"];
+      options = [
+        "auto"
+        "defaults"
+        "nfsvers=4.1"
+      ];
     };
     "/net/media" = {
       device = "192.168.1.155:/volume1/media";
       fsType = "nfs";
-      options = ["auto" "defaults" "nfsvers=4.1"];
+      options = [
+        "auto"
+        "defaults"
+        "nfsvers=4.1"
+      ];
     };
   };
 
@@ -51,7 +57,7 @@ in {
   # the following configuration enabled.
   #
   # cf. https://github.com/NixOS/nixpkgs/issues/76671#issuecomment-1399044941
-  boot.supportedFilesystems = ["nfs"];
+  boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true;
 
   # Enable kernel same-page merging; this allows KVM guests to share identical

@@ -1,8 +1,5 @@
+{ lib, modulesPath, ... }:
 {
-  lib,
-  modulesPath,
-  ...
-}: {
   imports = [
     "${modulesPath}/profiles/hardened.nix" # Hardened OS defaults.
     ../../config/system/nix.nix

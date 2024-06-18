@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) types;
   cfg = config.virtualisation.podman;
-in {
+in
+{
   options.virtualisation.podman = {
     autoUpdate = lib.mkOption {
       type = types.bool;
@@ -22,24 +20,24 @@ in {
       '';
     };
   };
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      virtualisation = {
-        containers.storage.settings.storage = {
-          driver = "zfs";
-          graphroot = "/state/podman/containers";
-          runroot = "/run/containers/storage";
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      (lib.mkIf cfg.enable {
+        virtualisation = {
+          containers.storage.settings.storage = {
+            driver = "zfs";
+            graphroot = "/state/podman/containers";
+            runroot = "/run/containers/storage";
+          };
+          podman.defaultNetwork.settings.subnets = [
+            {
+              gateway = "172.25.0.1";
+              subnet = "172.25.0.0/23";
+            }
+          ];
         };
-        podman.defaultNetwork.settings.subnets = [
-          {
-            gateway = "172.25.0.1";
-            subnet = "172.25.0.0/23";
-          }
-        ];
-      };
-    })
-    (lib.mkIf cfg.autoUpdate {
-      systemd.timers.podman-auto-update.wantedBy = ["timers.target"];
-    })
-  ]);
+      })
+      (lib.mkIf cfg.autoUpdate { systemd.timers.podman-auto-update.wantedBy = [ "timers.target" ]; })
+    ]
+  );
 }

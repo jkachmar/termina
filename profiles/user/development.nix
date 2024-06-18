@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   imports = [
     ../../modules/user/emacs
     ../../modules/user/git.nix

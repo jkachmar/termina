@@ -4,24 +4,27 @@
   lib,
   vscode-extensions,
   vscode-utils,
-}: let
+}:
+let
   inherit (buildPlatform) system;
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
 
   sources = builtins.fromJSON (builtins.readFile ./sources.json);
   extensions = lib.lists.forEach sources (
-    source: let
+    source:
+    let
       hasPlatforms = builtins.hasAttr "platforms" source.src;
       args =
-        if hasPlatforms
-        then ({inherit (source.src) name;} // source.src.platforms.${system})
-        else source.src;
+        if hasPlatforms then
+          ({ inherit (source.src) name; } // source.src.platforms.${system})
+        else
+          source.src;
       vsix = fetchurl args;
-      mktplcRef = {inherit (source) name publisher version;};
+      mktplcRef = {
+        inherit (source) name publisher version;
+      };
     in
-      buildVscodeMarketplaceExtension {
-        inherit mktplcRef vsix;
-      }
+    buildVscodeMarketplaceExtension { inherit mktplcRef vsix; }
   );
 in
-  extensions
+extensions

@@ -6,12 +6,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkDefault mkIf;
   cfg = config.primary-user;
-in {
+in
+{
   # OS-agnostic options/aliases.
-  imports = [../shared/primary-user.nix];
+  imports = [ ../shared/primary-user.nix ];
   # Define macOS-specific `primary-user` configuration.
   config = mkIf (cfg.name != null) {
     nix = {
@@ -19,8 +21,18 @@ in {
       gc.user = cfg.name;
       # TODO: Should this use `lib.mkMerge` and _only_ specify the primary user
       # as an allowed and/or trusted user?
-      settings.allowed-users = ["root" cfg.name "@admin" "@wheel"];
-      settings.trusted-users = ["root" cfg.name "@admin" "@wheel"];
+      settings.allowed-users = [
+        "root"
+        cfg.name
+        "@admin"
+        "@wheel"
+      ];
+      settings.trusted-users = [
+        "root"
+        cfg.name
+        "@admin"
+        "@wheel"
+      ];
     };
 
     # Used for backwards compatibility, please read the changelog before

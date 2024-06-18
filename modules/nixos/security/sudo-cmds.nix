@@ -6,32 +6,35 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (lib) mapAttrsToList mkAfter mkOption types;
+}:
+let
+  inherit (lib)
+    mapAttrsToList
+    mkAfter
+    mkOption
+    types
+    ;
 
   cfg = config.sudo-cmds;
 
   nopasswd = command: {
     inherit command;
-    options = ["NOPASSWD"];
+    options = [ "NOPASSWD" ];
   };
-in {
+in
+{
   options.sudo-cmds = mkOption {
     type = types.attrsOf (types.listOf types.str);
-    default = {};
+    default = { };
     description = ''
       An attrset mapping usernames to lists of sudo commands to allow those
       users to run without passwords.
     '';
   };
   config.security.sudo.extraRules = mkAfter (
-    mapAttrsToList
-    (
-      username: commands: {
-        users = [username];
-        commands = map nopasswd commands;
-      }
-    )
-    cfg
+    mapAttrsToList (username: commands: {
+      users = [ username ];
+      commands = map nopasswd commands;
+    }) cfg
   );
 }

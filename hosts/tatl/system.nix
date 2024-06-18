@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     ../../profiles/nixos/server.nix
     ./hardware.nix
@@ -11,7 +8,7 @@
     ./wireguard.nix
   ];
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   networking = {
     domain = "thempire.dev";
     enableIPv6 = false; # TODO: Figure out IPv6...
@@ -50,7 +47,10 @@
   primary-user = {
     initialHashedPassword = "$y$j9T$J.Eb31b.9Gi4fS/lvcodk0$c4RHKee/cjn5AyhJo3HiXm1svt54l9MQ0SfWhy7fiz4";
 
-    extraGroups = ["analytics" "downloads"];
+    extraGroups = [
+      "analytics"
+      "downloads"
+    ];
     # TODO: Source this from an external file; keep in sync w/ all servers.
     openssh.authorizedKeys.keys = [
       # yubikey

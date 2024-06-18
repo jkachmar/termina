@@ -1,13 +1,11 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) types;
   inherit (config.networking) fqdn;
   cfg = config.services.pihole;
   nginxCfg = config.services.nginx;
-in {
+in
+{
   options.services.pihole = {
     enable = lib.mkOption {
       type = types.bool;
@@ -37,13 +35,13 @@ in {
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      environment.persistence."/state/root".directories = ["/etc/pihole"];
-      systemd.services.podman-pihole.after = ["etc-pihole.mount"];
+      environment.persistence."/state/root".directories = [ "/etc/pihole" ];
+      systemd.services.podman-pihole.after = [ "etc-pihole.mount" ];
 
       networking.firewall = {
         # Allow clients to make requests on port 53.
-        allowedTCPPorts = [53];
-        allowedUDPPorts = [53];
+        allowedTCPPorts = [ 53 ];
+        allowedUDPPorts = [ 53 ];
         # Open up ports on the "podman0" bridge network.
         #
         # The NixOS firewall is conservative by default, so these ports must be
@@ -51,8 +49,8 @@ in {
         # should be configured to supply local DNS resolution from
         # `dnscrypt-proxy`) .
         interfaces.podman0 = {
-          allowedTCPPorts = [cfg.forwardPort];
-          allowedUDPPorts = [cfg.forwardPort];
+          allowedTCPPorts = [ cfg.forwardPort ];
+          allowedUDPPorts = [ cfg.forwardPort ];
         };
       };
 

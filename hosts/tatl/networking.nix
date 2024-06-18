@@ -1,7 +1,11 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   services.resolved = {
     enable = true;
-    fallbackDns = ["9.9.9.9" "8.8.8.8"];
+    fallbackDns = [
+      "9.9.9.9"
+      "8.8.8.8"
+    ];
     # NOTE: [stub-resolver]
     #
     # DNS is being handled by a pretty miserable combination of PiHole &

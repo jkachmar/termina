@@ -3,28 +3,28 @@
   self,
   withSystem,
   ...
-}: let
+}:
+let
   inherit (inputs) darwin;
 
   # Utility function to construct a macOS system config.
-  mkMacOSConfig = hostname: system:
-    withSystem system
-    ({
-      pkgsets,
-      pkgs,
-      unstable,
-      homeManager,
-      ...
-    }:
+  mkMacOSConfig =
+    hostname: system:
+    withSystem system (
+      {
+        pkgsets,
+        pkgs,
+        unstable,
+        homeManager,
+        ...
+      }:
       darwin.lib.darwinSystem rec {
         specialArgs = {
           inherit pkgsets pkgs unstable;
           # XXX: `nix-darwin` requires that `inputs` have a `nixpkgs` attribute.
-          inputs =
-            inputs
-            // {
-              inherit (pkgsets) nixpkgs;
-            };
+          inputs = inputs // {
+            inherit (pkgsets) nixpkgs;
+          };
         };
         modules = [
           homeManager.darwinModules.home-manager
@@ -34,10 +34,12 @@
           }
           ../modules/macos/primary-user.nix
           (../hosts + "/${hostname}/system.nix")
-          {primary-user.home-manager = import (../hosts + "/${hostname}/user.nix");}
+          { primary-user.home-manager = import (../hosts + "/${hostname}/user.nix"); }
         ];
-      });
-in {
+      }
+    );
+in
+{
   flake = {
     darwinConfigurations = {
       crazy-diamond = mkMacOSConfig "crazy-diamond" "aarch64-darwin";
@@ -46,8 +48,7 @@ in {
     # Expose the activation package created by `nix-darwin`, so it can be
     # realized (and possibly applied) directly from the command line.
     packages = with self.outputs.darwinConfigurations; {
-      aarch64-darwin.crazy-diamond-system =
-        crazy-diamond.config.system.build.toplevel;
+      aarch64-darwin.crazy-diamond-system = crazy-diamond.config.system.build.toplevel;
     };
   };
 }

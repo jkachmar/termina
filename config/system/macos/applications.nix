@@ -8,9 +8,9 @@
       upgrade = true;
     };
 
-    taps = ["homebrew/cask"];
+    taps = [ "homebrew/cask" ];
 
-    brews = [];
+    brews = [ ];
     casks = [
       "balenaetcher" # USB drive imager.
       "calibre" # Digital library.

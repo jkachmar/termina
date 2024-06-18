@@ -1,3 +1,1 @@
-{
-  imports = [../../config/user/ssh];
-}
+{ imports = [ ../../config/user/ssh ]; }

@@ -5,9 +5,11 @@
   keyFileSize ? 8096, # 8KiB
   keyFileOffset ? 4194304, # 4MiB
   ...
-}: let
+}:
+let
   devicename = builtins.baseNameOf device;
-in {
+in
+{
   # Construct the partition table for the system's primary disk.
   disko.devices.disk.${devicename} = {
     type = "disk";
@@ -37,7 +39,7 @@ in {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
-            mountOptions = ["defaults"];
+            mountOptions = [ "defaults" ];
           };
         };
         # Partition the remainder of the disk as a LUKS container.
@@ -80,7 +82,11 @@ in {
   # to balance these settings w/ ZRAM-swap (configured elsewhere).
   disko.devices.nodev."/" = {
     fsType = "tmpfs";
-    mountOptions = ["defaults" "size=16G" "mode=755"];
+    mountOptions = [
+      "defaults"
+      "size=16G"
+      "mode=755"
+    ];
   };
 
   # Mount `/tmp` on `tmpfs`.
@@ -90,7 +96,11 @@ in {
   # to balance these settings w/ ZRAM-swap (configured elsewhere).
   disko.devices.nodev."/tmp" = {
     fsType = "tmpfs";
-    mountOptions = ["defaults" "size=16G" "mode=1777"];
+    mountOptions = [
+      "defaults"
+      "size=16G"
+      "mode=1777"
+    ];
   };
 
   # Construct the primary ZFS pool for this system.

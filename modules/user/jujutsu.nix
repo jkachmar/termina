@@ -4,11 +4,13 @@
   pkgs,
   unstable,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   cfg = config.programs.jujutsu;
 in
-  lib.mkIf cfg.enable (lib.mkMerge [
+lib.mkIf cfg.enable (
+  lib.mkMerge [
     {
       # Install 'watchman' so 'jujutsu' can use it for filesystem monitoring.
       home.packages = [ pkgs.watchman ];
@@ -35,6 +37,7 @@ in
       };
       # If 'home-manager' is handling git config then make sure jujutsu's
       # state directory is ignored when colocated with git repos.
-      programs.git.ignores = [".jj"];
+      programs.git.ignores = [ ".jj" ];
     })
-  ])
+  ]
+)

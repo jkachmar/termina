@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.services.nginx;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services.nginx = {
       recommendedGzipSettings = true;
@@ -14,11 +12,17 @@ in {
     };
 
     networking.firewall = {
-      allowedTCPPorts = [80 443];
-      allowedUDPPorts = [80 443];
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        80
+        443
+      ];
     };
 
     # Nginx needs to be able to read the certificates
-    users.users.nginx.extraGroups = ["acme"];
+    users.users.nginx.extraGroups = [ "acme" ];
   };
 }

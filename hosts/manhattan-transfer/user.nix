@@ -1,8 +1,10 @@
-{config, ...}: let
+{ config, ... }:
+let
   sshDir = "${config.home.homeDirectory}/.ssh";
   matchFile = "${sshDir}/config.match";
   workFile = "${sshDir}/config.work";
-in {
+in
+{
   imports = [
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix

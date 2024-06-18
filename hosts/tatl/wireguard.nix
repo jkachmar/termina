@@ -3,13 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.networking.wireguard;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     # XXX: Hardened profile locks kernel modules, so attempting to call
     # 'modprobe' from the Wireguard service fails.
-    boot.initrd.kernelModules = ["wireguard"];
+    boot.initrd.kernelModules = [ "wireguard" ];
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;
 
@@ -31,13 +33,12 @@ in {
         # XXX: 'enp86s0' is the stable name for this system's onboard NIC; it
         # _must_ be kept in sync with the primary network interface!
         externalInterface = "enp86s0";
-        internalInterfaces =
-          builtins.attrNames config.networking.wireguard.interfaces;
+        internalInterfaces = builtins.attrNames config.networking.wireguard.interfaces;
       };
       # Wireguard listen port must also be forwarded.
-      firewall.allowedUDPPorts = [51820];
+      firewall.allowedUDPPorts = [ 51820 ];
       wireguard.interfaces.wg0 = {
-        ips = ["192.168.50.1/24"];
+        ips = [ "192.168.50.1/24" ];
         listenPort = 51820;
         privateKeyFile = "/secrets/wireguard/privatekey";
 
@@ -45,17 +46,17 @@ in {
           {
             # crazy-diamond | MacBook Pro
             publicKey = "Mi0aMgmZrZF9MDS8POWtAOgdSCyG4C0kpiAcLvz8HAs=";
-            allowedIPs = ["192.168.50.2/32"];
+            allowedIPs = [ "192.168.50.2/32" ];
           }
           {
             # purple-haze | iPhone 14 Pro
             publicKey = "U9twqSeN7eNEap4JodQf20aO+rtbBylB82RUiYuEUnc=";
-            allowedIPs = ["192.168.50.3/32"];
+            allowedIPs = [ "192.168.50.3/32" ];
           }
           {
             # wonder-of-u | iPad Mini
             publicKey = "X7KUdq+6fHFuyY81BLtKG6LUNQOmOHdtGzhDQRxC4yw=";
-            allowedIPs = ["192.168.50.4/32"];
+            allowedIPs = [ "192.168.50.4/32" ];
           }
         ];
         # This allows the wireguard server to route your traffic to the
@@ -83,8 +84,8 @@ in {
     # Wireguard should wait to start until after the 'secrets' directory has
     # been mounted (it needs to access keys).
     systemd.services.wireguard-wg0 = {
-      after = ["secrets.mount"];
-      requires = ["secrets.mount"];
+      after = [ "secrets.mount" ];
+      requires = [ "secrets.mount" ];
     };
   };
 }

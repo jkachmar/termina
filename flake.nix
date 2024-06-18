@@ -3,10 +3,15 @@
   description = "jkachmar's personal dotfiles and machine configurations.";
 
   #############################################################################
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [./flake];
-      systems = ["aarch64-darwin" "x86_64-darwin" "x86_64-linux"];
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./flake ];
+      systems = [
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
     };
 
   #############################################################################

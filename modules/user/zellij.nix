@@ -3,10 +3,12 @@
   lib,
   unstable,
   ...
-}: let
+}:
+let
   inherit (lib) types;
   cfg = config.programs.zellij;
-in {
+in
+{
   programs.zellij = lib.mkIf cfg.enable {
     settings = {
       theme = "gruvbox-light";

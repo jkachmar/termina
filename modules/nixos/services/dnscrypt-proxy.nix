@@ -1,15 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.services.dnscrypt-proxy2;
   piholeCfg = config.services.pihole;
-in {
+in
+{
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      environment.persistence."/state/root".directories = ["/var/lib/private/dnscrypt-proxy"];
-      systemd.services.dnscrypt-proxy2.after = ["var-lib-private-dnscrypt\\x2dproxy.mount"];
+      environment.persistence."/state/root".directories = [ "/var/lib/private/dnscrypt-proxy" ];
+      systemd.services.dnscrypt-proxy2.after = [ "var-lib-private-dnscrypt\\x2dproxy.mount" ];
       services.dnscrypt-proxy2 = {
         # See the upstream TOML configuration example for a documented list of
         # available settings:
@@ -21,8 +19,11 @@ in {
           #
           # Ideally this could specify servers to try in order of priority so
           # Cloudflare could be set as a fallback even though I prefer Quad9.
-          server_names = ["cloudflare"];
-          fallback_resolvers = ["9.9.9.9:53" "1.1.1.1:53"];
+          server_names = [ "cloudflare" ];
+          fallback_resolvers = [
+            "9.9.9.9:53"
+            "1.1.1.1:53"
+          ];
           ignore_system_dns = true;
 
           # Prefer DNS-Over-HTTPS and require DNSSEC verification for the
@@ -48,7 +49,7 @@ in {
           sources = {
             # Quad9 DNS resolvers.
             quad9-resolvers = {
-              urls = ["https://www.quad9.net/quad9-resolvers.md"];
+              urls = [ "https://www.quad9.net/quad9-resolvers.md" ];
               cache_file = "/state/root/var/lib/private/dnscrypt-proxy/quad9-resolvers.md";
               minisign_key = "RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN";
               refresh_delay = 72;
@@ -94,8 +95,10 @@ in {
       # TODO: Look into switching to the PiHole Nix module whenever
       # https://github.com/NixOS/nixpkgs/pull/108055 whenever is
       # finished/merged.
-      services.dnscrypt-proxy2.settings.listen_addresses = ["172.25.0.1:${builtins.toString piholeCfg.forwardPort}"];
-      systemd.services.podman-pihole.after = ["dnscrypt-proxy2.service"];
+      services.dnscrypt-proxy2.settings.listen_addresses = [
+        "172.25.0.1:${builtins.toString piholeCfg.forwardPort}"
+      ];
+      systemd.services.podman-pihole.after = [ "dnscrypt-proxy2.service" ];
     })
   ];
 }

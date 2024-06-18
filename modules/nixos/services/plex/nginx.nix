@@ -3,11 +3,13 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (config.networking) fqdn;
   plexCfg = config.services.plex;
   nginxCfg = config.services.nginx;
-in {
+in
+{
   config = lib.mkIf (nginxCfg.enable && plexCfg.enable) {
     services.nginx.virtualHosts."plex.${fqdn}" = {
       forceSSL = true;
