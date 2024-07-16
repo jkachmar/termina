@@ -12,6 +12,17 @@ in
 {
   nix = {
     enable = true;
+    # XXX: Workaround for a conflict between `nix-darwin` & `home-manager` both
+    # trying to set `home-manager.${user}.nix.package` when both this & the
+    # system-level `nix.package` are set.
+    #
+    # NOTE: `mkOverride 1000` is equivalent to `mkDefault`, but calling it
+    # explicitly serves as a reminder that this _isn't_ constructing a default
+    # value for the module system so much as it is working around an edge case.
+    #
+    # NOTE: Setting this explicitly is necessary to get 'home-manager' to
+    # generate Nix settings under '$XDG_CONFIG_HOME'.
+    package = lib.mkOverride 1000 pkgs.nix;
     settings = mkMerge [
       {
         experimental-features = [
