@@ -9,11 +9,11 @@
           [
             alejandra
             shellcheck
-            inputs'.nixos-anywhere.packages.default
           ]
           ++ lib.optionals buildPlatform.isDarwin [ ]
           ++ lib.optionals buildPlatform.isLinux [
             inputs'.disko.packages.disko
+            inputs'.nixos-anywhere.packages.default
             rng-tools
           ];
       };

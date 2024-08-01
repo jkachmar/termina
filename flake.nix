@@ -59,7 +59,7 @@
 
     # Declarative disk partitioning for NixOS.
     disko = {
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "stablePkgs";
       url = "github:nix-community/disko";
     };
 
