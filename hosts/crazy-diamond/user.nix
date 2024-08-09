@@ -17,7 +17,8 @@
     ../../config/user/ssh/tatl.nix
   ];
 
-  home.packages = with pkgs; [ colima ];
+  home.packages = builtins.attrValues { inherit (pkgs) colima mosh; };
+  programs.emacs.enable = true;
   programs.neovim.enable = true;
   programs.vscode.enable = true;
 }
