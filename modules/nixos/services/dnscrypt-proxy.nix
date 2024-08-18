@@ -50,8 +50,8 @@ in
             # Quad9 DNS resolvers.
             quad9-resolvers = {
               urls = [ "https://www.quad9.net/quad9-resolvers.md" ];
-              cache_file = "/state/root/var/lib/private/dnscrypt-proxy/quad9-resolvers.md";
-              minisign_key = "RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN";
+              cache_file = "/var/lib/private/dnscrypt-proxy/quad9-resolvers.md";
+              minisign_key = "RWTp2E4t64BrL651lEiDLNon+DqzPG4jhZ97pfdNkcq1VDdocLKvl5FW";
               refresh_delay = 72;
               prefix = "quad9-";
             };
@@ -64,7 +64,7 @@ in
                 "https://ipv6.download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
                 "https://download.dnscrypt.net/resolvers-list/v3/public-resolvers.md"
               ];
-              cache_file = "/state/root/var/lib/private/dnscrypt-proxy/public-resolvers.md";
+              cache_file = "/var/lib/private/dnscrypt-proxy/public-resolvers.md";
               minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
               refresh_delay = 72;
               prefix = "";
@@ -78,7 +78,7 @@ in
                 "https://ipv6.download.dnscrypt.info/resolvers-list/v3/relays.md"
                 "https://download.dnscrypt.net/resolvers-list/v3/relays.md"
               ];
-              cache_file = "/state/root/var/lib/private/dnscrypt-proxy/relays.md";
+              cache_file = "/var/lib/private/dnscrypt-proxy/relays.md";
               minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
               refresh_delay = 72;
               prefix = "";
