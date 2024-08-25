@@ -22,6 +22,7 @@
         "Hack"
         "IBMPlexMono"
         "JetBrainsMono"
+        "NerdFontsSymbolsOnly"
         "Overpass"
       ];
     })
