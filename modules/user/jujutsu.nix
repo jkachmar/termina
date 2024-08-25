@@ -16,11 +16,6 @@ lib.mkIf cfg.enable (
       home.packages = [ pkgs.watchman ];
       programs.jujutsu = {
         package = unstable.jujutsu;
-        # Conditionally enable 'jj' integration for interactive shells managed
-        # via home-manager.
-        enableBashIntegration = config.programs.bash.enable;
-        enableFishIntegration = config.programs.fish.enable;
-        enableZshIntegration = config.programs.zsh.enable;
         settings = {
           core.fsmonitor = "watchman";
           colors."commit_id prefix".bold = true;
