@@ -100,6 +100,11 @@
       };
     };
 
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "";
+    };
+
     # Autoformatting via `nix fmt`.
     treefmt = {
       inputs.nixpkgs.follows = "stablePkgs";

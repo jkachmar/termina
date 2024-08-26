@@ -1,4 +1,4 @@
-{ self, withSystem, ... }:
+{ inputs, outputs, withSystem, ... }:
 let
   inherit (import ./utils.nix) mkSpecialArgs;
 
@@ -19,6 +19,7 @@ let
           inherit pkgsets pkgs unstable;
         };
         modules = [
+          inputs.nix-doom-emacs-unstraightened.hmModule
           (../hosts + "/${hostname}/user.nix")
           # FIXME: Workaround for the fact that 'NIX_PATH' isn't set when not
           # using the system config.
@@ -51,7 +52,7 @@ in
 
     # Expose the activation package created by `home-manager`, so it can be
     # realized (and possibly applied) directly from the command line.
-    packages = with self.outputs.userConfigurations; {
+    packages = with outputs.userConfigurations; {
       aarch64-darwin.crazy-diamond-user = crazy-diamond.activationPackage;
       aarch64-darwin.manhattan-transfer-user = manhattan-transfer.activationPackage;
       x86_64-linux.jkachmar-user = jkachmar.activationPackage;

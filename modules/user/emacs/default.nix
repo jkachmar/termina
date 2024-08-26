@@ -5,11 +5,7 @@
   unstable,
   ...
 }:
-let
-  inherit (lib) types;
-  cfg = config.programs.emacs;
-in
-lib.mkIf cfg.enable {
+lib.mkIf config.programs.emacs.enable {
   # for 'org-roam'
   home.packages = [pkgs.graphviz];
   programs.emacs = {

@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
+    inputs.nix-doom-emacs-unstraightened.hmModule
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
     ../../profiles/user/ui.nix
@@ -18,7 +19,7 @@
   ];
 
   home.packages = builtins.attrValues { inherit (pkgs) colima mosh; };
-  programs.emacs.enable = true;
+  programs.doom-emacs.enable = true;
   programs.neovim.enable = true;
   programs.vscode.enable = true;
 }
