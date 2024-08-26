@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 {
   imports = [
     inputs.nix-doom-emacs-unstraightened.hmModule
@@ -22,4 +22,14 @@
   programs.doom-emacs.enable = true;
   programs.neovim.enable = true;
   programs.vscode.enable = true;
+  launchd.agents.emacsdaemon = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "${config.programs.doom-emacs.emacs}/bin/emacs"
+        "--fg-daemon" # keep the daemon in the foreground for 'launchd'
+      ];
+      RunAtLoad = true;
+    };
+  };
 }
