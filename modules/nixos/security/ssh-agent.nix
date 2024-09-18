@@ -16,7 +16,7 @@ in
     programs.ssh.startAgent = true;
     security.sudo.enable = true;
     security.pam = {
-      enableSSHAgentAuth = true;
+      sshAgentAuth.enable = true;
       services.sudo.sshAgentAuth = true;
     };
   };

@@ -29,7 +29,6 @@ in
         vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but can work better for some applications)
         vaapiVdpau
         # HDR tone mapping.
-        beignet
         intel-compute-runtime
         ocl-icd
       ];
