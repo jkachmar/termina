@@ -36,6 +36,10 @@
 
   # TODO: Factor this out into a separate module.
   environment.persistence."/state/root".hideMounts = true;
+  # Needed to silence a warning about 'uid' & 'gid' mapping persistence.
+  #
+  # TODO: Factor this out into a separate module.
+  environment.persistence."/state/root".directories = [ "/var/lib/nixos" ];
   environment.etc."nixos".source = "${config.primary-user.home}/.config/dotfiles";
   microvm.host.enable = true;
 
