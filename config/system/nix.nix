@@ -23,21 +23,20 @@ in
       inherit substituters trusted-public-keys;
     };
 
-    nixPath = lib.mkForce (
-      [
-        "nixpkgs=${pkgsets.nixpkgs}"
-        "unstable=${pkgsets.unstable}"
-      ]
-      ++ lib.optionals isDarwin [
-        "darwin=${inputs.darwin}"
-        "darwin-config=${darwinCfg}"
-      ]
-    );
+    # Set '$NIX_PATH' entries to point to the local registry.
+    nixPath = (builtins.map (pkgset: "${pkgset}=flake:${pkgset}") [
+      "nixpkgs"
+      "unstable"
+    ]) ++ lib.optionals isDarwin [
+      "darwin=${inputs.darwin}"
+      "darwin-config=${darwinCfg}"
+    ];
 
+    channel.enable = false; # Use flakes for everything!
     # FIXME: Duplicated; see user-level Nix config.
     registry = {
-      nixpkgs.flake = pkgsets.nixpkgs;
-      unstable.flake = pkgsets.nixpkgs;
+      nixpkgs.to.path = pkgsets.nixpkgs;
+      unstable.to.path = pkgsets.unstable;
     };
   };
 

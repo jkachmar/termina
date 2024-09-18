@@ -43,8 +43,8 @@ in
 
     # FIXME: Duplicated; see system-level Nix config.
     registry = {
-      nixpkgs.flake = pkgsets.nixpkgs;
-      unstable.flake = pkgsets.unstable;
+      nixpkgs.to.path = pkgsets.nixpkgs;
+      unstable.to.path = pkgsets.unstable;
     };
   };
 }
