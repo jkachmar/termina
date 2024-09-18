@@ -1,7 +1,6 @@
 { config, inputs, pkgs, ... }:
 {
   imports = [
-    inputs.nix-doom-emacs-unstraightened.hmModule
     ../../profiles/user/base.nix
     ../../profiles/user/development.nix
     ../../profiles/user/ui.nix
@@ -19,17 +18,6 @@
   ];
 
   home.packages = builtins.attrValues { inherit (pkgs) colima mosh; };
-  programs.doom-emacs.enable = true;
   programs.neovim.enable = true;
   programs.vscode.enable = true;
-  launchd.agents.emacsdaemon = {
-    enable = true;
-    config = {
-      ProgramArguments = [
-        "${config.programs.doom-emacs.emacs}/bin/emacs"
-        "--fg-daemon" # keep the daemon in the foreground for 'launchd'
-      ];
-      RunAtLoad = true;
-    };
-  };
 }

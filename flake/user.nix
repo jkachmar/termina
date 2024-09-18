@@ -19,7 +19,6 @@ let
           inherit pkgsets pkgs unstable;
         };
         modules = [
-          inputs.nix-doom-emacs-unstraightened.hmModule
           (../hosts + "/${hostname}/user.nix")
           # FIXME: Workaround for the fact that 'NIX_PATH' isn't set when not
           # using the system config.

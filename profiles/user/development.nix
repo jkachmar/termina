@@ -1,7 +1,6 @@
 { lib, ... }:
 {
   imports = [
-    ../../modules/user/doom.nix
     ../../modules/user/git.nix
     ../../modules/user/jujutsu.nix
     ../../modules/user/zellij.nix
