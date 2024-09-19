@@ -1,4 +1,4 @@
-{ inputs, outputs, withSystem, ... }:
+{ inputs, self, withSystem, ... }:
 let
   inherit (import ./utils.nix) mkSpecialArgs;
 
@@ -51,7 +51,7 @@ in
 
     # Expose the activation package created by `home-manager`, so it can be
     # realized (and possibly applied) directly from the command line.
-    packages = with outputs.userConfigurations; {
+    packages = with self.outputs.userConfigurations; {
       aarch64-darwin.crazy-diamond-user = crazy-diamond.activationPackage;
       aarch64-darwin.manhattan-transfer-user = manhattan-transfer.activationPackage;
       x86_64-linux.jkachmar-user = jkachmar.activationPackage;
