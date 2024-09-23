@@ -35,8 +35,14 @@ in
     channel.enable = false; # Use flakes for everything!
     # FIXME: Duplicated; see user-level Nix config.
     registry = {
-      nixpkgs.to.path = pkgsets.nixpkgs;
-      unstable.to.path = pkgsets.unstable;
+      nixpkgs.to = {
+        type = "path";
+        path = pkgsets.nixpkgs;
+      };
+      unstable.to = {
+        type = "path";
+        path = pkgsets.unstable;
+      };
     };
   };
 

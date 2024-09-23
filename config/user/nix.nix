@@ -43,8 +43,14 @@ in
 
     # FIXME: Duplicated; see system-level Nix config.
     registry = {
-      nixpkgs.to.path = pkgsets.nixpkgs;
-      unstable.to.path = pkgsets.unstable;
+      nixpkgs.to = {
+        type = "path";
+        path = pkgsets.nixpkgs;
+      };
+      unstable.to = {
+        type = "path";
+        path = pkgsets.unstable;
+      };
     };
   };
 }
