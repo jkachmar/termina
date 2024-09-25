@@ -20,4 +20,16 @@
   home.packages = builtins.attrValues { inherit (pkgs) colima mosh; };
   programs.neovim.enable = true;
   programs.vscode.enable = true;
+
+  programs.emacs.enable = true;
+  launchd.agents.emacsdaemon = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "${config.programs.emacs.package}/bin/emacs"
+        "--fg-daemon" # keep the daemon in the foreground for 'launchd'
+      ];
+      RunAtLoad = true;
+    };
+  };
 }
