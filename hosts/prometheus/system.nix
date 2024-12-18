@@ -9,5 +9,10 @@
     max-jobs = lib.mkDefault 4;
   };
 
+  # TODO: sort out homebrew stuff
+  homebrew.enable = lib.mkForce false;
+
+  ids.gids.nixbld = 350;
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
 }

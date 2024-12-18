@@ -24,10 +24,10 @@
     # NOTE: `darwin` indicates that this channel passes CI on macOS builders;
     # this should increase the binary cache hit rate, but may result in it
     # lagging behind the equivalent NixOS/Linux package set.
-    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    macosPkgs.url = "github:nixos/nixpkgs/nixpkgs-24.11-darwin";
 
     # Latest stable Nix package set.
-    stablePkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    stablePkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Unstable (rolling-release) Nix package set.
     #
@@ -73,14 +73,14 @@
     linuxHome = {
       inputs.nixpkgs.follows = "stablePkgs";
       # NOTE: Update this when `stablePkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
     };
 
     # Declarative user configuration for macOS systems.
     macosHome = {
       inputs.nixpkgs.follows = "macosPkgs";
       # NOTE: Update this when `macosPkgs` is updated to a new stable release!
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
     };
 
     # Lightweight NixOS VMs.
