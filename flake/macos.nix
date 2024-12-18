@@ -43,12 +43,14 @@ in
   flake = {
     darwinConfigurations = {
       crazy-diamond = mkMacOSConfig "crazy-diamond" "aarch64-darwin";
+      prometheus = mkMacOSConfig "prometheus" "aarch64-darwin";
     };
 
     # Expose the activation package created by `nix-darwin`, so it can be
     # realized (and possibly applied) directly from the command line.
     packages = with self.outputs.darwinConfigurations; {
       aarch64-darwin.crazy-diamond-system = crazy-diamond.config.system.build.toplevel;
+      aarch64-darwin.prometheus-system = prometheus.config.system.build.toplevel;
     };
   };
 }
