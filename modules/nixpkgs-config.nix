@@ -1,0 +1,1 @@
+{ allowUnfreePredicate = pkg: false; }
