@@ -1,1 +1,0 @@
-../hosts/tatl/disks.nix
