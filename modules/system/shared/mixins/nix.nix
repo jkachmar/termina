@@ -11,11 +11,32 @@ let
 in
 {
   nix = {
+    package = pkgs.lix;
     settings = {
       experimental-features = [
         "nix-command"
         "flakes"
       ];
+      allowed-users =
+        [
+          "root"
+        ]
+        ++ lib.optionals isDarwin [
+          "@admin"
+        ]
+        ++ lib.optionals isLinux [
+          "@wheel"
+        ];
+      trusted-users =
+        [
+          "root"
+        ]
+        ++ lib.optionals isDarwin [
+          "@admin"
+        ]
+        ++ lib.optionals isLinux [
+          "@wheel"
+        ];
     };
 
     # Set '$NIX_PATH' entries to point to the local registry.
@@ -32,11 +53,11 @@ in
     registry = {
       nixpkgs.to = {
         type = "path";
-        path = pkgsets.nixpkgs;
+        path = inputs.nixpkgs;
       };
       unstable.to = {
         type = "path";
-        path = pkgsets.unstable;
+        path = inputs.unstable;
       };
     };
   };

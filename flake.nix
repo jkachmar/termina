@@ -10,6 +10,7 @@
       ];
       imports = [
         ./modules/flake
+        ./machines/moros
       ];
       flake = {
         # Expose the default nixpkgs config that's shared by all package sets.
@@ -35,15 +36,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # User config.
-    home = {
-      url = "github:nix-community/home-manager/release-24.11";
+    # macOS system management.
+    darwin = {
+      url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # macOS system management.
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
+    # User config.
+    home = {
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
