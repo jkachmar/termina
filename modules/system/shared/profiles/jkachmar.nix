@@ -25,6 +25,18 @@ in
       default = if isDarwin then "/Users/${cfg.username}" else "/home/${cfg.username}";
       description = "jkachmar's home directory";
     };
+
+    extraGroups = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "user's auxiliary groups; no-op on macOS";
+    };
+
+    isNormalUser = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "whether the account is for a 'real' user; no-op on macOS";
+    };
   };
 
   imports = [
@@ -47,7 +59,7 @@ in
         gid = lib.mkDefault 1000;
       };
       home-manager.extraSpecialArgs = {
-        inherit unstable;
+        inherit inputs unstable;
       };
       users.users."${cfg.username}" = {
         name = cfg.username;

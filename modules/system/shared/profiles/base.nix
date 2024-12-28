@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (pkgs.targetPlatform) isDarwin;
   cfg = config.profiles.base;
 in
 {
@@ -13,6 +14,15 @@ in
       type = lib.types.bool;
       description = "base profile for all systems";
       default = true;
+    };
+
+    configLocation = lib.mkOption {
+      type = lib.types.oneOf [
+        lib.types.path
+        lib.types.str
+      ];
+      description = "default location for this config; varies between NixOS & macOS";
+      default = if isDarwin then "/etc/nix-config" else /etc/nixos;
     };
   };
 
