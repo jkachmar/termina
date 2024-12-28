@@ -31,6 +31,16 @@ in
         gcoreutils
       ];
 
+    # Enable catppuccin themes for all programs that have options :3
+    catppuccin = {
+      enable = true;
+      flavor = "frappe";
+      # bat.enable = true;
+      # fish.enable = true;
+      # starship.enable = true;
+      # tmux.enable = true;
+    };
+
     programs = {
       bash.enable = true;
       fish.enable = true;
@@ -41,10 +51,7 @@ in
       jujutsu.enable = true;
       ripgrep.enable = true;
 
-      bat = {
-        enable = true;
-        config.theme = "ansi";
-      };
+      bat.enable = true;
 
       starship = {
         enable = true;
