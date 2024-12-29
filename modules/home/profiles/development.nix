@@ -24,6 +24,17 @@ in
       ];
 
     programs = {
+      # Let's try 'hx' as the default editor.
+      helix = {
+        enable = true;
+        defaultEditor = true;
+      };
+
+      jujutsu.enable = true;
+      # FIXME: Some more SSH identity stuff probably needs to get set up...
+      gpg.enable = true;
+      ssh.enable = true;
+
       jq.enable = true;
       nix-index.enable = true;
 

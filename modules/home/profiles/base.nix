@@ -43,15 +43,18 @@ in
 
     programs = {
       bash.enable = true;
-      fish.enable = true;
+      fish = {
+        enable = true;
+        shellInit = ''
+          set -g fish_greeting
+        '';
+      };
       zsh.enable = true;
 
+      bat.enable = true;
       fd.enable = true;
       git.enable = true;
-      jujutsu.enable = true;
       ripgrep.enable = true;
-
-      bat.enable = true;
 
       starship = {
         enable = true;

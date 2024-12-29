@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstable,
   ...
 }:
 let
@@ -13,10 +14,12 @@ lib.mkIf cfg.enable (
       # Install 'watchman' so 'jujutsu' can use it for filesystem monitoring.
       home.packages = [ pkgs.watchman ];
       programs.jujutsu = {
-        package = pkgs.jujutsu;
+        package = unstable.jujutsu;
         settings = {
           core.fsmonitor = "watchman";
           colors."commit_id prefix".bold = true;
+          # FIXME: NixOS & nix-darwin both set '$PAGER' to 'less -R'.
+          ui.pager = "less \-FRX";
           template-aliases."format_short_id(id)" = "id.shortest(12)";
         };
       };

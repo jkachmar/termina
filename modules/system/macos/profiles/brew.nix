@@ -16,7 +16,10 @@ in
       global.autoUpdate = true;
       onActivation.upgrade = true;
       taps = [ "homebrew/cask" ];
-      casks = [ "ghostty" ];
+      casks = [
+        "ghostty"
+        "iterm2"
+      ];
     };
   };
 }

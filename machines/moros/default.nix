@@ -15,7 +15,7 @@
     }:
     inputs.darwin.lib.darwinSystem {
       inherit system;
-      specialArgs = { inherit inputs self; };
+      specialArgs = { inherit inputs self unstable; };
       modules = [
         {
           # TODO: Abstract this out so it's set by some function that discovers
