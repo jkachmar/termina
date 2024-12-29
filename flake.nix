@@ -76,6 +76,5 @@
         catppuccin-v1_2.follows = "";
       };
     };
-
   };
 }
