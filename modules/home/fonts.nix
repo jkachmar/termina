@@ -5,13 +5,10 @@
   ...
 }:
 let
-  cfg = config.profiles.fonts;
+  cfg = config.jk.fonts;
 in
 {
-  options.profiles.fonts.enable = lib.mkEnableOption "font profile for all users" // {
-    default = true;
-  };
-
+  options.jk.fonts.enable = lib.mkEnableOption "my font environment";
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # Icon fonts.
