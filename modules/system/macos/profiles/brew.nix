@@ -15,7 +15,6 @@ in
       enable = true;
       global.autoUpdate = true;
       onActivation.upgrade = true;
-      taps = [ "homebrew/cask" ];
       casks = [
         "ghostty"
         "iterm2"
