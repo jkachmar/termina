@@ -1,16 +1,15 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
-  cfg = config.profiles.macos.personal;
+  cfg = config.jk.macos.apps.personal;
 in
 {
-  options.profiles.macos.personal = {
-    enable = lib.mkEnableOption "personal macOS machine profile";
-  };
+  options.jk.macos.apps.personal.enable =
+    lib.mkEnableOption "macOS applications for my personal machines";
+
   config = lib.mkIf cfg.enable {
     homebrew = {
       casks = [
