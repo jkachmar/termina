@@ -1,6 +1,11 @@
-{ config, inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
- accountCfg = config.jk.account;
+  accountCfg = config.jk.account;
 in
 {
   imports = [

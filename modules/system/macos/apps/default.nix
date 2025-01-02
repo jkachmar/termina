@@ -15,17 +15,7 @@ in
       enable = true;
       global.autoUpdate = true;
       onActivation.upgrade = true;
-
       casks = [ "ghostty" ];
-      # Mac App Store applications.
-      #
-      # NOTE: Use the `mas` CLI to search for the number associated with a given
-      # application name.
-      #
-      # e.g. `mas search 1Password`
-      masApps = {
-        "Slack" = 803453959;
-      };
     };
   };
 }

@@ -10,7 +10,7 @@
       ];
       imports = [
         ./modules/flake
-        ./machines/moros
+        ./machines
       ];
       flake = {
         # Expose the default nixpkgs config that's shared by all package sets.
@@ -18,7 +18,7 @@
           allowUnfreePredicate = pkg: false;
         };
         # Expose different overlays for the 'stable' & 'unstable' package sets.
-        overlays = rec {
+        overlays = {
           stable = import ./overlays/stable.nix;
           unstable = import ./overlays/unstable.nix;
         };
