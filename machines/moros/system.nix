@@ -1,17 +1,19 @@
 {
   imports = [
-    ../../modules/system/shared
+    ../../modules/system/common
     ../../modules/system/macos
   ];
   jk = {
+    account.enable = true;
+    nix.enable = true;
     macos.apps.enable = true;
     macos.apps.personal.enable = true;
     macos.settings.enable = true;
-  };
-  profiles = {
-    jkachmar = {
+    utils.enable = true;
+
+    home-manager = {
       enable = true;
-      home-manager = import ./home.nix;
+      configPath = ./home.nix;
     };
   };
 }

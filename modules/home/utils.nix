@@ -56,6 +56,7 @@ in
       };
 
       bat.enable = true;
+      btop.enable = true;
       fd.enable = true;
       git.enable = true;
       jq.enable = true;
@@ -75,6 +76,8 @@ in
         enable = true;
         clock24 = true;
         keyMode = "vi";
+        # FIXME: re-enable this once https://github.com/tmux-plugins/tmux-sensible/pull/75 is closed
+        sensibleOnTop = false;
       };
 
       starship = {

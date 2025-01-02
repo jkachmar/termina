@@ -1,7 +1,7 @@
 {
   imports = [ ../../modules/home ];
   jk = {
-    home.enable = true;
+    account.enable = true;
     fonts.enable = true;
     utils.enable = true;
     gpg.enable = true;

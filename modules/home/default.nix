@@ -1,9 +1,9 @@
 { inputs, ... }:
 {
   imports = [
+    ./account.nix
     ./fonts.nix
     ./gpg.nix
-    ./home.nix
     ./ssh.nix
     ./utils.nix
     ./vcs.nix

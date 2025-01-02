@@ -9,17 +9,15 @@ let
   cfg = config.jk.ssh;
 in
 {
-  options.jk.ssh = {
-    enable = lib.mkEnableOption "my SSH config";
-  };
+  options.jk.ssh.enable = lib.mkEnableOption "my SSH config";
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       programs.ssh = {
-        # TODO: Set catchall identity file to invoke the Yubikey flow.
-        #extraConfig = ''
-        #  IdentityFile=
-        #'';
+        enable = true;
+        extraConfig = ''
+          IdentityFile=~/.ssh/yubikey.pub
+        '';
       };
     })
     (lib.mkIf (cfg.enable && isDarwin) {

@@ -7,11 +7,11 @@
 }:
 let
   inherit (pkgs.targetPlatform) isDarwin;
-  cfg = config.jk.home;
+  cfg = config.jk.account;
 in
 {
-  options.jk.home = {
-    enable = lib.mkEnableOption "my home account";
+  options.jk.account = {
+    enable = lib.mkEnableOption "my account";
 
     username = lib.mkOption {
       type = lib.types.str;
@@ -19,7 +19,7 @@ in
       description = "my username";
     };
 
-    directory = lib.mkOption {
+    homeDirectory = lib.mkOption {
       type = lib.types.str;
       default = if isDarwin then "/Users/${cfg.username}" else "/home/${cfg.username}";
       description = "my home directory";
@@ -34,7 +34,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.username = lib.mkDefault cfg.username;
-    home.homeDirectory = lib.mkDefault cfg.directory;
+    home.homeDirectory = lib.mkDefault cfg.homeDirectory;
     # By default, allow `home-manager` to manage its own installation.
     programs.home-manager.enable = lib.mkDefault true;
   };
