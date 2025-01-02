@@ -16,7 +16,6 @@
         ...
       }:
       inputs.darwin.lib.darwinSystem {
-        inherit system;
         specialArgs = { inherit inputs self unstable; };
         modules = [
           {

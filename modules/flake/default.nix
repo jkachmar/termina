@@ -1,7 +1,8 @@
 { inputs, self, ... }:
 {
   imports = [
-    ./mixins/treefmt.nix
+    ./darwinConfigurations.nix
+    ./treefmt.nix
   ];
 
   perSystem =
