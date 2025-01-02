@@ -53,6 +53,8 @@ in
         ])
         ++ lib.optionals isDarwin [
           "darwin=${inputs.darwin}"
+        ] ++ lib.optionals (isDarwin && config.jk.account.enable) [
+          "darwin-config=${config.jk.account.configLocation}"
         ];
 
       channel.enable = false; # Use flakes for everything!

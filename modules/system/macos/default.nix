@@ -1,4 +1,7 @@
-{ inputs, lib, ... }:
+{ config, inputs, lib, ... }:
+let
+ accountCfg = config.jk.account;
+in
 {
   imports = [
     inputs.home.darwinModules.home-manager
@@ -8,8 +11,6 @@
     ./settings.nix
   ];
 
-  # TODO: Factor this out to a module that can define the config location
-  # in a way that can be addressed from both macOS & NixOS.
-  environment.darwinConfig = lib.mkDefault "/etc/nix-darwin";
+  environment.darwinConfig = lib.mkIf accountCfg.enable accountCfg.configLocation;
   system.stateVersion = 5;
 }

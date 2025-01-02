@@ -26,13 +26,13 @@ in
       description = "my home directory";
     };
 
-    config = lib.mkOption {
+    configLocation = lib.mkOption {
       type = lib.types.oneOf [
         lib.types.path
         lib.types.str
       ];
       description = "default location for this config; varies between NixOS & macOS";
-      default = if isDarwin then "/etc/nix-config" else /etc/nixos;
+      default = if isDarwin then "/etc/nix-darwin" else /etc/nixos;
     };
 
     extraGroups = lib.mkOption {
