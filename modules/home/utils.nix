@@ -78,6 +78,7 @@ in
         keyMode = "vi";
         # FIXME: re-enable this once https://github.com/tmux-plugins/tmux-sensible/pull/75 is closed
         sensibleOnTop = false;
+        shell = "${lib.getExe config.programs.fish.package}";
       };
 
       starship = {
