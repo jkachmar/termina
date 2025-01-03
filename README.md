@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="tartarus.jpg">
+    <img src="tartarus.jpg" height="auto" width="500px" alt="image of Tartarus from Hades 2">
+  </a>
+</p>
+
 # antikythera
 
 > an Ancient Greek hand-powered orrery; it is the oldest known example of an
@@ -16,32 +22,20 @@ useful.
 
 ### structure
 
+- [`machines/`](./machines) - machine-specific configurations
+  - [`moros/`](./machines/moros) - personal laptop (M2 MacBook Pro)
+  - [`prometheus/`](./machines/prometheus) - work-issued laptop (M4 MacBook Pro)
 - [`modules/`](./modules)
   - [`flake/`](./modules/flake) - modules that configure or extend flakes à la [`flake-parts`]
   - [`system/`](./modules/system) - "system-level" configuration/extension
-    - [`shared/`](./modules/system/shared) - OS-agnostic modules
-      - [`mixins/`](./modules/system/shared/mixins)
-      - [`profiles/`](./modules/system/shared/profiles)
+    - [`common/`](./modules/system/common) - OS-agnostic modules
     - [`macos/`](./modules/system/macos) - macOS modules, courtesy of [`nix-darwin`]
-      - [`mixins/`](./modules/system/macos/mixins)
-      - [`profiles/`](./modules/system/macos/profiles)
     - [`nixos/`](./modules/system/nixos) - NixOS modules
-      - [`mixins/`](./modules/system/nixos/mixins)
-      - [`profiles/`](./modules/system/nixos/profiles)
   - [`home/`](./modules/home) - user-level configuration, courtesy of [`home-manager`]
-      - [`mixins/`](./modules/system/nixos/mixins)
-      - [`profiles/`](./modules/home/profiles)
 
 [`disko`]: https://www.github.com/nix-community/disko
 [`home-manager`]: https://www.github.com/nix-community/home-manager
 [`flake-parts`]: https://www.github.com/hercules-ci/flake-parts
-
-Note that `mixins` & `profiles` are design patterns that are shared between
-`system` & `home` module groups:
-- `mixins` extend built-in options provided by the configuration framework
-  - e.g. an `ssh-agent` mixin might create an option to select `rssh` as the PAM framework for SSH AuthZ
-- `profiles` collect/expose related configuration options under a common namespace
-  - e.g. `profiles.base` contains common settings for all systems
 
 ## notes
 
