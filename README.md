@@ -1,18 +1,14 @@
+# tartarus
+
 <p align="center">
   <a href="tartarus.jpg">
     <img src="tartarus.jpg" height="auto" width="500px" alt="image of Tartarus from Hades 2">
   </a>
 </p>
 
-# antikythera
-
-> an Ancient Greek hand-powered orrery; it is the oldest known example of an
-> analogue computer.
-> 
-> **orrery** noun (_plural_ **orreries**)
-> 
-> a mechanical model of the solar system, or of just the sun, earth, and moon,
-> used to represent their relative positions and motions.
+> How exactly the Titan escaped an inescapable prison, he alone can say. But the
+> groaning wheels and machinery throughout the place have grown more prevalent
+> since his return, suggesting long-dormant plans that came finally to fruition.
 
 ## tl;dr
 

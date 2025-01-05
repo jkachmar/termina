@@ -9,6 +9,7 @@
       # ...all markdown files
       "*.md"
       # ...all image files
+      "*.jpg"
       "*.png"
     ];
     # Search for the `flake.nix` file to determine the project root directory.

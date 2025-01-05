@@ -1,5 +1,8 @@
 {
-  description = "a heliocentric model of computer infrastructure";
+  description = ''
+    punishment is all that is left for souls such as these; no more chance of
+    rehabilitation, only suffering
+  '';
 
   outputs =
     inputs@{ flake-parts, self, ... }:
