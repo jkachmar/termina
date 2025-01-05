@@ -6,6 +6,9 @@
     utils.enable = true;
     gpg.enable = true;
     ssh.enable = true;
-    vcs.enable = true;
+    vcs = {
+      enable = true;
+      email = "j@mercury.com";
+    };
   };
 }
