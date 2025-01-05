@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  unstable,
   ...
 }:
 let
@@ -52,6 +53,7 @@ in
 
       helix = {
         enable = true;
+        package = unstable.helix;
         defaultEditor = true;
       };
 
