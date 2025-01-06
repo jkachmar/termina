@@ -6,6 +6,7 @@
 }:
 let
   inherit (pkgs.targetPlatform) isDarwin;
+  gpgPkg = config.programs.gpg.package;
   cfg = config.jk.gpg;
 in
 {
@@ -15,22 +16,20 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      programs.gpg = {
-        enable = true;
-        scdaemonSettings = {
-          disable-ccid = true;
-        };
-      };
+      programs.gpg.enable = true;
     })
+    # Workaround for https://github.com/nix-community/home-manager/pull/5901
     (lib.mkIf (cfg.enable && isDarwin) {
-      # The 'gpg-agent' module for 'home-manager' takes care of this, but it's
-      # Linux-only.
-      #
-      # TODO: replace this w/ 'nix-darwin' & 'launchd'.
-      # cf. https://evilmartians.com/chronicles/stick-with-security-yubikey-ssh-gnupg-macos
-      programs.fish.shellInit = lib.optionalString config.programs.fish.enable ''
-        set -x GPG_TTY (tty)
-        set -x SSH_AUTH_SOCK (${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+      programs.fish.shellInit = ''
+        set -gx GPG_TTY (tty)
+
+        # SSH agent protocol doesn't support changing TTYs, so bind the agent
+        # to every new TTY.
+        ${gpgPkg}/bin/gpg-connect-agent --quiet updatestartuptty /bye > /dev/null 2>&1
+
+        set -e SSH_AGENT_PID
+        set -e SSH_AUTH_SOCK
+        set -gx SSH_AUTH_SOCK (${gpgPkg}/bin/gpgconf --list-dirs agent-ssh-socket)
       '';
     })
   ];

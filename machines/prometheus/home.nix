@@ -9,6 +9,7 @@
     vcs = {
       enable = true;
       email = "j@mercury.com";
+      signing = true;
     };
   };
 }
