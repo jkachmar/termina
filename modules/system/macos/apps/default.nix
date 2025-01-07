@@ -15,7 +15,10 @@ in
       enable = true;
       global.autoUpdate = true;
       onActivation.upgrade = true;
-      casks = [ "ghostty" ];
+      casks = [
+        "ghostty"
+        "sanesidebuttons"
+      ];
     };
   };
 }
