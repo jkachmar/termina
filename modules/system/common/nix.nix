@@ -15,65 +15,72 @@ in
 
   imports = [ inputs.lix-module.nixosModules.default ];
 
-  config = lib.mkIf cfg.enable {
-    nix = {
-      package = pkgs.lix;
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        allowed-users =
-          [
-            "root"
-          ]
-          ++ lib.optionals isDarwin [
-            "@admin"
-          ]
-          ++ lib.optionals isLinux [
-            "@wheel"
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      nix = {
+        package = pkgs.lix;
+        settings = {
+          experimental-features = [
+            "nix-command"
+            "flakes"
           ];
-        trusted-users =
-          [
-            "root"
-          ]
-          ++ lib.optionals isDarwin [
-            "@admin"
-          ]
-          ++ lib.optionals isLinux [
-            "@wheel"
-          ];
-      };
-
-      # Set '$NIX_PATH' entries to point to the local registry.
-      nixPath =
-        (builtins.map (pkgset: "${pkgset}=flake:${pkgset}") [
-          "nixpkgs"
-          "unstable"
-        ])
-        ++ lib.optionals isDarwin [
-          "darwin=${inputs.darwin}"
-        ]
-        ++ lib.optionals (isDarwin && config.jk.account.enable) [
-          "darwin-config=${config.jk.account.configLocation}"
-        ];
-
-      channel.enable = false; # Use flakes for everything!
-      registry = {
-        nixpkgs.to = {
-          type = "path";
-          path = inputs.nixpkgs;
+          # NOTE: For some reason 'root' is a 'trusted-user' by default, but
+          # not an 'allowed-user'.
+          allowed-users = [ "root" ];
         };
-        unstable.to = {
-          type = "path";
-          path = inputs.unstable;
+
+        # Set '$NIX_PATH' entries to point to the local registry.
+        nixPath = (
+          builtins.map (pkgset: "${pkgset}=flake:${pkgset}") [
+            "nixpkgs"
+            "unstable"
+          ]
+        );
+
+        channel.enable = false; # Use flakes for everything!
+        registry = {
+          nixpkgs.to = {
+            type = "path";
+            path = inputs.nixpkgs;
+          };
+          unstable.to = {
+            type = "path";
+            path = inputs.unstable;
+          };
         };
       };
-    };
 
-    nixpkgs = {
-      config = self.nixpkgs-config;
-      overlays = [ self.overlays.stable ];
-    };
-  };
+      nixpkgs = {
+        config = self.nixpkgs-config;
+        overlays = [ self.overlays.stable ];
+      };
+    })
+    (lib.mkIf (cfg.enable && isDarwin) {
+      nix = {
+        # de-prioritize Nix daemon I/O priority relative to userspace stuff.
+        daemonIOLowPriority = true;
+
+        # macOS-specific config for standard 'nix' module options.
+        nixPath =
+          [
+            "darwin=${inputs.darwin}"
+          ]
+          ++ lib.optionals config.jk.account.enable [
+            "darwin-config=${config.jk.account.configLocation}"
+          ];
+        settings = {
+          allowed-users = [ "@admin" ];
+          trusted-users = [ "@admin" ];
+        };
+      };
+    })
+    (lib.mkIf (cfg.enable && isLinux) {
+      nix = {
+        settings = {
+          allowed-users = [ "@wheel" ];
+          trusted-users = [ "@wheel" ];
+        };
+      };
+    })
+  ];
 }
