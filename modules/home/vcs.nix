@@ -60,12 +60,21 @@ in
           user.name = cfg.name;
           user.email = cfg.email;
 
+          git = {
+            push-new-bookmarks = true;
+            sign-on-push = true;
+            subprocess = true;
+          };
+
           core.fsmonitor = "watchman";
           colors."commit_id prefix".bold = true;
           template-aliases."format_short_id(id)" = "id.shortest(12)";
 
           # FIXME: NixOS & nix-darwin both set '$PAGER' to 'less -R'.
-          ui.pager = "less \-FRX";
+          ui = {
+            pager = "less \-FRX";
+            show-cryptographic-signatures = true;
+          };
 
           # Cribbed the following from Jonathan.
           revsets = {
@@ -119,6 +128,7 @@ in
               "abandon"
               "bases:: ~ bases & empty()"
             ];
+
             rb = [
               "rebase"
               "-s"
