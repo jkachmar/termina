@@ -11,6 +11,9 @@
       # ...all image files
       "*.jpg"
       "*.png"
+      # ...yaml files
+      "*.yaml"
+      "*.yml"
     ];
     # Search for the `flake.nix` file to determine the project root directory.
     projectRootFile = "flake.nix";

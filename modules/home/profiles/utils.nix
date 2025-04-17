@@ -13,14 +13,16 @@ let
   };
 
   inherit (pkgs.targetPlatform) isDarwin;
-  cfg = config.jk.utils;
+  cfg = config.profiles.utils;
 in
 {
-  options.jk.utils = {
-    enable = lib.mkEnableOption "useful utilities & configuration options";
+  options.profiles.utils = {
+    enable = (lib.mkEnableOption "profile of useful utilities & configuration options") // {
+      default = true;
+    };
   };
 
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   config = lib.mkIf cfg.enable {
     # Enable catppuccin themes for all programs that have options :3
@@ -94,3 +96,4 @@ in
     };
   };
 }
+

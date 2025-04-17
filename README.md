@@ -25,7 +25,11 @@ useful.
   - [`flake/`](./modules/flake) - modules that configure or extend flakes à la [`flake-parts`]
   - [`system/`](./modules/system) - "system-level" configuration/extension
     - [`common/`](./modules/system/common) - OS-agnostic modules
+      - [`mixins/`](./modules/system/common/mixins) - mixins that modify existing module options
+      - [`profiles/`](./modules/system/common/profiles) - collections of module options (e.g. `localization`)
     - [`macos/`](./modules/system/macos) - macOS modules, courtesy of [`nix-darwin`]
+      - [`mixins/`](./modules/system/macos/mixins) - mixins that modify existing module options
+      - [`profiles/`](./modules/system/macos/profiles) - collections of module options (e.g. `homebrew`)
     - [`nixos/`](./modules/system/nixos) - NixOS modules
   - [`home/`](./modules/home) - user-level configuration, courtesy of [`home-manager`]
 

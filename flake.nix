@@ -1,14 +1,12 @@
 {
-  description = ''
-    punishment is all that is left for souls such as these; no more chance of
-    rehabilitation, only suffering
-  '';
+  description = "";
 
   outputs =
-    inputs@{ flake-parts, self, ... }:
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-darwin"
+        "x86_64-darwin"
         "x86_64-linux"
       ];
       imports = [
@@ -45,19 +43,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # User config.
-    home = {
+    # User config management.
+    home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Flake module management.
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
     # Autoformatting via 'nix fmt'.
     treefmt = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:numtide/treefmt-nix";
+    };
+
+    # Partition management.
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Secret management.

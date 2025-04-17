@@ -1,13 +1,6 @@
-{ inputs, ... }:
-{
-  imports = [
-    ./account.nix
-    ./fonts.nix
-    ./gpg.nix
-    ./ssh.nix
-    ./utils.nix
-    ./vcs.nix
-  ];
-  # Set the default 'home-manager' state version globally;
+{ lib, ... }: {
+  imports = [ ./profiles ];
   home.stateVersion = "24.11";
+  # Allow home-manager to manage itself by default.
+  programs.home-manager.enable = lib.mkDefault true;
 }

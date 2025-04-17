@@ -6,10 +6,10 @@
 }:
 let
   inherit (pkgs.targetPlatform) isDarwin;
-  cfg = config.jk.ssh;
+  cfg = config.profiles.ssh;
 in
 {
-  options.jk.ssh.enable = lib.mkEnableOption "my SSH config";
+  options.profiles.ssh.enable = lib.mkEnableOption "SSH user profile";
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {

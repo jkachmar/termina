@@ -2,6 +2,8 @@
 {
   imports = [
     ./darwinConfigurations.nix
+    # FIXME: Import this module from the home-manager input when we update to 25.05.
+    ./homeConfigurations.nix
     ./treefmt.nix
   ];
 

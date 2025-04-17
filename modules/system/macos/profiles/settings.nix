@@ -4,10 +4,12 @@
   ...
 }:
 let
-  cfg = config.jk.macos.settings;
+  cfg = config.macos.settings;
 in
 {
-  options.jk.macos.settings.enable = lib.mkEnableOption "my default macOS system settings";
+  options.macos.settings.enable = (lib.mkEnableOption "macOS system settings") // {
+    default = true;
+  };
 
   config = lib.mkIf cfg.enable {
     system = {

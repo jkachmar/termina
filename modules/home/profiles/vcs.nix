@@ -6,11 +6,14 @@
   ...
 }:
 let
-  cfg = config.jk.vcs;
+  cfg = config.profiles.vcs;
+  homeCfg = config.home;
 in
 {
-  options.jk.vcs = {
-    enable = lib.mkEnableOption "my VCS environment";
+  options.profiles.vcs = {
+    enable = (lib.mkEnableOption "version control system profile") // {
+      default = true;
+    };
 
     name = lib.mkOption {
       type = lib.types.str;
@@ -27,7 +30,7 @@ in
     signing = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "commit signing with gpg; defaults keys associated with vcs email";
+      description = "commit signing with gpg; defaults to keys associated with vcs email";
     };
   };
 
@@ -66,7 +69,10 @@ in
             subprocess = true;
           };
 
-          core.fsmonitor = "watchman";
+          # FIXME: Weird performance regression with `watchman`.
+          # cf. https://github.com/jj-vcs/jj/issues/5826
+          # 
+          # core.fsmonitor = "watchman";
           colors."commit_id prefix".bold = true;
           template-aliases."format_short_id(id)" = "id.shortest(12)";
 
@@ -154,11 +160,12 @@ in
     (lib.mkIf (cfg.enable && cfg.signing) {
       programs.jujutsu.settings = {
         signing = {
-          sign-all = true;
           backend = "gpg";
+          behavior = "own";
           key = cfg.email;
         };
       };
     })
   ];
 }
+

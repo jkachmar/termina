@@ -1,21 +1,14 @@
-{
-  config,
-  inputs,
-  lib,
-  ...
-}:
-let
-  accountCfg = config.jk.account;
-in
+{ config, ... }:
 {
   imports = [
-    inputs.home.darwinModules.home-manager
-
-    ./apps
-    ./apps/personal.nix
-    ./settings.nix
+    # Pull all the OS-agnostic modules, so macOS hosts can just import this as
+    # their configuration entrypoint.
+    ../common
+    # Expose all of the macOS mixins & profiles.
+    ./mixins
+    ./profiles
   ];
 
-  environment.darwinConfig = lib.mkIf accountCfg.enable accountCfg.configLocation;
+  environment.darwinConfig = config.profiles.nix.location;
   system.stateVersion = 5;
 }

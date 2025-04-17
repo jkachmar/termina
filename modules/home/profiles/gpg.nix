@@ -7,11 +7,13 @@
 let
   inherit (pkgs.targetPlatform) isDarwin;
   gpgPkg = config.programs.gpg.package;
-  cfg = config.jk.gpg;
+  cfg = config.profiles.gpg;
 in
 {
-  options.jk.gpg = {
-    enable = lib.mkEnableOption "my PGP environment";
+  options.profiles.gpg = {
+    enable = (lib.mkEnableOption "GPG user profile") // {
+      default = true;
+    };
   };
 
   config = lib.mkMerge [
