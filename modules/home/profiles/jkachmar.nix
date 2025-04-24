@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   inherit (pkgs.hostPlatform) isDarwin;
   cfg = config.profiles.jkachmar;
-in {
+in
+{
 
   options.profiles.jkachmar = {
     enable = (lib.mkEnableOption "jkachmar's user profile") // {

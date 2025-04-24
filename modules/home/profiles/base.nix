@@ -13,11 +13,11 @@ let
   };
 
   inherit (pkgs.targetPlatform) isDarwin;
-  cfg = config.profiles.utils;
+  cfg = config.profiles.base;
 in
 {
-  options.profiles.utils = {
-    enable = (lib.mkEnableOption "profile of useful utilities & configuration options") // {
+  options.profiles.base = {
+    enable = (lib.mkEnableOption "base user profile") // {
       default = true;
     };
   };
@@ -96,4 +96,3 @@ in
     };
   };
 }
-

@@ -7,7 +7,7 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
   cfg = config.profiles.nix;
 in
 {
@@ -31,11 +31,15 @@ in
     nix = {
       package = pkgs.lix;
       settings = {
-        experimental-features = [
-          "flakes"
-          "nix-command"
-          "repl-flake"
-        ];
+        experimental-features =
+          [
+            "flakes"
+            "nix-command"
+            "repl-flake"
+          ]
+          ++ lib.optionals isLinux [
+            "cgroups"
+          ];
         # NOTE: For some reason 'root' is a 'trusted-user' by default, but not
         # an 'allowed-user'; also extend 'root' privileges to the 'admin'
         # group on macOS.
@@ -45,8 +49,11 @@ in
           ]
           ++ lib.optionals isDarwin [
             "@admin"
+          ]
+          ++ lib.optionals isLinux [
+            "@wheel"
           ];
-        trusted-users = lib.optionals isDarwin [ "@admin" ];
+        trusted-users = lib.optionals isDarwin [ "@admin" ] ++ lib.optionals isLinux [ "@wheel" ];
       };
 
       # Globally disable Nix channels.
@@ -85,6 +92,10 @@ in
     nixpkgs = {
       config = self.nixpkgs-config;
       overlays = [ self.overlays.stable ];
+      flake = {
+        setFlakeRegistry = true;
+        setNixPath = true;
+      };
     };
   };
 }

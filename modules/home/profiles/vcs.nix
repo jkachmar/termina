@@ -65,13 +65,12 @@ in
 
           git = {
             push-new-bookmarks = true;
-            sign-on-push = true;
             subprocess = true;
           };
 
           # FIXME: Weird performance regression with `watchman`.
           # cf. https://github.com/jj-vcs/jj/issues/5826
-          # 
+          #
           # core.fsmonitor = "watchman";
           colors."commit_id prefix".bold = true;
           template-aliases."format_short_id(id)" = "id.shortest(12)";
@@ -159,6 +158,7 @@ in
     })
     (lib.mkIf (cfg.enable && cfg.signing) {
       programs.jujutsu.settings = {
+        git.sign-on-push = true;
         signing = {
           backend = "gpg";
           behavior = "own";
@@ -168,4 +168,3 @@ in
     })
   ];
 }
-

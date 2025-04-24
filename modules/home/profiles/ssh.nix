@@ -9,16 +9,23 @@ let
   cfg = config.profiles.ssh;
 in
 {
-  options.profiles.ssh.enable = lib.mkEnableOption "SSH user profile";
+  options.profiles.ssh = {
+    enable = (lib.mkEnableOption "SSH user profile") // {
+      default = true;
+    };
+    yubikey = (lib.mkEnableOption "yubikey identity file") // {
+      default = true;
+    };
+  };
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      programs.ssh = {
-        enable = true;
-        extraConfig = ''
-          IdentityFile=~/.ssh/yubikey.pub
-        '';
-      };
+      programs.ssh.enable = true;
+    })
+    (lib.mkIf cfg.yubikey {
+      programs.ssh.extraConfig = ''
+        IdentityFile=~/.ssh/yubikey.pub
+      '';
     })
     (lib.mkIf (cfg.enable && isDarwin) {
       programs.ssh = {

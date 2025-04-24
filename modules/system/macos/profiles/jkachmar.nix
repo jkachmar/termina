@@ -24,7 +24,7 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
-    users.users.jkachmar = {
+    users.users.${cfg.username} = {
       name = cfg.username;
       uid = 501; # 501 is the default gid for the first macOS account.
       home = "/Users/${cfg.username}";

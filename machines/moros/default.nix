@@ -16,10 +16,12 @@
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = { inherit inputs pkgs unstable; };
-      modules = [{
-        imports = [ ../../modules/home ];
-        profiles.vcs.signing = true;
-      }];
+      modules = [
+        {
+          imports = [ ../../modules/home ];
+          profiles.vcs.signing = true;
+        }
+      ];
     }
   );
 
