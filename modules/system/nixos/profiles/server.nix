@@ -1,0 +1,28 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.profiles.server;
+in
+{
+  options.profiles.server = {
+    enable = lib.mkEnableOption "server profile";
+  };
+
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      security.ssh-agent.enable = true;
+      services = {
+        fail2ban.enable = lib.mkDefault true;
+        openssh.enable = true;
+      };
+      networking = {
+        firewall.enable = true;
+        nftables.enable = true;
+      };
+    })
+  ];
+}

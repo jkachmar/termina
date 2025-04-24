@@ -1,10 +1,14 @@
-{ config, ... }:
+{ inputs, lib, ... }:
 {
   imports = [
-    # Pull all the OS-agnostic modules, so NixOS hosts can just import this as
+    # Pull all the OS-agnostic modules, so macOS hosts can just import this as
     # their configuration entrypoint.
     ../common
+    inputs.nixpkgs.nixosModules.notDetected
+    inputs.disko.nixosModules.disko
+    ./mixins
+    ./profiles
   ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = lib.mkDefault "24.11";
 }
