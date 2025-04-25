@@ -19,6 +19,9 @@ in
 
     # Don't install the '/lib/ld-linux.so.2 stub'; saves one instance of nixpkgs.
     environment.ldso32 = null;
+    environment.systemPackages = with pkgs; [
+      ghostty.terminfo
+    ];
 
     # Use 'dbus-broker' impl; it's better than the default.
     #
