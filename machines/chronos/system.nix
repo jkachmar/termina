@@ -25,4 +25,20 @@
     docs.enable = true;
     server.enable = true;
   };
+
+  # FIXME: Remove this once stuff is done syncing.
+  boot.supportedFilesystems = [ "nfs" ];
+  services.rpcbind.enable = true;
+
+  fileSystems = {
+    "/net/media" = {
+      device = "192.168.1.155:/volume1/media";
+      fsType = "nfs";
+      options = [
+        "auto"
+        "defaults"
+        "nfsvers=4.1"
+      ];
+    };
+  };
 }

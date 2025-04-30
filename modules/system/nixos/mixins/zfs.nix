@@ -15,7 +15,12 @@ lib.mkIf config.boot.zfs.enabled {
     autoScrub.enable = lib.mkDefault true;
     autoSnapshot = {
       enable = lib.mkDefault true;
+      # -k Keep zero-sized snapshots.
+      # -p Create snapshots in parallel.
+      # -u Use UTC for snapshots.
+      flags = lib.mkDefault "-k -p -u";
       frequent = lib.mkDefault 4;
+      hourly = lib.mkDefault 24;
       daily = lib.mkDefault 3;
       weekly = lib.mkDefault 2;
       monthly = lib.mkDefault 2;
