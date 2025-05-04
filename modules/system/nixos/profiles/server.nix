@@ -18,6 +18,7 @@ in
       services = {
         fail2ban.enable = lib.mkDefault true;
         openssh.enable = true;
+        smartd.enable = true;
       };
       networking = {
         firewall.enable = true;

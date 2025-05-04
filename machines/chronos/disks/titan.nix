@@ -3,13 +3,14 @@ let
   # Enumerate disks by the aliases defined in `/etc/zfs/vdev_id.conf`:
   # "/dev/disk/by-vdev/{bay-1,bay-2,bay-3,bay-4,bay-5}".
   aliases = builtins.map (n: "bay-${builtins.toString n}") (lib.lists.range 1 5);
-in {
+in
+{
   boot.zfs = {
     # NOTE: ZFS auto-mounts datasets with the `mountpoint` label on import;
-    # adding it to `extraPools` triggers the import, which mounts the datasets. 
+    # adding it to `extraPools` triggers the import, which mounts the datasets.
     #
     # cf. https://github.com/nix-community/disko/issues/581#issuecomment-2260602290
-    extraPools = ["titan"];
+    extraPools = [ "titan" ];
 
     # NOTE: These disks are being specified by `vdev_id` alias so the pool
     # should be discovered/imported according to these aliases.
@@ -50,10 +51,12 @@ in {
 
       mode.topology = {
         type = "topology";
-        vdev = [{
-          mode = "raidz2";
-          members = aliases;
-        }];
+        vdev = [
+          {
+            mode = "raidz2";
+            members = aliases;
+          }
+        ];
       };
 
       datasets = {

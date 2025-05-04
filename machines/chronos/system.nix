@@ -1,4 +1,4 @@
-# TODO: Pull some of the networking stuff out into a profile.
+{ config, lib, ... }:
 {
   imports = [
     ../../modules/system/nixos
@@ -25,6 +25,24 @@
     docs.enable = true;
     server.enable = true;
   };
+
+  # FIXME: Find a better place to refactor this out to.
+  services.smartd.devices = [
+    {
+      # NOTE: `DEVICESCAN` finds `/dev/nvme0`, so we should use this (rather
+      # than `/dev/disk/by-id`) to make sure it doesn't get monitored twice.
+      device = "/dev/nvme0";
+      # Inherit default 'smartd' options, but track temperature in 2 degree
+      # increments with a log level at 60 C & an alert at 65 C.
+      options = lib.concatStringsSep " " (
+        config.services.smartd.defaults.shared
+        ++ [
+          "-W"
+          "2,60,65"
+        ]
+      );
+    }
+  ];
 
   # FIXME: Remove this once stuff is done syncing.
   boot.supportedFilesystems = [ "nfs" ];
