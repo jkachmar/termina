@@ -108,6 +108,13 @@
           mountpoint = "/home/jkachmar";
         };
 
+        # cache directories (no snapshotting).
+        "cache" = {
+          type = "zfs_fs";
+          mountpoint = "/var/cache";
+          options."com.sun:auto-snapshot" = "false";
+        };
+
         # `journald` persistence.
         "logs" = {
           type = "zfs_fs";
