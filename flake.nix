@@ -16,7 +16,7 @@
       flake = {
         # Expose the default nixpkgs config that's shared by all package sets.
         nixpkgs-config = {
-          allowUnfreePredicate = pkg: false;
+          allowUnfree = true;
         };
         # Expose different overlays for the 'stable' & 'unstable' package sets.
         overlays = {

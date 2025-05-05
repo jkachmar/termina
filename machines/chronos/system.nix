@@ -23,7 +23,15 @@
 
   profiles = {
     docs.enable = true;
-    server.enable = true;
+    server = {
+      enable = true;
+      media = {
+        enable = true;
+        jellyfin = true;
+        plex = true;
+        quicksync = true;
+      };
+    };
   };
 
   # FIXME: Find a better place to refactor this out to.
