@@ -14,11 +14,11 @@
   # Can be reloaded by updating this file & running `udevadm trigger` whenever
   # zpool membership is changed (e.g. when resilvering a failing array).
   environment.etc."zfs/vdev_id.conf".text = ''
-    alias bay-1 pci-0000:00:17.0-ata-1
-    alias bay-2 pci-0000:00:17.0-ata-2
-    alias bay-3 pci-0000:00:17.0-ata-3
-    alias bay-4 pci-0000:00:17.0-ata-4
-    alias bay-5 pci-0000:00:17.0-ata-6
+    alias bay-1 wwn-0x5000cca2ebc2a8b7
+    alias bay-2 wwn-0x5000cca2ecc334f9
+    alias bay-3 wwn-0x5000cca2ecc07c5e
+    alias bay-4 wwn-0x5000cca2ebc0b54a
+    alias bay-5 wwn-0x5000cca2ecc0cabd
   '';
 
   profiles = {
