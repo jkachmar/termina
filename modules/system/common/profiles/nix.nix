@@ -35,7 +35,6 @@ in
           [
             "flakes"
             "nix-command"
-            "repl-flake"
           ]
           ++ lib.optionals isLinux [
             "cgroups"
