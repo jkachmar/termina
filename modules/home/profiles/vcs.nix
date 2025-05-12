@@ -63,10 +63,7 @@ in
           user.name = cfg.name;
           user.email = cfg.email;
 
-          git = {
-            push-new-bookmarks = true;
-            subprocess = true;
-          };
+          git.push-new-bookmarks = true;
 
           # FIXME: Weird performance regression with `watchman`.
           # cf. https://github.com/jj-vcs/jj/issues/5826
