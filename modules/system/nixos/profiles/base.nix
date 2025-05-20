@@ -37,5 +37,8 @@ in
       enable = lib.mkDefault false;
       enableNg = lib.mkDefault true;
     };
+
+    # By default we want all NixOS hosts to manage users declaratively.
+    users.mutableUsers = lib.mkDefault false;
   };
 }
