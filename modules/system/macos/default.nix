@@ -10,5 +10,5 @@
   ];
 
   environment.darwinConfig = config.profiles.nix.location;
-  system.stateVersion = 5;
+  system.stateVersion = 6;
 }

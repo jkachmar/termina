@@ -24,6 +24,7 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
+    system.primaryUser = cfg.username;
     users.users.${cfg.username} = {
       name = cfg.username;
       uid = 501; # 501 is the default gid for the first macOS account.

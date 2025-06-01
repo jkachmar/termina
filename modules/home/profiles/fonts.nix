@@ -24,20 +24,10 @@ in
       overpass
 
       # Various fonts with nerd symbols.
-      #
-      # NOTE: Try to keep this in-line with fonts from the above list of
-      # "actual" fonts.
-      #
-      # cf. https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
-      (nerdfonts.override {
-        fonts = [
-          "Hack"
-          "IBMPlexMono"
-          "JetBrainsMono"
-          "NerdFontsSymbolsOnly"
-          "Overpass"
-        ];
-      })
+      nerd-fonts.blex-mono
+      nerd-fonts.hack
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.overpass
     ];
   };
 }
