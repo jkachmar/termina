@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   jellyCfg = config.services.jellyfin;
   plexCfg = config.services.plex;
@@ -56,10 +61,16 @@ in
     })
     (lib.mkIf (cfg.enable && cfg.quicksync) {
       systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
-      users.users.${jellyCfg.user}.extraGroups = [ "render" "video" ];
+      users.users.${jellyCfg.user}.extraGroups = [
+        "render"
+        "video"
+      ];
 
       systemd.services.plex.environment.LIBVA_DRIVER_NAME = "iHD";
-      users.users.${plexCfg.user}.extraGroups = [ "render" "video" ];
+      users.users.${plexCfg.user}.extraGroups = [
+        "render"
+        "video"
+      ];
 
       hardware.enableAllFirmware = true;
       hardware.graphics = {

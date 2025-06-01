@@ -6,7 +6,7 @@ in
   options.services.smartd.defaults = {
     shared = lib.mkOption {
       description = "a list of options to be shared among 'smartd' configurations";
-      default = [];
+      default = [ ];
       type = lib.types.listOf lib.types.str;
     };
   };
@@ -15,19 +15,25 @@ in
     # Default to saving the attribute logs & state information to
     # `/var/log/smartd` instead of the default `/var/lib/smartmontools`.
     extraOptions = lib.mkDefault [
-      "--attributelog" "/var/log/smartd/"
-      "--savestates" "/var/log/smartd/"
+      "--attributelog"
+      "/var/log/smartd/"
+      "--savestates"
+      "/var/log/smartd/"
     ];
     # Use shared 'smartd' options + temperature tracking that assumes HDDs.
     #
     # NVMe drives should get their own explicit device config.
-    defaults.autodetected = lib.concatStringsSep " " (cfg.defaults.shared ++ [
-      # Drive temperature -- track,log,alert
-      #
-      # That is: track changes in 2 C increments, log when temperatures exceed
-      # 40 C, alert when temperatures exceed 45 C.
-      "-W" "2,40,45"
-    ]);
+    defaults.autodetected = lib.concatStringsSep " " (
+      cfg.defaults.shared
+      ++ [
+        # Drive temperature -- track,log,alert
+        #
+        # That is: track changes in 2 C increments, log when temperatures exceed
+        # 40 C, alert when temperatures exceed 45 C.
+        "-W"
+        "2,40,45"
+      ]
+    );
     defaults.shared = [
       # Run tests at scheduled times according to the pattern: T/MM/DD/d/HH
       #
@@ -47,7 +53,8 @@ in
       # TODO: Look into selective tests, which can be run on a range of LBAs
       # and then "continued" via `smartd`. For example, a 16 TB extended test
       # could be run over several days in 4 TB increments.
-      "-s" "(S/../../../00|L/../15/../02)"
+      "-s"
+      "(S/../../../00|L/../15/../02)"
       #   -H -- check health status of the disk
       #   -f -- check for 'failure' of any Usage Attributes
       #   -t -- report when Prefail or Usage Attributes change between tests
@@ -57,8 +64,10 @@ in
       #
       # cf. https://man.archlinux.org/man/smartd.conf.5.en#a
       "-a"
-      "-o" "on" # enable automatic "offline test" (scan drive every 4 hours for defects)
-      "-S" "on" # ensure device vendor-specific attribute autosave is enabled
+      "-o"
+      "on" # enable automatic "offline test" (scan drive every 4 hours for defects)
+      "-S"
+      "on" # ensure device vendor-specific attribute autosave is enabled
     ];
   };
 }

@@ -71,7 +71,14 @@
   # Hardware survey results.
   boot = {
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
       kernelModules = [ "i915" ];
     };
     kernelModules = [ "kvm-intel" ];
