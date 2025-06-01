@@ -16,7 +16,9 @@ in
   ];
   config = lib.mkIf cfg.enable {
     profiles.localization = {
-      timeZone = lib.mkDefault "America/New_York";
+      # Clickhouse sets UTC as the default time zone, which conflicts with
+      # 'lib.mkDefault' here; 'mkOverride 999' is higher priority.
+      timeZone = lib.mkOverride 999 "America/New_York";
     };
   };
 }

@@ -5,6 +5,7 @@
     ./jkachmar.nix
     ./localization.nix
     ./media.nix
+    ./monitoring.nix
     ./server.nix
   ];
 }
