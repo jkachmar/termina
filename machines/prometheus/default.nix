@@ -42,6 +42,21 @@
         {
           networking.hostName = "prometheus";
           nixpkgs.hostPlatform = system;
+          nix.linux-builder = {
+            enable = false;
+            package = pkgs.darwin.linux-builder-x86_64;
+            # ephemeral = true;
+            systems = [
+              "x86_64-linux"
+              "aarch64-linux"
+            ];
+          };
+          launchd.daemons.linux-builder = {
+            serviceConfig = {
+              StandardOutPath = "/var/log/darwin-builder.log";
+              StandardErrorPath = "/var/log/darwin-builder.log";
+            };
+          };
         }
       ];
     }
