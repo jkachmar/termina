@@ -40,6 +40,7 @@
           networking.hostName = "moros";
           nixpkgs.hostPlatform = system;
           profiles.homebrew.personal = true;
+          nix.linux-builder.enable = true;
         }
       ];
     }
