@@ -3,16 +3,22 @@
 
   outputs =
     inputs@{ flake-parts, ... }:
+    let
+      modules = import ./modules/top-level/all-modules.nix { inherit (inputs.nixpkgs) lib; };
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-darwin"
         "x86_64-darwin"
         "x86_64-linux"
       ];
-      imports = [
-        ./modules/flake
-        ./machines
+      imports = modules.flake ++ [
+        ./users/jkachmar
+        ./hosts/chronos
+        ./hosts/moros
+        ./hosts/prometheus
       ];
+
       flake = {
         # Expose the default nixpkgs config that's shared by all package sets.
         nixpkgs-config = {
@@ -22,6 +28,14 @@
         overlays = {
           stable = import ./overlays/stable.nix;
           unstable = import ./overlays/unstable.nix;
+        };
+        # implementation details meant for internal consumption.
+        internal = {
+          # re-expose non-flake modules so they can be imported from within
+          # the configuration.
+          modules = {
+            inherit (modules) darwin nixos home;
+          };
         };
       };
     };

@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./chronos
-    ./moros
-    ./prometheus
-  ];
-}
