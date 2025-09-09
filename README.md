@@ -18,21 +18,24 @@ useful.
 
 ### structure
 
-- [`machines/`](./machines) - machine-specific configurations
-  - [`moros/`](./machines/moros) - personal laptop (M2 MacBook Pro)
-  - [`prometheus/`](./machines/prometheus) - work-issued laptop (M4 MacBook Pro)
-- [`modules/`](./modules)
-  - [`flake/`](./modules/flake) - modules that configure or extend flakes à la [`flake-parts`]
-  - [`system/`](./modules/system) - "system-level" configuration/extension
-    - [`common/`](./modules/system/common) - OS-agnostic modules
-      - [`mixins/`](./modules/system/common/mixins) - mixins that modify existing module options
-      - [`profiles/`](./modules/system/common/profiles) - collections of module options (e.g. `localization`)
-    - [`macos/`](./modules/system/macos) - macOS modules, courtesy of [`nix-darwin`]
-      - [`mixins/`](./modules/system/macos/mixins) - mixins that modify existing module options
-      - [`profiles/`](./modules/system/macos/profiles) - collections of module options (e.g. `homebrew`)
-    - [`nixos/`](./modules/system/nixos) - NixOS modules
-  - [`home/`](./modules/home) - user-level configuration, courtesy of [`home-manager`]
+- [`hosts/`](./hosts): host configurations
+  - [`chronos/`](./hosts/chronos): NixOS home server & NAS
+  - [`moros/`](./hosts/moros): personal laptop (M2 MacBook Pro)
+  - [`prometheus/`](./hosts/prometheus): work-issued laptop (M4 MacBook Pro)
+- [`modules/`](./modules): config & options modules laid out according to [RFC 0140](https://github.com/NixOS/rfcs/pull/140)
+  - each terminal directory contains one or more of the following files, which are automatically collected in flake outputs:
+    - `module.nix`: modules that are compatible with both NixOS & [`nix-darwin`]
+    - `darwin-module.nix`: [`nix-darwin`] system modules
+    - `nixos-module.nix`: NixOS system modules
+    - `home-module.nix`: [`home-manager`] modules
+    - `flake-module.nix`: [`flake-parts`] modules
+- [`overlays/`](./overlays): overlays that are exposed in this flake & applied to some of the package sets I use
+- [`users/`](./users): user configurations, typically exposing [`flake-parts`] modules containing variations on the following:
+  - `darwinModules.jkachmar`: [`nix-darwin`] configuration for my personal user profile
+  - `nixosModules.jkachmar`: NixOS system configuration for my personal user profile
+  - `homeModules.jkachmar`: [`home-manager`] configuration for my personal user profile
 
+[`nix-darwin`]: https://www.github.com/nix-darwin/nix-darwin
 [`disko`]: https://www.github.com/nix-community/disko
 [`home-manager`]: https://www.github.com/nix-community/home-manager
 [`flake-parts`]: https://www.github.com/hercules-ci/flake-parts
