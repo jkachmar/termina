@@ -1,10 +1,8 @@
 { inputs, pkgs, ... }:
 
 {
-  imports = [ inputs.lix-module.nixosModules.default ];
-
   nix = {
-    package = pkgs.lix;
+    package = pkgs.lixPackageSets.latest.lix;
     settings = {
       experimental-features = [
         "flakes"

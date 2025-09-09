@@ -26,6 +26,7 @@
         };
         # Expose different overlays for the 'stable' & 'unstable' package sets.
         overlays = {
+          lix = import ./overlays/lix.nix;
           stable = import ./overlays/stable.nix;
           unstable = import ./overlays/unstable.nix;
         };
@@ -44,12 +45,6 @@
     # Package sets.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
-
-    # Use 'Lix' instead of 'CppNix' everywhere.
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # macOS system management.
     darwin = {
